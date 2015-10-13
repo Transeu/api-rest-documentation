@@ -8,6 +8,7 @@ h2 {
 
 h3 {
     font-size: 140%;
+    margin: 0;
 }
 
 h4 small {
@@ -22,12 +23,13 @@ h4 small {
     margin: 10px 0;
 }
 
-.mainContent table td, .mainContent table th   {
+.mainContent table td, .mainContent table th {
     border: 1px solid #888;
     padding: 2px 5px;
 }
+
 .mainContent, footer.container {
-    max-width: 900px;
+    max-width: 1140px;
 }
 
 footer.container {
@@ -47,4 +49,8 @@ footer.container {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
         padding-bottom: 40px;
     }
+}
+
+a.anchor {
+    padding-top: 30px;
 }

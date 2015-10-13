@@ -7,9 +7,9 @@
     <link href="/favicon.ico" rel="icon" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
-    <link href="http://transeu.github.io/api-rest-documentation//components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="http://transeu.github.io/api-rest-documentation//components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
-    <link href="http://transeu.github.io/api-rest-documentation//css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="http://transeu.github.io/api-rest-documentation/css/style.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -17,7 +17,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <link rel="stylesheet" href="http://transeu.github.io/api-rest-documentation//components/highlightjs/styles/github.css"/>
+    <link rel="stylesheet" href="http://transeu.github.io/api-rest-documentation/components/highlightjs/styles/github.css"/>
     <style>
         /** quick fix because bootstrap <pre> has a background-color. */
         pre code {
@@ -35,15 +35,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a class="brand" href="http://transeu.github.io/api-rest-documentation//">TransConnect</a>
+                <a class="brand" href="http://transeu.github.io/api-rest-documentation/"><img src="http://transeu.github.io/api-rest-documentation/images/transconnect.png"/></a>
 
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li><a href="http://transeu.github.io/api-rest-documentation//authorization">Authorization</a></li>
-                        <li><a href="http://transeu.github.io/api-rest-documentation//api-specification">API Specification</a></li>
-                        <li><a href="http://transeu.github.io/api-rest-documentation//use-cases">Use cases</a></li>
-                        <li><a href="http://transeu.github.io/api-rest-documentation//faq">FAQ</a></li>
-                        <li><a href="http://transeu.github.io/api-rest-documentation//contact">Contact</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization">Authorization</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/api-specification">API Specification</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases">Use cases</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/faq">FAQ</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/contact">Contact</a></li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -53,11 +53,7 @@
 </header>
 <div class="mainContent container">
     <div class="row-fluid">
-        <div class="span4 sidebar">
-            <div class="well">
-                <h4>TransConnect                    <small>page for developers</small>
-                                    </h4>
-            </div>
+        <div class="span3 sidebar">
             <div class="well sidebar-nav">
                 <h4>Links</h4>
                 <ul class="nav">
@@ -66,7 +62,7 @@
                 </ul>
             </div>
         </div>
-        <div class="span8">
+        <div class="span9">
             <article>
     <header>
         <h1>TransAPI Business use cases
@@ -74,7 +70,20 @@
 
     </header>
     <div>
-        <h2 id="1.-adding-a-load-offer-based-on-an-order-in-external-system">1. Adding a load offer based on an order in external system</h2>
+        <h2 id="table-of-content">Table of content</h2>
+
+<ol>
+<li><a href="#adding_a_load_offer_based_on_an_order_in_external_system">Adding a load offer based on an order in external system</a></li>
+<li><a href="#search_offers_with_free_vehicle_to_complete_order_in_external_system">Search offers with free vehicle to complete order in external system</a></li>
+<li><a href="#find_load_offers_for_driver_with_empty_vehicle_on_a_way_back_based_on_order_in_external_system">Find load offers for driver with empty vehicle on a way back based on order in external system</a></li>
+<li><a href="#adding_vehicle_offer">Adding vehicle offer</a></li>
+<li><a href="#search_additional_loading_during_transit">Search additional loading during transit</a></li>
+<li><a href="#malfunction_of_vehicle_executing_transit_search_for_vehicle_offers_in_the_area_which_can_replace_it">Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it</a></li>
+</ol>
+
+<p><a class="anchor" name="adding_a_load_offer_based_on_an_order_in_external_system"></a></p>
+
+<h2 id="1.-adding-a-load-offer-based-on-an-order-in-external-system">1. Adding a load offer based on an order in external system</h2>
 
 <h4 id="scenario">Scenario</h4>
 
@@ -206,6 +215,8 @@ Host: offers.system.trans.eu
   }
 }
 </code></pre>
+
+<p><a class="anchor" name="search_offers_with_free_vehicle_to_complete_order_in_external_system"></a></p>
 
 <h2 id="2.-search-offers-with-free-vehicle-to-complete-order-in-external-system">2. Search offers with free vehicle to complete order in external system</h2>
 
@@ -406,6 +417,8 @@ Host: offers.system.trans.eu
 }
 </code></pre>
 
+<p><a class="anchor" name="find_load_offers_for_driver_with_empty_vehicle_on_a_way_back_based_on_order_in_external_system"></p>
+
 <h2 id="3.-find-load-offers-for-driver-with-empty-vehicle-on-a-way-back-based-on-order-in-external-system">3. Find load offers for driver with empty vehicle on a way back based on order in external system</h2>
 
 <ul>
@@ -577,6 +590,8 @@ Host: offers.system.trans.eu
 }
 </code></pre>
 
+<p><a class="anchor" name="adding_vehicle_offer"></a></p>
+
 <h2 id="4.-adding-vehicle-offer">4. Adding vehicle offer</h2>
 
 <ul>
@@ -701,6 +716,8 @@ Host: offers.system.trans.eu
   }
 }
 </code></pre>
+
+<p><a class="anchor" name="search_additional_loading_during_transit"></a></p>
 
 <h2 id="5.-search-additional-loading-during-transit">5. Search additional loading during transit</h2>
 
@@ -871,6 +888,8 @@ Host: offers.system.trans.eu
   "total_items": 1
 }
 </code></pre>
+
+<p><a class="anchor" name="malfunction_of_vehicle_executing_transit_search_for_vehicle_offers_in_the_area_which_can_replace_it"></a></p>
 
 <h2 id="6.-malfunction-of-vehicle-executing-transit.-search-for-vehicle-offers-in-the-area%2C-which-can-replace-it">6. Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it</h2>
 
@@ -1053,10 +1072,10 @@ Host: offers.system.trans.eu
 </footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="http://transeu.github.io/api-rest-documentation//components/jquery/jquery.min.js"><\/script>')</script>
-<script src="http://transeu.github.io/api-rest-documentation//components/bootstrap/js/bootstrap.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://transeu.github.io/api-rest-documentation/components/jquery/jquery.min.js"><\/script>')</script>
+<script src="http://transeu.github.io/api-rest-documentation/components/bootstrap/js/bootstrap.min.js"></script>
 
-<script src="http://transeu.github.io/api-rest-documentation//components/highlightjs/highlight.pack.js"></script>
+<script src="http://transeu.github.io/api-rest-documentation/components/highlightjs/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
