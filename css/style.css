@@ -54,3 +54,12 @@ footer.container {
 a.anchor {
     padding-top: 30px;
 }
+
+a.active {
+    font-weight:bold;
+    color: #002451;
+}
+
+ul.side-menu li {
+    padding-bottom:5px;
+}

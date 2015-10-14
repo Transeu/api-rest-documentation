@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#ffffff">
     <link href="/favicon.ico" rel="icon" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
-    <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <meta name="robots" content="noindex, follow">
+        <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
     <link href="http://transeu.github.io/api-rest-documentation/css/style.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -39,9 +39,9 @@
 
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization">Authorization</a></li>
-                        <li><a href="http://transeu.github.io/api-rest-documentation/api-specification">API Specification</a></li>
-                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases">Use cases</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization/authorization-overview/">Authorization</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/api-specification/companies-api-endpoints-reference/">API Specification</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/authorization-use-cases/">Use cases</a></li>
                         <li><a href="http://transeu.github.io/api-rest-documentation/faq">FAQ</a></li>
                         <li><a href="http://transeu.github.io/api-rest-documentation/contact">Contact</a></li>
                     </ul>
@@ -53,24 +53,50 @@
 </header>
 <div class="mainContent container">
     <div class="row-fluid">
-        <div class="span3 sidebar">
-            <div class="well sidebar-nav">
-                <h4>Links</h4>
-                <ul class="nav">
-                    <li><a href="http://www.trans.eu/pl/integracja">Trans.eu for integrations </a></li>
-                    <li><a href="https://github.com/Transeu/TransConnect">Trans.eu on Github</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="span9">
-            <article>
-    <header>
-        <h1>Refreshing an Access Token
-                    </h1>
+            
 
-    </header>
-    <div>
-        <blockquote>
+<div class="span3 sidebar">
+    <div class="well sidebar-nav">
+        <h4>Menu</h4>
+        <ul class="nav side-menu">
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization/authorization-overview/"
+                     >
+                Authorization overview
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization/registering-an-application/"
+                     >
+                Registering an application
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization/multi-language-support/"
+                     >
+                Multi language support
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization/authorization-code-grant/"
+                     >
+                Authorization Code Grant (external users)
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization/refreshing-an-access-token/"
+                                            class="active"
+                     >
+                Refreshing an Access Token
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization/resource-owner-password-credentials-grant/"
+                     >
+                Resource Owner Password Credentials Grant (internal users)
+            </a></li>
+                    </ul>
+    </div>
+</div>
+<div class="span9">
+    
+        <article>
+            <header>
+                <h1>Refreshing an Access Token
+                                    </h1>
+
+            </header>
+            <div>
+                <blockquote>
   <p><strong>Important note</strong>: To utilize this authentication flow your application must have <code>refresh_token</code> grant type admitted.</p>
 </blockquote>
 
@@ -200,10 +226,10 @@ Content-Type: application/json
 </tbody>
 </table>
 
+            </div>
+        </article>
     </div>
-</article>
         </div>
-    </div>
 </div>
 <footer class="container">
     &copy; 2015 TransConnect
