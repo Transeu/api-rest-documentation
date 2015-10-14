@@ -23,12 +23,18 @@
             background-color: inherit;
         }
     </style>
+
+    <script type="application/javascript">
+        //FIXES: https://github.com/twbs/bootstrap/issues/1768
+        window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+    </script>
+
                 </head>
 <body>
 <header>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -38,9 +44,9 @@
 
                 <div class="nav-collapse collapse">
                     <ul class="nav">
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/authorization-use-cases/">Use cases</a></li>
                         <li><a href="http://transeu.github.io/api-rest-documentation/authorization/authorization-overview/">Authorization</a></li>
                         <li><a href="http://transeu.github.io/api-rest-documentation/api-specification/companies-api-endpoints-reference/">API Specification</a></li>
-                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/authorization-use-cases/">Use cases</a></li>
                         <li><a href="http://transeu.github.io/api-rest-documentation/faq">FAQ</a></li>
                         <li><a href="http://transeu.github.io/api-rest-documentation/contact">Contact</a></li>
                     </ul>
@@ -108,23 +114,25 @@
             <div>
                 <p><a class="anchor" name="how_can_i_integrate_oauth2_with_desktop_application"></a></p>
 
-<h3 id="%2Ahow-can-i-integrate-oauth2-with-desktop-application%3F%2A"><em>How can I integrate OAuth2 with desktop application?</em></h3>
+<h3 id="how-can-i-integrate-oauth2-with-desktop-application%3F">How can I integrate OAuth2 with desktop application?</h3>
 
 <p>Tags: <code>oauth</code></p>
 
-<p><strong>Answer:</strong>
-The <a href="http://wiki.oauth.net/w/page/27249271/OAuth%202%20for%20Native%20Apps">OAuth wiki</a> lists numerous options you can use. This question was also asked on stackoverflow: <a href="http://stackoverflow.com/questions/13753969/oauth-2-0-for-desktop-and-mobile-applications">OAuth 2.0 for desktop and mobile applications</a></p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p>The <a href="http://wiki.oauth.net/w/page/27249271/OAuth%202%20for%20Native%20Apps">OAuth wiki</a> lists numerous options you can use. This question was also asked on stackoverflow: <a href="http://stackoverflow.com/questions/13753969/oauth-2-0-for-desktop-and-mobile-applications">OAuth 2.0 for desktop and mobile applications</a></p>
 
 <hr />
 
 <p><a class="anchor" name="can_i_accept_offer_using_rest_api"></a></p>
 
-<h3 id="%2Acan-i-accept-offer-using-rest-api%3F%2A"><em>Can I accept offer using REST API?</em></h3>
+<h3 id="can-i-accept-offer-using-rest-api%3F">Can I accept offer using REST API?</h3>
 
 <p>Tags: <code>api usage</code>, <code>available features</code></p>
 
-<p><strong>Answer:</strong>
-It's not possible to accept offer using REST API.</p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p>It's not possible to accept offer using REST API.</p>
 
 <p>However it's possible to accept offer after calling offer details modal window of Trans.eu and starting conversation about offer.</p>
 
@@ -132,46 +140,49 @@ It's not possible to accept offer using REST API.</p>
 
 <p><a class="anchor" name="what_is_client_secret_and_client_id"></a></p>
 
-<h3 id="%2Awhat-is-%60client_sercret%60-and-%60client_id%60%3F%2A"><em>What is <code>client_sercret</code> and <code>client_id</code>?</em></h3>
+<h3 id="what-is-%60client_sercret%60-and-%60client_id%60%3F">What is <code>client_sercret</code> and <code>client_id</code>?</h3>
 
 <p>Tags: <code>oauth</code></p>
 
-<p><strong>Answer:</strong>
-<em><code>client_id</code></em> and <em><code>client_sercret</code></em> are client credentials used to authenticate the identity of your application. As specified in <a href="https://tools.ietf.org/html/rfc6749#section-2.3.1">RFC6749</a></p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p><em><code>client_id</code></em> and <em><code>client_sercret</code></em> are client credentials used to authenticate the identity of your application. As specified in <a href="https://tools.ietf.org/html/rfc6749#section-2.3.1">RFC6749</a></p>
 
 <hr />
 
 <p><a class="anchor" name="how_do_i_secure_client_secret_for_my_web_app"></a></p>
 
-<h3 id="%2Ahow-do-i-secure-%60client_secret%60-for-my-web-app%3F%2A"><em>How do I secure <code>client_secret</code> for my web app?</em></h3>
+<h3 id="how-do-i-secure-%60client_secret%60-for-my-web-app%3F">How do I secure <code>client_secret</code> for my web app?</h3>
 
 <p>Tags:  <code>oauth</code></p>
 
-<p><strong>Answer:</strong>
-<em><code>cient_secret</code></em> is used to authenticate the identity of your application to the service API. Don't send <em><code>cient_secret</code></em> via HTTP allways use TLS encryption. Transmit <em><code>cient_secret</code></em> only in the request-body and do not include it in the request URI. For more information see <a href="https://tools.ietf.org/html/rfc6749#section-2.3.1">RFC6749</a></p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p><em><code>client_secret</code></em> is used to authenticate the identity of your application to the service API. Don't send <em><code>client_secret</code></em> via HTTP allways use TLS encryption. Transmit <em><code>client_secret</code></em> only in the request-body and do not include it in the request URI. For more information see <a href="https://tools.ietf.org/html/rfc6749#section-2.3.1">RFC6749</a></p>
 
 <hr />
 
 <p><a class="anchor" name="what_is_the_difference_between_employeeid_companyid_and_transid"></a></p>
 
-<h3 id="%2Awhat-is-the-difference-between-%60employeeid%60%2C-%60companyid%60-and-%60transid%60%3F%2A"><em>What is the difference between <code>EmployeeId</code>, <code>CompanyId</code> and <code>TransId</code>?</em></h3>
+<h3 id="what-is-the-difference-between-%60employeeid%60%2C-%60companyid%60-and-%60transid%60%3F">What is the difference between <code>EmployeeId</code>, <code>CompanyId</code> and <code>TransId</code>?</h3>
 
 <p>Tags: <code>api usage</code></p>
 
-<p><strong>Answer:</strong>
-<em><code>TransId</code></em> is composed of <em><code>CompanyId</code></em> and <em><code>EmployeeId</code></em> separated by a hypen sign.</p>
+<h4 id="answer%3A">Answer:</h4>
 
-<p>Example: <em><code>TransId = 12-1234</code></em>, so <code>CompanyId</code> = 12 and <code>EmployeeId</code> = 1234.</p>
+<p><em><code>TransId</code></em> is composed of <em><code>CompanyId</code></em> and <em><code>EmployeeId</code></em> separated by a hypen sign.</p>
+
+<p>Example: <em><code>TransId = 12-1234</code></em>, so <em><code>CompanyId = 12 and EmployeeId = 1234</code></em>.</p>
 
 <hr />
 
 <p><a class="anchor" name="when_requesting_authorization_token_using_code_i_am_receiving_400_bad_request_response"></a></p>
 
-<h3 id="%2Awhen-requesting-authorization-token-using-code-i-am-receiving-%60400-bad-request%60-response%2C-what-am-i-doing-wrong%3F%2A"><em>When requesting authorization token using code I am receiving <code>400 Bad Request</code> response, What am I doing wrong?</em></h3>
+<h3 id="when-requesting-authorization-token-using-code-i-am-receiving-%60400-bad-request%60-response%2C-what-am-i-doing-wrong%3F">When requesting authorization token using code I am receiving <code>400 Bad Request</code> response, What am I doing wrong?</h3>
 
 <p>Tags: <code>oauth</code></p>
 
-<p><strong>Answer:</strong></p>
+<h4 id="answer%3A">Answer:</h4>
 
 <ul>
 <li>Verify in documentation, if you are sending all required fields in proper format.</li>
@@ -182,66 +193,73 @@ It's not possible to accept offer using REST API.</p>
 
 <p><a class="anchor" name="when_i_request_offers_data_i_am_not_receiving_all_available_fields"></a></p>
 
-<h3 id="%2Awhen-i-request-offers-data%2C-i-am-not-receiving-all-available-fields.-what%E2%80%99s-happening%3F%2A"><em>When I request offers data, I am not receiving all available fields. What’s happening?</em></h3>
+<h3 id="when-i-request-offers-data%2C-i-am-not-receiving-all-available-fields.-what%E2%80%99s-happening%3F">When I request offers data, I am not receiving all available fields. What’s happening?</h3>
 
 <p>Tags: <code>api usage</code>, <code>available features</code></p>
 
-<p><strong>Answer:</strong>
-Upon subscription expiry access to the fields is limited to subset of available fields of an offer.</p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p>Upon subscription expiry access to the fields is limited to subset of available fields of an offer.</p>
 
 <hr />
 
 <p><a class="anchor" name="when_i_am_posting_new_offer_i_get_response_you_are_not_authorized_to_do"></a></p>
 
-<h3 id="%2Awhen-i-am-posting-new-offer-i-get-response-%E2%80%9Cyou-are-not-authorized-to-do...%E2%80%9D-what%E2%80%99s-the-problem%3F%2A"><em>When I am posting new offer I get response “You are not authorized to do...” what’s the problem?</em></h3>
+<h3 id="when-i-am-posting-new-offer-i-get-response-%E2%80%9Cyou-are-not-authorized-to-...%E2%80%9D-what%E2%80%99s-the-problem%3F">When I am posting new offer I get response “You are not authorized to [...]” what’s the problem?</h3>
 
 <p>Tags: <code>api usage</code>, <code>available features</code></p>
 
-<p><strong>Answer:</strong>
-Your company is not authorized to add offers. Make sure your company is authorized in Trans.eu platform and your subscription is active.</p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p>Your company is not authorized to add offers. Make sure your company is authorized in Trans.eu platform and your subscription is active.</p>
 
 <hr />
 
 <p><a class="anchor" name="i_dont_have_transid_to_test_my_application_how_can_i_get_it"></a></p>
 
-<h3 id="%2Ai-don%E2%80%99t-have-transid-to-test-my-application%2C-how-can-i-get-it%3F%2A"><em>I don’t have TransId to test my application, how can I get it?</em></h3>
+<h3 id="i-don%E2%80%99t-have-transid-to-test-my-application%2C-how-can-i-get-it%3F">I don’t have TransId to test my application, how can I get it?</h3>
 
 <p>Tags: <code>api usage</code>, <code>available features</code></p>
 
-<p><strong>Answer:</strong>
-To obtain TransId please contact Grzegorz Patynek <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x67;&#112;&#97;&#116;&#x79;&#x6e;&#x65;&#107;&#64;&#116;&#x72;&#x61;&#x6e;&#115;&#46;e&#x75;">gpatynek@trans.eu</a>.</p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p>To obtain TransId please contact Grzegorz Patynek <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x67;&#112;&#97;&#116;&#x79;&#x6e;&#x65;&#107;&#64;&#116;&#x72;&#x61;&#x6e;&#115;&#46;e&#x75;">gpatynek@trans.eu</a>.</p>
 
 <hr />
 
 <p><a class="anchor" name="are_dictionary_entries_translated"></a></p>
 
-<h3 id="%2Aare-dictionary-entries-translated%3F%2A"><em>Are dictionary entries translated?</em></h3>
+<h3 id="are-dictionary-entries-translated%3F">Are dictionary entries translated?</h3>
 
 <p>Tags: <code>api usage</code></p>
 
-<p><strong>Answer:</strong></p>
+<h4 id="answer%3A">Answer:</h4>
 
-<h2 id="in-transapi-dictionary-entries-are-not-being-translated.-if-you-need-translations-for-dictionary-entries%2C-consider-translating-them-on-your-application-side.">In TransAPI dictionary entries are not being translated. If you need translations for dictionary entries, consider translating them on your application side.</h2>
+<p>In TransAPI dictionary entries are not being translated. If you need translations for dictionary entries, consider translating them on your application side.</p>
+
+<hr />
 
 <p><a class="anchor" name="i_am_getting_response_415_unsupported_media_type_what_is_wrong"></a></p>
 
-<h3 id="%2Ai-am-getting-response-%60415-unsupported-media-type%60-what-is-wrong%3F%2A"><em>I am getting response <code>415 Unsupported Media Type</code> what is wrong?</em></h3>
+<h3 id="i-am-getting-response-%60415-unsupported-media-type%60-what-is-wrong%3F">I am getting response <code>415 Unsupported Media Type</code> what is wrong?</h3>
 
 <p>Tags: <code>api usage</code></p>
 
-<p><strong>Answer:</strong>
-You have to properly specify HTTP headers. Make sure you are sending headers <code>Content-Type</code> set to <code>application/json</code> and <code>Accept</code> set to <code>application/hal+json</code>.</p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p>You have to properly specify HTTP headers. Make sure you are sending headers <code>Content-Type</code> set to <code>application/json</code> and <code>Accept</code> set to <code>application/hal+json</code>.</p>
 
 <hr />
 
 <p><a class="anchor" name="and_or_in_filters_how_does_it_work"></a></p>
 
-<h3 id="%2Aand-%26-or-in-filters---how-does-it-work%3F%2A"><em>AND &amp; OR in filters - how does it work?</em></h3>
+<h3 id="and-%26-or-in-filters---how-does-it-work%3F">AND &amp; OR in filters - how does it work?</h3>
 
 <p>Tags: <code>api usage</code></p>
 
-<p><strong>Answer:</strong>
-All filters in TransAPI are using MongoDB filters syntax. Logical operators allow you to combine filters in API request.</p>
+<h4 id="answer%3A">Answer:</h4>
+
+<p>All filters in TransAPI are using MongoDB filters syntax. Logical operators allow you to combine filters in API request.</p>
 
 <p>Examples:</p>
 
