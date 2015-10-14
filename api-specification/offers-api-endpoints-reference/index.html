@@ -6,8 +6,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="/favicon.ico" rel="icon" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="robots" content="noindex, follow">
-        <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+            <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
     <link href="http://transeu.github.io/api-rest-documentation/css/style.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -310,13 +309,13 @@
 
 <p><strong>Example</strong></p>
 
-<pre><code>GET /api/rest/v1/loads?filter={"price":{"$gt":1,"$lt":100},"price_currency":"EUR"}&amp;sort={"loading_place.address.country":-1}}}&amp;page=5 HTTP/1.1
+<pre><code class="http">GET /api/rest/v1/loads?filter={"price":{"$gt":1,"$lt":100},"price_currency":"EUR"}&amp;sort={"loading_place.address.country":-1}}}&amp;page=5 HTTP/1.1
 Host: offers.system.trans.eu
 Accept: application/hal+json
 Authorization: Bearer {access_token}
 </code></pre>
 
-<pre><code class="json">HTTP/1.1 200 OK
+<pre><code class="http">HTTP/1.1 200 OK
 Content-Type: application/hal+json
 
 {
@@ -403,15 +402,15 @@ Content-Type: application/hal+json
 </tbody>
 </table>
 
-<p>**Example **</p>
+<p><strong>Example</strong></p>
 
-<pre><code>GET /api/rest/v1/loads/123456789?fields={"description":false} HTTP/1.1
+<pre><code class="http">GET /api/rest/v1/loads/123456789?fields={"description":false} HTTP/1.1
 Host: offers.system.trans.eu
 Accept: application/hal+json
 Authorization: Bearer {access_token}
 </code></pre>
 
-<pre><code class="json">HTTP/1.1 200 OK
+<pre><code class="http">HTTP/1.1 200 OK
 Content-Type: application/hal+json
 
 {
@@ -702,7 +701,7 @@ Content-Type: application/hal+json
 
 <p><strong>Example</strong></p>
 
-<pre><code class="json">POST /api/rest/v1/loads HTTP/1.1
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
 Host: offers.system.trans.eu
 Accept: application/hal+json
 Content-Type: application/json
@@ -777,7 +776,7 @@ Authorization: Bearer {access_token}
 }
 </code></pre>
 
-<pre><code class="json">HTTP/1.1 201 Created
+<pre><code class="http">HTTP/1.1 201 Created
 Content-Type: application/hal+json
 
 {
@@ -826,12 +825,12 @@ Content-Type: application/hal+json
 
 <p><strong>Example</strong></p>
 
-<pre><code>DELETE /api/rest/v1/loads/123456789 HTTP/1.1
+<pre><code class="http">DELETE /api/rest/v1/loads/123456789 HTTP/1.1
 Host: offers.system.trans.eu
 Authorization: Bearer {access_token}
 </code></pre>
 
-<pre><code>HTTP/1.1 204 No Content
+<pre><code class="http">HTTP/1.1 204 No Content
 </code></pre>
 
 <h3 id="vehicles">Vehicles</h3>
@@ -1054,13 +1053,13 @@ Authorization: Bearer {access_token}
 
 <p><strong>Example</strong></p>
 
-<pre><code>GET /api/rest/v1/vehicles/api/rest/v1/vehicles?filter={"price":{"$gt":1,"$lt":100},"price_currency":"EUR","cargo_space_length":{"$gt":1,"$lt":100}}&amp;sort={"loading_place.address.country":-1}}}&amp;page=5 HTTP/1.1
+<pre><code class="http">GET /api/rest/v1/vehicles/api/rest/v1/vehicles?filter={"price":{"$gt":1,"$lt":100},"price_currency":"EUR","cargo_space_length":{"$gt":1,"$lt":100}}&amp;sort={"loading_place.address.country":-1}}}&amp;page=5 HTTP/1.1
 Host: offers.system.trans.eu
 Accept: application/hal+json
 Authorization: Bearer {access_token}
 </code></pre>
 
-<pre><code class="json">{
+<pre><code class="http">{
   "_links": {
     "self": {
       "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter=%7B%22price%22:%7B%22$gt%22:1,%22$lt%22:100%7D,%22price_currency%22:%22EUR%22,%22cargo_space_length%22:%7B%22$gt%22:1,%22$lt%22:100%7D%7D&amp;sort=%7B%22loading_place.address.country%22:-1%7D%7D%7D&amp;page=5"
@@ -1144,15 +1143,15 @@ Authorization: Bearer {access_token}
 </tbody>
 </table>
 
-<p>**Example **</p>
+<p><strong>Example</strong></p>
 
-<pre><code>GET /api/rest/v1/vehicles/397936884?fields={"loading_place":false,"unloading_place.address.locality":false}
+<pre><code class="http">GET /api/rest/v1/vehicles/397936884?fields={"loading_place":false,"unloading_place.address.locality":false} HTTP/1.1
 Host: offers.system.trans.eu
 Accept: application/hal+json
 Authorization: Bearer {access_token}
 </code></pre>
 
-<pre><code class="json">HTTP/1.1 200 OK
+<pre><code class="http">HTTP/1.1 200 OK
 Content-Type: application/hal+json
 
 {
@@ -1229,13 +1228,6 @@ Content-Type: application/hal+json
     }
   }
 }
-</code></pre>
-
-<pre><code class="json">DELETE /api/rest/v1/loads/123456789 HTTP/1.1
-Host: offers.system.trans.eu
-</code></pre>
-
-<pre><code>HTTP/1.1 204 No Content
 </code></pre>
 
 <h4 id="add-a-vehicle-offer">Add a vehicle offer</h4>
@@ -1411,7 +1403,7 @@ Host: offers.system.trans.eu
 
 <p><strong>Example</strong></p>
 
-<pre><code class="json">POST /api/rest/v1/vehicles HTTP/1.1
+<pre><code class="http">POST /api/rest/v1/vehicles HTTP/1.1
 Host: offers.system.trans.eu
 Accept: application/hal+json
 Content-Type: application/json
@@ -1474,7 +1466,7 @@ Authorization: Bearer {access_token}
 }
 </code></pre>
 
-<pre><code class="json">HTTP/1.1 201 Created
+<pre><code class="http">HTTP/1.1 201 Created
 Content-Type: application/hal+json
 
 {
@@ -1523,8 +1515,12 @@ Content-Type: application/hal+json
 
 <p><strong>Example</strong></p>
 
-<pre><code class="json">DELETE /api/rest/v1/vehicles/123456789 HTTP/1.1
+<pre><code class="http">DELETE /api/rest/v1/vehicles/123456789 HTTP/1.1
 Host: offers.system.trans.eu
+Authorization: Bearer {access_token}
+</code></pre>
+
+<pre><code class="http">HTTP/1.1 204 No Content
 </code></pre>
 
 <h2 id="enities">Enities</h2>
@@ -2084,37 +2080,40 @@ Host: offers.system.trans.eu
 </tbody>
 </table>
 
-<p>Supported truck bodies:
-* tent
-* isotherm
-* box-truck
-* spacious
-* other
-* car-transporter
-* double-trailer
-* van
-* mega
-* coilmulde
-* walking-floor
-* low-suspension
-* flatbed
-* chemical-tanker
-* food-tanker
-* petroleum-tanker
-* gas-tanker
-* log-trailer
-* oversized-cargo
-* hook-lift
-* container-20-40
-* dump-truck
-* koffer
-* swap-body-system
-* jumbo
-* cooler
-* curtainsider
-* tanker
-* silos
-* removal-truck</p>
+<p>Supported truck bodies:</p>
+
+<ul>
+<li>tent</li>
+<li>isotherm</li>
+<li>box-truck</li>
+<li>spacious</li>
+<li>other</li>
+<li>car-transporter</li>
+<li>double-trailer</li>
+<li>van</li>
+<li>mega</li>
+<li>coilmulde</li>
+<li>walking-floor</li>
+<li>low-suspension</li>
+<li>flatbed</li>
+<li>chemical-tanker</li>
+<li>food-tanker</li>
+<li>petroleum-tanker</li>
+<li>gas-tanker</li>
+<li>log-trailer</li>
+<li>oversized-cargo</li>
+<li>hook-lift</li>
+<li>container-20-40</li>
+<li>dump-truck</li>
+<li>koffer</li>
+<li>swap-body-system</li>
+<li>jumbo</li>
+<li>cooler</li>
+<li>curtainsider</li>
+<li>tanker</li>
+<li>silos</li>
+<li>removal-truck</li>
+</ul>
 
 <h3 id="type-of-load-entity">Type Of Load entity</h3>
 
@@ -2135,21 +2134,24 @@ Host: offers.system.trans.eu
 </tbody>
 </table>
 
-<p>Supported types of load:
-* full-truck-standard
-* full-truck-mega
-* cubic
-* bag
-* item
-* envelope
-* box
-* package
-* cardboard
-* timber
-* roll
-* roll2
-* barrel
-* other</p>
+<p>Supported types of load:</p>
+
+<ul>
+<li>full-truck-standard</li>
+<li>full-truck-mega</li>
+<li>cubic</li>
+<li>bag</li>
+<li>item</li>
+<li>envelope</li>
+<li>box</li>
+<li>package</li>
+<li>cardboard</li>
+<li>timber</li>
+<li>roll</li>
+<li>roll2</li>
+<li>barrel</li>
+<li>other</li>
+</ul>
 
             </div>
         </article>

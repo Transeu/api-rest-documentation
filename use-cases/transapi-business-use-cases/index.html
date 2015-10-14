@@ -6,8 +6,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="/favicon.ico" rel="icon" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="robots" content="noindex, follow">
-        <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+            <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
     <link href="http://transeu.github.io/api-rest-documentation/css/style.css" rel="stylesheet" type="text/css"/>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -59,7 +58,7 @@
         <div class="well sidebar-nav">
         <h4>Menu</h4>
         <ul class="nav side-menu">
-                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/authorization-use-cases"
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/authorization-use-cases/"
                      >
                 Authorization use cases
             </a></li>
@@ -117,10 +116,10 @@
 
 <h4 id="http-request">HTTP Request</h4>
 
-<pre><code>POST /api/rest/v1/loads
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
 Content-Type: application/hal+json
 Accept: application/hal+json
-Authorization: Bearer [YOUR_TOKEN]
+Authorization: Bearer {access_token}
 Host: offers.system.trans.eu
 
 {
@@ -154,8 +153,8 @@ Host: offers.system.trans.eu
 
 <h4 id="expected-response-body%3A">Expected response body:</h4>
 
-<pre><code>{
-  "id": GENERATED_ID,
+<pre><code class="json">{
+  "id": 123456789,
   "creation_date": "2015-10-21T08:54:23+0000",
   "publication_date": null,
   "finish_date": "2015-10-23T14:59:56+0000",
@@ -256,7 +255,7 @@ Host: offers.system.trans.eu
 <li>Locality</li>
 </ul>
 
-<pre><code>{
+<pre><code class="json">{
    "loading_place":{
       "address":{
          "locality":"Warszawa"
@@ -278,7 +277,7 @@ Host: offers.system.trans.eu
 <li>Circle area (latitude, longitude)</li>
 </ul>
 
-<pre><code>{
+<pre><code class="json">{
    "circle_area":{
       "start":{
          "latitude":"52,2296756",
@@ -300,16 +299,16 @@ Host: offers.system.trans.eu
 
 <h4 id="http-request">HTTP Request</h4>
 
-<pre><code>GET /api/rest/v1/vehicles?filter={json_filter}
+<pre><code class="http">GET /api/rest/v1/vehicles?filter={json_filter} HTTP/1.1
 Content-Type: application/hal+json
 Accept: application/hal+json
-Authorization: Bearer [YOUR_TOKEN]
+Authorization: Bearer {access_token}
 Host: offers.system.trans.eu
 </code></pre>
 
 <h4 id="response-body%3A">Response body:</h4>
 
-<pre><code>{
+<pre><code class="json">{
   "_links": {
     "self": {
       "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":"tent","cargo_space_capacity":{"$gt":0.965}}&amp;page=1"
@@ -457,7 +456,7 @@ Host: offers.system.trans.eu
 <li>Circle area (latitude, longitude):</li>
 </ul>
 
-<pre><code>{
+<pre><code class="json">{
     "circle_area":{
         "start":{
             "latitude":"52,5234051",
@@ -475,16 +474,16 @@ Host: offers.system.trans.eu
 
 <h4 id="http-request">HTTP Request</h4>
 
-<pre><code>GET /api/rest/v1/loads?filter={json_filter}
+<pre><code class="http">GET /api/rest/v1/loads?filter={json_filter} HTTP/1.1
 Accept: application/hal+json
 Content-Type: application/hal+json
-Authorization: Bearer [YOUR_TOKEN]
+Authorization: Bearer {access_token}
 Host: offers.system.trans.eu
 </code></pre>
 
 <h4 id="expected-response-body%3A">Expected response body:</h4>
 
-<pre><code>{
+<pre><code class="json">{
   "_links": {
     "self": {
       "href": "https://offers.system.trans.eu/api/rest/v1/loads?filter={"circle_area":{"start":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000},"end":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000}}}&amp;page=1"
@@ -624,10 +623,10 @@ Host: offers.system.trans.eu
 
 <h4 id="http-request">HTTP Request</h4>
 
-<pre><code>POST /api/rest/v1/loads
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
 Accept: application/hal+json
 Content-Type: application/hal+json
-Authorization: Bearer [YOUR_TOKEN]
+Authorization: Bearer {access_token}
 Host: offers.system.trans.eu
 
 {
@@ -659,8 +658,8 @@ Host: offers.system.trans.eu
 
 <h4 id="response-body%3A">Response body:</h4>
 
-<pre><code>{
-  "id": GENERATED_ID,
+<pre><code class="json">{
+  "id": 123456789,
   "creation_date": "2015-10-21T12:08:01 0000",
   "publication_date": null,
   "finish_date": "2015-10-23T14:59:56 0000",
@@ -758,7 +757,7 @@ Host: offers.system.trans.eu
 <li>Circle area</li>
 </ul>
 
-<pre><code>{
+<pre><code class="json">{
     "circle_area": {
         "start": {
             "latitude":"52,2296756",
@@ -776,16 +775,16 @@ Host: offers.system.trans.eu
 
 <h4 id="http-request">HTTP Request</h4>
 
-<pre><code>GET /api/rest/v1/loads?filter={json_filter}
+<pre><code class="http">GET /api/rest/v1/loads?filter={json_filter}
 Accept: application/hal+json
 Content-Type: application/hal+json
-Authorization: Bearer [YOUR_TOKEN]
+Authorization: Bearer {access_token}
 Host: offers.system.trans.eu
 </code></pre>
 
 <h4 id="response-body%3A">Response body:</h4>
 
-<pre><code>{
+<pre><code class="json">{
   "_links": {
     "self": {
       "href": "https://offers.system.trans.eu/api/rest/v1/loads?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000},"end":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000}}}&amp;page=1"
@@ -930,7 +929,7 @@ Host: offers.system.trans.eu
 <li>Circle area</li>
 </ul>
 
-<pre><code>{
+<pre><code class="json">{
     "circle_area":{
         "start":{
             "latitude":"52,2296756",
@@ -948,16 +947,16 @@ Host: offers.system.trans.eu
 
 <h4 id="http-request">HTTP Request</h4>
 
-<pre><code>GET /api/rest/v1/vehicles?filter={json_filter}
+<pre><code class="http">GET /api/rest/v1/vehicles?filter={json_filter}
 Accept: application/hal+json
 Content-Type: application/hal+json
-Authorization: Bearer [YOUR_TOKEN]
+Authorization: Bearer {access_token}
 Host: offers.system.trans.eu
 </code></pre>
 
 <h4 id="response-body%3A">Response body:</h4>
 
-<pre><code>{
+<pre><code class="json">{
   "_links": {
     "self": {
       "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000},"end":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000}}}&amp;page=1"
