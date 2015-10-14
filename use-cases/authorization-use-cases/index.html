@@ -149,14 +149,17 @@ Host: auth.system.trans.eu
 </code></pre></li>
 <li><p>User is inquired to authorize application to access data within requested scope.</p>
 
-<p>If the user is not currently signed in, login form will be presented by the Trans Authorization Server where user can sign in using Trans.eu credentials.</p>
+<p>If the user is not currently signed in, login form will be presented by the Trans Authorization Server where user can sign in using Trans.eu credentials.</p></li>
+</ol>
 
 <p><img src="/api-rest-documentation/images/login.png" alt="'Log in'" /></p>
 
 <p>After signing in Trans Authorization Server displays page with list of scopes with
-details and asks user to grant application permissions to the listed scopes.</p>
+   details and asks user to grant application permissions to the listed scopes.</p>
 
-<p><img src="/api-rest-documentation/images/authorize.png" alt="'Authorize'" /></p></li>
+<p><img src="/api-rest-documentation/images/authorize.png" alt="'Authorize'" /></p>
+
+<ol start="3">
 <li><p>User grants access to requested scope and is redirected back to specified redirect URI</p>
 
 <p>After the user has granted requested access to the application, he's redirected
