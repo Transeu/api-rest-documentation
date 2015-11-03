@@ -271,7 +271,9 @@ Host: offers.system.trans.eu
       "address":{
          "locality":"Wrocław"
       },
-      "required_truck_body":"tent",
+      "required_truck_body":{
+         "id":"tent"
+      },
       "cargo_space_capacity":{
          "$gt":0.965
       }
@@ -296,7 +298,9 @@ Host: offers.system.trans.eu
          "distance":10000
       }
    },
-   "required_truck_body":"tent",
+   "required_truck_body":{
+      "id":"tent"
+   },
    "cargo_space_capacity":{
       "$gt":0.965
    }
@@ -317,13 +321,13 @@ Host: offers.system.trans.eu
 <pre><code class="json">{
   "_links": {
     "self": {
-      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":"tent","cargo_space_capacity":{"$gt":0.965}}&amp;page=1"
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":{"id":"tent"},"cargo_space_capacity":{"$gt":0.965}}&amp;page=1"
     },
     "first": {
-      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":"tent","cargo_space_capacity":{"$gt":0.965}}"
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":{"id":"tent"},"cargo_space_capacity":{"$gt":0.965}}"
     },
     "last": {
-      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":"tent","cargo_space_capacity":{"$gt":0.965}}&amp;page=1"
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":{"id":"tent"},"cargo_space_capacity":{"$gt":0.965}}&amp;page=1"
     }
   },
   "_embedded": {
