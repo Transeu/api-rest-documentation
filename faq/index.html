@@ -100,6 +100,9 @@
                         <li><a href="http://transeu.github.io/api-rest-documentation/faq/#and_or_in_filters_how_does_it_work">
                 AND &amp; OR in filters - how does it work?
             </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/faq/#403_forbidden_on_authorization_request">
+                403 forbidden on authorizatoin request
+            </a></li>
                     </ul>
     </div>
     </div>
@@ -268,6 +271,18 @@ $and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } }
 </code></pre>
 
 <p>For more information checkout <a href="http://docs.mongodb.org/manual/reference/operator/query-logical/">Logical Query Operations</a> section of MongoDB reference.</p>
+
+<hr />
+
+<p><a class="anchor" name="403_forbidden_on_authorization_request"></a></p>
+
+<h3 id="when-sending-authorization-request-instead-of-%60302-found%60-response-i-am-getting-%60403-forbidden%60-what%27s-wrong%3F">When sending authorization request instead of <code>302 Found</code> response I am getting <code>403 Forbidden</code> what's wrong?</h3>
+
+<p>Tags: <code>api usage</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>Make sure you are using <code>https</code> protocol not <code>http</code>.</p>
 
             </div>
         </article>
