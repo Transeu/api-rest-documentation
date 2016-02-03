@@ -1,5 +1,17 @@
 ## External api rest documentation
 
+## Prequisites
+
+Before you can start working with this documentation please run - czy napewno????
+
+```
+bash install.sh
+```
+
+This will install Sculpin binaries required to run other commands of this project.
+
+Alternatively you can install Sculpin manually using [this](https://sculpin.io/download/)
+
 ## Build
 
 ```
@@ -11,10 +23,16 @@ External rest api documentation is now accessible at `http://localhost:8000/`.
 
 ## Automated deploy
 
-To automatically deploy currently provided changes simply run 
+To automatically deploy currently provided changes perform desired changes simply run 
 
 ```
-bash publish.sh
+bash publish.sh documentation-update
+```
+
+To verify locally if changes done look good run
+
+```
+publish testcontent.sh
 ```
 
 ## Manual Deploy
@@ -40,7 +58,7 @@ bash publish.sh
     cd ../api-rest-documentation
     git add .
     git commit -m 'documentation deploy'
-    git push
+    git push;
     ```
 5. Clean up
     ```
