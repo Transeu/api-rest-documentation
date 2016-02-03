@@ -12,28 +12,29 @@ This will install Sculpin binaries required to run other commands of this projec
 
 Alternatively you can install Sculpin manually using [this](https://sculpin.io/download/)
 
-## Build
-
-```
-bin/sculpin install
-bin/sculpin generate --watch --server
-```
-
-External rest api documentation is now accessible at `http://localhost:8000/`.
-
-## Automated deploy
-
-To automatically deploy currently provided changes perform desired changes simply run 
-
-```
-bash publish.sh documentation-update
-```
+## Local testing
 
 To verify locally if changes done look good run
 
 ```
-publish testcontent.sh
+publish testlocal.sh
 ```
+Please take a note that due to certain Github assumptions and page structure images are not displayed on local version
+(documentation on Github sits in sub-directory, while local version is in top-level directory)
+
+## Automated deploy
+
+To automatically deploy currently made changes perform desired changes simply run 
+
+```
+bash publish.sh documentation-update-name
+```
+
+Where `documentattion-update-run` is branch name to which changes will be pushed.
+
+After script executes, please open a Pull Request in documentation repository [https://github.com/Transeu/api-rest-documentation/](https://github.com/Transeu/api-rest-documentation/)
+
+Please also be aware that it will be required for development team to review changes and accept them before they will be published.
 
 ## Manual Deploy
 
@@ -45,23 +46,26 @@ publish testcontent.sh
     ```    
     The site will be generated in `output_prod/`. 
 
-2. Clone transeu.github.io repository
+2. Go to parent directory
     ```
-    git clone git@github.com:Transeu/api-rest-documentation.git ../api-rest-documentation --branch gh-pages
+    cd ..
     ```
 3. Move generated documentation
     ```
-    cp -rf output_prod/* ../api-rest-documentation
+    cp -rf __src/output_prod/* .
     ```
 4. Commit and push changes
     ```
-    cd ../api-rest-documentation
     git add .
     git commit -m 'documentation deploy'
     git push;
+    
     ```
 5. Clean up
     ```
-    cd ../
-    rm -rf api-rest-documentation
+    rm -rf __src/output_*
     ```
+    
+## Support
+
+In case you have any questions or suggestions regarding this documentation please contact [api@trans.eu](mailto:api@trans.eu)

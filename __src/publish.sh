@@ -13,15 +13,18 @@ fi
 if [ $1 -eq 'master' ]
    then
      echo "Please don't try to push to master branch"
+     exit 0
+fi
 
 BRANCH=$1
 
-cd ..
 git checkout -b feature/$BRANCH
 bin/sculpin install
 bin/sculpin generate --env=prod --url=http://transeu.github.io/api-rest-documentation
-mv -r o__src/utput_prod/* .
-#git add .
-#git commit -m"update documentation content"
-#git push
-echo "Now please open a Pull Request on documentation repository https://github.com/Transeu/api-rest-documentation/ "
+cd ..
+cp -rf __src/output_prod/* .
+rm -rf __src/output_*
+git add .
+git commit -m"update documentation content"
+git push
+echo "Now please open a Pull Request in documentation repository https://github.com/Transeu/api-rest-documentation/";
