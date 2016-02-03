@@ -16,12 +16,12 @@ if [ $1 -eq 'master' ]
 
 BRANCH=$1
 
-git checkout -b update/$BRANCH
+cd ..
+git checkout -b feature/$BRANCH
 bin/sculpin install
 bin/sculpin generate --env=prod --url=http://transeu.github.io/api-rest-documentation
-mv -r output_prod/* ../
-cd ..
-git add .
-git commit -m"update documentation content"
-git push
+mv -r o__src/utput_prod/* .
+#git add .
+#git commit -m"update documentation content"
+#git push
 echo "Now please open a Pull Request on documentation repository https://github.com/Transeu/api-rest-documentation/ "
