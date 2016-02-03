@@ -1,0 +1,55 @@
+{% extends "default" %}
+
+{% block content_wrapper %}
+
+{% if (page.side_menu or page.table_of_content) %}
+
+<div class="span3 sidebar">
+    {% if page.side_menu %}
+    <div class="well sidebar-nav">
+        <h4>Menu</h4>
+        <ul class="nav side-menu">
+            {% for menu_index, menu_item in page.side_menu %}
+            <li><a href="{{ site.url }}{{ menu_item.url }}"
+                    {% if menu_item.active %}
+                        class="active"
+                    {% endif %} >
+                {{ menu_item.title}}
+            </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if page.table_of_content %}
+    <div class="well sidebar-nav">
+        <h4>Page content</h4>
+        <ul class="nav side-menu">
+            {% for content_index, content_item in page.table_of_content %}
+            <li><a href="{{ site.url }}{{ content_item.url }}">
+                {{ content_item.title}}
+            </a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+<div class="span9">
+    {% else %}
+    <div class="span12">
+        {% endif %}
+
+        <article>
+            <header>
+                <h1>{{ page.title }}
+                    {% if page.subtitle %}
+                    <small> {{ page.subtitle}}</small>
+                    {% endif %}
+                </h1>
+
+            </header>
+            <div>
+                {{ page.blocks.content|raw }}
+            </div>
+        </article>
+    </div>
+    {% endblock %}

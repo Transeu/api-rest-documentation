@@ -1,0 +1,12 @@
+---
+layout: default
+title: Use Cases
+use:
+- usecases
+---
+<h2>Use cases</h2>
+{% for usecase in data.usecases %}
+<div>
+    <a href="{{ site.url }}{{ usecase.url }}">{{ usecase.title }}</a>
+</div>
+{% endfor %}

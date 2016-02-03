@@ -1,0 +1,14 @@
+---
+layout: default
+title: FAQ
+use:
+    - general_documents
+---
+{% block content_wrapper %}
+    {% for document in data.general_documents %}
+        {% if document.is_faq %}
+            <h1>{{ document.title }}</h1>
+            <div>{{ document.content | raw }}</div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

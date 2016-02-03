@@ -1,0 +1,29 @@
+sculpin_content_types:
+    usecases:
+        type: path
+        path: _docs/use-cases/
+        layout: document
+        singular_name: usecase
+        permalink: use-cases/:title/
+        enabled: true
+    authorization_documents:
+        type: path
+        path: _docs/authorization
+        layout: document
+        singular_name: authorization_document
+        permalink: authorization/:title/
+        enabled: true
+    specifications:
+        type: path
+        path: _docs/rest-apis
+        layout: document
+        singular_name: specification
+        permalink: api-specification/:title/
+        enabled: true
+    general_documents:
+        type: path
+        path: _docs/
+        layout: document
+        singular_name: general_document
+        permalink: :title/
+        enabled: true
