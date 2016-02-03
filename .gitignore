@@ -4,7 +4,7 @@
 /__src/app/config/sculpin_kernel_*.yml
 /__src/app/config/sculpin_site_*.yml
 /__src/app/logs/*
-/__src/app/output_*
+/__src/output_*
 /__src/source/components/
 /__src/vendor
 
