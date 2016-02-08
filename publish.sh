@@ -10,7 +10,7 @@ if [ $# -eq 0 ]
      exit 0
 fi
 
-if [ $1 -eq 'gh-pages' ]
+if [ $1 == "gh-pages" ]
    then
      echo "Please don't try to push to main branch"
      exit 0
@@ -19,7 +19,7 @@ fi
 BRANCH=$1
 
 git checkout -b feature/$BRANCH
-cd _src
+cd _src/
 bin/sculpin generate --env=prod --url=http://transeu.github.io/api-rest-documentation
 cd ..
 cp -rf _src/output_prod/* .
