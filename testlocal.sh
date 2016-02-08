@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-bin/sculpin install
+cd _src
 bin/sculpin generate --watch --server

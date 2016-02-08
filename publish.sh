@@ -10,21 +10,21 @@ if [ $# -eq 0 ]
      exit 0
 fi
 
-if [ $1 -eq 'master' ]
+if [ $1 -eq 'gh-pages' ]
    then
-     echo "Please don't try to push to master branch"
+     echo "Please don't try to push to main branch"
      exit 0
 fi
 
 BRANCH=$1
 
 git checkout -b feature/$BRANCH
-bin/sculpin install
+cd _src
 bin/sculpin generate --env=prod --url=http://transeu.github.io/api-rest-documentation
 cd ..
-cp -rf __src/output_prod/* .
-rm -rf __src/output_*
+cp -rf _src/output_prod/* .
+rm -rf _src/output_*
 git add .
 git commit -m"update documentation content"
 git push
-echo "Now please open a Pull Request in documentation repository https://github.com/Transeu/api-rest-documentation/";
+echo "Now please open a Pull Request in documentation repository https://github.com/Transeu/api-rest-documentation/"

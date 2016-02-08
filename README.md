@@ -2,22 +2,16 @@
 
 ## Prequisites
 
-Before you can start working with this documentation please run - czy napewno????
+Before you can start working with this documentation you only need to know markdown syntax.
 
-```
-bash install.sh
-```
-
-This will install Sculpin binaries required to run other commands of this project.
-
-Alternatively you can install Sculpin manually using [this](https://sculpin.io/download/)
+Markdown syntax documentation is available [here](https://help.github.com/articles/basic-writing-and-formatting-syntax/)
 
 ## Local testing
 
-To verify locally if changes done look good run
+To verify locally how changes made look run
 
 ```
-publish testlocal.sh
+bash testlocal.sh
 ```
 Please take a note that due to certain Github assumptions and page structure images are not displayed on local version
 (documentation on Github sits in sub-directory, while local version is in top-level directory)
