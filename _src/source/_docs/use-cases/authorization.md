@@ -168,7 +168,7 @@ This section will show you how to:
   &password=abc123
   &client_id=example_app_client_id
   &client_secret=example_app_secret
-  &scope=offers.loads.manage,companies.employees.update
+  &scope=offers.loads.manage
   ```
   On success, the response has status code 200 OK and following JSON data in
   response body:
