@@ -24,7 +24,7 @@ To automatically deploy currently made changes perform desired changes simply ru
 bash publish.sh documentation-update-name
 ```
 
-Where `documentattion-update-run` is branch name to which changes will be pushed.
+Where `documentattion-update-name` is branch name to which changes will be pushed.
 
 After script executes, please open a Pull Request in documentation repository [https://github.com/Transeu/api-rest-documentation/](https://github.com/Transeu/api-rest-documentation/)
 
@@ -35,6 +35,7 @@ Please also be aware that it will be required for development team to review cha
 1. Generate production ready documentation
 
     ```
+    cd _src
     bin/sculpin install
     bin/sculpin generate --env=prod --url=http://transeu.github.io/api-rest-documentation
     ```    
@@ -46,19 +47,20 @@ Please also be aware that it will be required for development team to review cha
     ```
 3. Move generated documentation
     ```
-    cp -rf __src/output_prod/* .
+    cp -rf _src/output_prod/* .
     ```
-4. Commit and push changes
+4. Clean up
+    ```
+    rm -rf _src/output_*
+    ```
+5. Commit and push changes
     ```
     git add .
-    git commit -m 'documentation deploy'
-    git push;
+    git commit -m 'documentation update'
+    git push
     
     ```
-5. Clean up
-    ```
-    rm -rf __src/output_*
-    ```
+
     
 ## Support
 
