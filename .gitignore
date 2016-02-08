@@ -1,10 +1,11 @@
-/__src/.sculpin/
+/_src/.sculpin/
 /.idea/
-/__src/app/cache/*
-/__src/app/config/sculpin_kernel_*.yml
-/__src/app/config/sculpin_site_*.yml
-/__src/app/logs/*
-/__src/output_*
-/__src/source/components/
-/__src/vendor
+/_src/app/cache/*
+/_src/app/config/sculpin_kernel_*.yml
+/_src/app/config/sculpin_site_*.yml
+/_src/app/logs/*
+/_src/output_*
+/_src/output_*/*
+/_src/source/components/
+/_src/vendor
 
