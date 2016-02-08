@@ -1,0 +1,14 @@
+---
+layout: default
+title: Documentation
+use:
+- specifications
+---
+<h2>API specification</h2>
+{% for document in data.specifications %}
+<div>
+    {% if document.is_specification %}
+    <a href="{{ site.url }}{{ document.url }}">{{ document.title }} {{ document.subtitle }}</a>
+    {% endif %}
+</div>
+{% endfor %}
