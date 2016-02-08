@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TransAPI Business use cases &mdash; TransConnect &mdash; page for developers</title>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#ffffff">
+    <link href="/api-rest-documentation/favicon.ico" rel="icon" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="/components/highlightjs/styles/github.css"/>
+    <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code {
+            background-color: inherit;
+        }
+    </style>
+
+    <script type="application/javascript">
+        //FIXES: https://github.com/twbs/bootstrap/issues/1768
+        window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+    </script>
+
+                </head>
+<body>
+<header>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/"><img src="/images/transconnect.png"/></a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="/use-cases/authorization-use-cases/">Use cases</a></li>
+                        <li><a href="/authorization/authorization-overview/">Authorization</a></li>
+                        <li><a href="/api-specification/companies-api-endpoints-reference/">API Specification</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+</header>
+<div class="mainContent container">
+    <div class="row-fluid">
+            
+
+<div class="span3 sidebar">
+        <div class="well sidebar-nav">
+        <h4>Menu</h4>
+        <ul class="nav side-menu">
+                        <li><a href="/use-cases/authorization-use-cases/"
+                     >
+                Authorization use cases
+            </a></li>
+                        <li><a href="/use-cases/transapi-business-use-cases/"
+                                            class="active"
+                     >
+                TransAPI Business use cases
+            </a></li>
+                    </ul>
+    </div>
+            <div class="well sidebar-nav">
+        <h4>Page content</h4>
+        <ul class="nav side-menu">
+                        <li><a href="/use-cases/transapi-business-use-cases/#adding_a_load_offer_based_on_an_order_in_external_system">
+                Adding a load offer based on an order in external system
+            </a></li>
+                        <li><a href="/use-cases/transapi-business-use-cases/#search_offers_with_free_vehicle_to_complete_order_in_external_system">
+                Search offers with free vehicle to complete order in external system
+            </a></li>
+                        <li><a href="/use-cases/transapi-business-use-cases/#find_load_offers_for_driver_with_empty_vehicle_on_a_way_back_based_on_order_in_external_system">
+                Find load offers for driver with empty vehicle on a way back based on order in external system
+            </a></li>
+                        <li><a href="/use-cases/transapi-business-use-cases/#adding_vehicle_offer">
+                Adding vehicle offer
+            </a></li>
+                        <li><a href="/use-cases/transapi-business-use-cases/#search_additional_loading_during_transit">
+                Search additional loading during transit
+            </a></li>
+                        <li><a href="/use-cases/transapi-business-use-cases/#malfunction_of_vehicle_executing_transit_search_for_vehicle_offers_in_the_area_which_can_replace_it">
+                Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it
+            </a></li>
+                    </ul>
+    </div>
+    </div>
+<div class="span9">
+    
+        <article>
+            <header>
+                <h1>TransAPI Business use cases
+                                    </h1>
+
+            </header>
+            <div>
+                <p><a class="anchor" name="adding_a_load_offer_based_on_an_order_in_external_system"></a></p>
+
+<h2 id="1.-adding-a-load-offer-based-on-an-order-in-external-system">1. Adding a load offer based on an order in external system</h2>
+
+<h4 id="scenario">Scenario</h4>
+
+<ul>
+<li>User of external system receives a contract to transport a load, but doesn't have a contract with a transport company or doesn't have any vehicle available,</li>
+<li>the user adds the load offer in Trans.eu based on existing offer in external system,</li>
+<li>person or company interested in transport execution contacts owner of the offer.</li>
+</ul>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "load_weight": {
+    "value": 9.65,
+    "unit_code": "TNE"
+  },
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Warszawa",
+      "postal_code": "00-125"
+    }
+  },
+  "required_truck_body": {
+    "id": "tent"
+  },
+  "loading_date": "2015-10-22T14:57:56+00:00",
+  "unloading_date" : "2015-10-23T14:59:56+00:00",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Wrocław",
+      "postal_code": "53-307"
+    }
+  },
+  "price": 4.11,
+  "price_currency": "PLN"
+}
+</code></pre>
+
+<h4 id="expected-response-body%3A">Expected response body:</h4>
+
+<pre><code class="json">{
+  "id": 123456789,
+  "creation_date": "2015-10-21T08:54:23+0000",
+  "publication_date": null,
+  "finish_date": "2015-10-23T14:59:56+0000",
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "00-125",
+      "locality": "Warszawa"
+    },
+    "geo": {
+      "latitude": null,
+      "longitude": null
+    }
+  },
+  "loading_date": "2015-10-22T14:57:56+0000",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "53-307",
+      "locality": "Wrocław"
+    },
+    "geo": {
+      "latitude": null,
+      "longitude": null
+    }
+  },
+  "unloading_date": "2015-10-23T14:59:56+0000",
+  "price": 4.11,
+  "price_currency": "PLN",
+  "description": null,
+  "type": "public",
+  "load_length": {
+    "unit_code": null,
+    "value": null
+  },
+  "load_height": {
+    "unit_code": null,
+    "value": null
+  },
+  "load_volume": {
+    "unit_code": null,
+    "value": null
+  },
+  "load_weight": {
+    "unit_code": "TNE",
+    "value": 9.65
+  },
+  "pallets": null,
+  "is_ltl": null,
+  "is_lift_required": null,
+  "is_truck_crane_required": null,
+  "is_tir_cable_required": null,
+  "is_tracking_system_required": null,
+  "is_for_clearance": null,
+  "required_ways_of_loading": null,
+  "required_adr_classes": null,
+  "_links": {
+    "self": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/loads/GENERATED_ID"
+    },
+    "offerer": {
+      "id": 1031652,
+      "href": "https://companies.system.trans.eu/api/rest/v1/employees/1031652"
+    },
+    "company": {
+      "id": 10,
+      "href": "https://companies.system.trans.eu/api/rest/v1/companies/10"
+    },
+    "contact_persons": {
+      "ids": [
+        1031652
+      ],
+      "href": "https://companies.system.trans.eu/api/rest/v1/employees?filter={"id":[1031652]}"
+    },
+    "required_truck_body": {
+      "id": "tent",
+      "href": "https://offers.system.trans.eu/api/rest/v1/truck-bodies/tent"
+    }
+  }
+}
+</code></pre>
+
+<p><a class="anchor" name="search_offers_with_free_vehicle_to_complete_order_in_external_system"></a></p>
+
+<h2 id="2.-search-offers-with-free-vehicle-to-complete-order-in-external-system">2. Search offers with free vehicle to complete order in external system</h2>
+
+<ul>
+<li>User receives a contract to transport a load, but he doesn't have a contract with a transport company or doesn't have any vehicle available,</li>
+<li>search vehicles in Trans.eu based on offer existing in external system,</li>
+<li>user receives list of vehicles offers meeting his search criteria and can browse details of each offer.</li>
+</ul>
+
+<h4 id="available-filters">Available filters</h4>
+
+<p><strong>Endpoint:</strong> <code>https://offers.system.trans.eu/api/rest/v1/vehicles?filter={json_filter}</code></p>
+
+<ul>
+<li>Locality</li>
+</ul>
+
+<pre><code class="json">{
+   "loading_place":{
+      "address":{
+         "locality":"Warszawa"
+      }
+   },
+   "unloading_place":{
+      "address":{
+         "locality":"Wrocław"
+      },
+      "required_truck_body":{
+         "id":"tent"
+      },
+      "cargo_space_capacity":{
+         "$gt":0.965
+      }
+   }
+}
+</code></pre>
+
+<ul>
+<li>Circle area (latitude, longitude)</li>
+</ul>
+
+<pre><code class="json">{
+   "circle_area":{
+      "start":{
+         "latitude":"52,2296756",
+         "longitude":"21,0122287",
+         "distance":10000
+      },
+      "end":{
+         "latitude":"51,108142",
+         "longitude":"17,037338",
+         "distance":10000
+      }
+   },
+   "required_truck_body":{
+      "id":"tent"
+   },
+   "cargo_space_capacity":{
+      "$gt":0.965
+   }
+}
+</code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">GET /api/rest/v1/vehicles?filter={json_filter} HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+</code></pre>
+
+<h4 id="response-body%3A">Response body:</h4>
+
+<pre><code class="json">{
+  "_links": {
+    "self": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":{"id":"tent"},"cargo_space_capacity":{"$gt":0.965}}&amp;page=1"
+    },
+    "first": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":{"id":"tent"},"cargo_space_capacity":{"$gt":0.965}}"
+    },
+    "last": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":{"id":"tent"},"cargo_space_capacity":{"$gt":0.965}}&amp;page=1"
+    }
+  },
+  "_embedded": {
+    "vehicles": [
+      {
+        "id": 396343484,
+        "creation_date": "2015-10-05T08:24:58 0000",
+        "publication_date": null,
+        "finish_date": "2015-10-06T15:00:00 0000",
+        "loading_place": {
+          "address": {
+            "country": "PL",
+            "postal_code": "00-001",
+            "locality": "Warszawa"
+          },
+          "geo": {
+            "latitude": 52.2445,
+            "longitude": 21.0291
+          }
+        },
+        "loading_date": "2015-10-05T09:00:00 0000",
+        "unloading_place": {
+          "address": {
+            "country": "PL",
+            "postal_code": "50-001",
+            "locality": "Wrocław"
+          },
+          "geo": {
+            "latitude": 51.1194,
+            "longitude": 17.028
+          }
+        },
+        "unloading_date": "2015-10-06T15:00:00 0000",
+        "price": 0,
+        "price_currency": "EUR",
+        "description": "16/17ep paleciak",
+        "type": "public",
+        "cargo_space_capacity": {
+          "value": 6.5,
+          "unit_code": "TNE"
+        },
+        "cargo_space_length": {
+          "value": 7,
+          "unit_code": "MTR"
+        },
+        "cargo_space_height": {
+          "value": 2.4,
+          "unit_code": "MTR"
+        },
+        "cargo_space_volume": {
+          "value": null,
+          "unit_code": null
+        },
+        "ltl_available": false,
+        "has_adr": false,
+        "has_lift": true,
+        "has_truck_crane": false,
+        "has_tir_cable": false,
+        "has_tir_carnet": false,
+        "has_pallet_bin": false,
+        "has_tracking_system": false,
+        "available_ways_of_loading": [
+          "side",
+          "back"
+        ],
+        "_embedded": {
+          "start_distance": {
+            "id": "0.911839,0.367027-0.911579806469,0.366732573997",
+            "value": 2012.332764,
+            "unit_code": "MTR",
+            "_links": {
+              "self": {
+                "href": "https://offers.system.trans.eu/api/rest/v1/distances/0.911839,0.367027-0.911579806469,0.366732573997"
+              }
+            }
+          },
+          "end_distance": {
+            "id": "0.892202,0.297195-0.892005352477,0.297357643875",
+            "value": 1411.531616,
+            "unit_code": "MTR",
+            "_links": {
+              "self": {
+                "href": "https://offers.system.trans.eu/api/rest/v1/distances/0.892202,0.297195-0.892005352477,0.297357643875"
+              }
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "https://offers.system.trans.eu/api/rest/v1/vehicles/396343484"
+          },
+          "offerer": {
+            "id": 1089919,
+            "href": "https://companies.system.trans.eu/api/rest/v1/employees/1089919"
+          },
+          "company": {
+            "id": 648761,
+            "href": "https://companies.system.trans.eu/api/rest/v1/companies/648761"
+          },
+          "contact_persons": {
+            "ids": [
+              1089919
+            ],
+            "href": "https://companies.system.trans.eu/api/rest/v1/employees?filter={"id":[1089919]}"
+          },
+          "truck_body": {
+            "id": "tent",
+            "href": "https://offers.system.trans.eu/api/rest/v1/truck-bodies/tent"
+          }
+        }
+      },
+      ...
+    ]
+  },
+  "page_count": 1,
+  "page_size": 20,
+  "total_items": 3
+}
+</code></pre>
+
+<p><a class="anchor" name="find_load_offers_for_driver_with_empty_vehicle_on_a_way_back_based_on_order_in_external_system"></a></p>
+
+<h2 id="3.-find-load-offers-for-driver-with-empty-vehicle-on-a-way-back-based-on-order-in-external-system">3. Find load offers for driver with empty vehicle on a way back based on order in external system</h2>
+
+<ul>
+<li>User knows that chosen vehicle will drive a route from Warsaw to Berlin,</li>
+<li>User doesn't have a contract for load transit on the way back,</li>
+<li>Based on the original order and the vehicle, user wants to search for a load offer with loading location near Berlin and unloading location near Warsaw.</li>
+</ul>
+
+<h4 id="available-filters">Available filters</h4>
+
+<p><strong>URL</strong> <code>https://offers.system.trans.eu/api/rest/v1/loads?filter={json_filter}</code></p>
+
+<ul>
+<li>Circle area (latitude, longitude):</li>
+</ul>
+
+<pre><code class="json">{
+    "circle_area":{
+        "start":{
+            "latitude":"52,5234051",
+            "longitude":"13,4113999",
+            "distance":25000
+        },
+        "end":{
+            "latitude":"52,2296756",
+            "longitude":"21,0122287",
+            "distance":25000
+        }
+    }
+}
+</code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">GET /api/rest/v1/loads?filter={json_filter} HTTP/1.1
+Accept: application/hal+json
+Content-Type: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+</code></pre>
+
+<h4 id="expected-response-body%3A">Expected response body:</h4>
+
+<pre><code class="json">{
+  "_links": {
+    "self": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/loads?filter={"circle_area":{"start":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000},"end":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000}}}&amp;page=1"
+    },
+    "first": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/loads?filter={"circle_area":{"start":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000},"end":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000}}}"
+    },
+    "last": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/loads?filter={"circle_area":{"start":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000},"end":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000}}}&amp;page=1"
+    }
+  },
+  "_embedded": {
+    "loads": [
+      {
+        "id": 396399892,
+        "creation_date": "2015-10-05T09:19:22 0000",
+        "publication_date": null,
+        "finish_date": "2015-10-07T16:00:00 0000",
+        "loading_place": {
+          "address": {
+            "country": "DE",
+            "postal_code": "10245",
+            "locality": "Berlin"
+          },
+          "geo": {
+            "latitude": 52.5011,
+            "longitude": 13.4557
+          }
+        },
+        "loading_date": "2015-10-06T10:00:00 0000",
+        "unloading_place": {
+          "address": {
+            "country": "PL",
+            "postal_code": "00-002",
+            "locality": "Warszawa"
+          },
+          "geo": {
+            "latitude": 52.2355,
+            "longitude": 21.0102
+          }
+        },
+        "unloading_date": "2015-10-07T16:00:00 0000",
+        "price": 440,
+        "price_currency": "EUR",
+        "description": "",
+        "type": "public",
+        "load_length": {
+          "value": 15.4,
+          "unit_code": "MTR"
+        },
+        "load_height": {
+          "value": 2.8,
+          "unit_code": "MTR"
+        },
+        "load_volume": {
+          "value": null,
+          "unit_code": null
+        },
+        "load_weight": {
+          "value": 10.5,
+          "unit_code": "TNE"
+        },
+        "pallets": null,
+        "is_ltl": false,
+        "is_lift_required": false,
+        "is_truck_crane_required": false,
+        "is_tir_cable_required": false,
+        "is_tracking_system_required": false,
+        "is_for_clearance": false,
+        "required_ways_of_loading": [
+          "side"
+        ],
+        "required_adr_classes": null,
+        "_embedded": {
+          "start_distance": {
+            "id": "0.916317,0.234846-0.916706353354,0.234073085557",
+            "value": 3899.559814,
+            "unit_code": "MTR",
+            "_links": {
+              "self": {
+                "href": "https://offers.system.trans.eu/api/rest/v1/distances/0.916317,0.234846-0.916706353354,0.234073085557"
+              }
+            }
+          },
+          "end_distance": {
+            "id": "0.911681,0.366698-0.911579806469,0.366732573997",
+            "value": 656.973145,
+            "unit_code": "MTR",
+            "_links": {
+              "self": {
+                "href": "https://offers.system.trans.eu/api/rest/v1/distances/0.911681,0.366698-0.911579806469,0.366732573997"
+              }
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "https://offers.system.trans.eu/api/rest/v1/loads/396399892"
+          },
+          "offerer": {
+            "id": 950308,
+            "href": "https://companies.system.trans.eu/api/rest/v1/employees/950308"
+          },
+          "company": {
+            "id": 91299,
+            "href": "https://companies.system.trans.eu/api/rest/v1/companies/91299"
+          },
+          "contact_persons": {
+            "ids": [
+              950308
+            ],
+            "href": "https://companies.system.trans.eu/api/rest/v1/employees?filter={"id":[950308]}"
+          },
+          "required_truck_body": {
+            "id": "jumbo",
+            "href": "https://offers.system.trans.eu/api/rest/v1/truck-bodies/jumbo"
+          }
+        }
+      },
+    ]
+  },
+  "page_count": 1,
+  "page_size": 20,
+  "total_items": 1
+}
+</code></pre>
+
+<p><a class="anchor" name="adding_vehicle_offer"></a></p>
+
+<h2 id="4.-adding-vehicle-offer">4. Adding vehicle offer</h2>
+
+<ul>
+<li>User vehicle is not involved in any load transport at this moment,</li>
+<li>user adds an offer of free vehicle in Trans.eu offers exchange,</li>
+<li>person or company interested in that offer contacts user.</li>
+</ul>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
+Accept: application/hal+json
+Content-Type: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "cargo_space_capacity": {
+    "value": 9.65,
+    "unit_code": "TNE"
+  },
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Warszawa",
+      "postal_code": "00-125"
+    }
+  },
+  "truck_body": {
+    "id": "tent"
+  },
+  "loading_date": "2015-10-22T14:57:56+00:00",
+  "unloading_date" : "2015-10-23T14:59:56+00:00",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Wrocław",
+      "postal_code": "53-307"
+    }
+  }
+}
+</code></pre>
+
+<h4 id="response-body%3A">Response body:</h4>
+
+<pre><code class="json">{
+  "id": 123456789,
+  "creation_date": "2015-10-21T12:08:01 0000",
+  "publication_date": null,
+  "finish_date": "2015-10-23T14:59:56 0000",
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "00-125",
+      "locality": "Warszawa"
+    },
+    "geo": {
+      "latitude": null,
+      "longitude": null
+    }
+  },
+  "loading_date": "2015-10-22T14:57:56 0000",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "53-307",
+      "locality": "Wrocław"
+    },
+    "address": {
+      "country": "PL",
+      "postal_code": "53-307",
+      "locality": "Wrocław"
+    },
+    "geo": {
+      "latitude": null,
+      "longitude": null
+    }
+  },
+  "unloading_date": "2015-10-23T14:59:56 0000",
+  "price": null,
+  "price_currency": null,
+  "description": null,
+  "type": "public",
+  "cargo_space_capacity": {
+    "unit_code": "TNE",
+    "value": 9.65
+  },
+  "cargo_space_length": null,
+  "cargo_space_height": null,
+  "cargo_space_volume": null,
+  "ltl_available": null,
+  "has_adr": null,
+  "has_lift": null,
+  "has_truck_crane": null,
+  "has_tir_cable": null,
+  "has_tir_carnet": null,
+  "has_pallet_bin": null,
+  "has_tracking_system": null,
+  "available_ways_of_loading": [],
+  "_links": {
+    "self": {
+      "href": "http://offers.dev-trans.rst.com.pl/api/rest/v1/vehicles/GENERATED_ID"
+    },
+    "company": {
+      "id": 10,
+      "href": "http://companies.dev-trans.rst.com.pl/api/rest/v1/companies/10"
+    },
+    "offerer": {
+      "id": 1031652,
+      "href": "http://companies.dev-trans.rst.com.pl/api/rest/v1/employees/1031652"
+    },
+    "truck_body": {
+      "id": "tent",
+      "href": "http://offers.dev-trans.rst.com.pl/api/rest/v1/truck-bodies/tent"
+    },
+    "contact_persons": {
+      "ids": [
+        1031652
+      ],
+      "href": "http://companies.dev-trans.rst.com.pl/api/rest/v1/employees?filter={"id":[1031652]}"
+    }
+  }
+}
+</code></pre>
+
+<p><a class="anchor" name="search_additional_loading_during_transit"></a></p>
+
+<h2 id="5.-search-additional-loading-during-transit">5. Search additional loading during transit</h2>
+
+<ul>
+<li>User vehicle will perform load transit from Warsaw to Berlin,</li>
+<li>the vehicle has some free loading space left,</li>
+<li>user wants to search for load offers matching available space at points along the vehicles route,</li>
+<li>user receives list of matching load offers.</li>
+</ul>
+
+<h4 id="available-filters">Available filters</h4>
+
+<p><strong>URL with circle area (latitude, longitude):</strong> <code>https://offers.system.trans.eu/api/rest/v1/loads?filter={json_filter}</code></p>
+
+<ul>
+<li>Circle area</li>
+</ul>
+
+<pre><code class="json">{
+    "circle_area": {
+        "start": {
+            "latitude":"52,2296756",
+            "longitude":"21,0122287",
+            "distance":25000
+        },
+        "end": {
+            "latitude":"52,5234051",
+            "longitude":"13,4113999",
+            "distance":25000
+        }
+    }
+}
+</code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">GET /api/rest/v1/loads?filter={json_filter}
+Accept: application/hal+json
+Content-Type: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+</code></pre>
+
+<h4 id="response-body%3A">Response body:</h4>
+
+<pre><code class="json">{
+  "_links": {
+    "self": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/loads?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000},"end":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000}}}&amp;page=1"
+    },
+    "first": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/loads?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000},"end":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000}}}"
+    },
+    "last": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/loads?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000},"end":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000}}}&amp;page=1"
+    }
+  },
+  "_embedded": {
+    "loads": [
+      {
+        "id": 396504956,
+        "creation_date": "2015-10-05T11:14:21 0000",
+        "publication_date": null,
+        "finish_date": "2015-10-06T18:00:00 0000",
+        "loading_place": {
+          "address": {
+            "country": "PL",
+            "postal_code": "00-693",
+            "locality": "Warszawa"
+          },
+          "geo": {
+            "latitude": 52.2298,
+            "longitude": 21.0118
+          }
+        },
+        "loading_date": "2015-10-05T12:00:00 0000",
+        "unloading_place": {
+          "address": {
+            "country": "DE",
+            "postal_code": "14050",
+            "locality": "Charlottenburg"
+          },
+          "geo": {
+            "latitude": 52.519,
+            "longitude": 13.313
+          }
+        },
+        "unloading_date": "2015-10-06T18:00:00 0000",
+        "price": 0,
+        "price_currency": "PLN",
+        "description": "",
+        "type": "public",
+        "load_length": {
+          "value": null,
+          "unit_code": null
+        },
+        "load_height": {
+          "value": null,
+          "unit_code": null
+        },
+        "load_volume": {
+          "value": null,
+          "unit_code": null
+        },
+        "load_weight": {
+          "value": 24,
+          "unit_code": "TNE"
+        },
+        "pallets": null,
+        "is_ltl": false,
+        "is_lift_required": false,
+        "is_truck_crane_required": false,
+        "is_tir_cable_required": false,
+        "is_tracking_system_required": false,
+        "is_for_clearance": false,
+        "required_ways_of_loading": null,
+        "required_adr_classes": null,
+        "_embedded": {
+          "start_distance": {
+            "id": "0.911581,0.366725-0.911579806469,0.366732573997",
+            "value": 32.412907,
+            "unit_code": "MTR",
+            "_links": {
+              "self": {
+                "href": "https://offers.system.trans.eu/api/rest/v1/distances/0.911581,0.366725-0.911579806469,0.366732573997"
+              }
+            }
+          },
+          "end_distance": {
+            "id": "0.916629,0.232356-0.916706353354,0.234073085557",
+            "value": 6697.331055,
+            "unit_code": "MTR",
+            "_links": {
+              "self": {
+                "href": "https://offers.system.trans.eu/api/rest/v1/distances/0.916629,0.232356-0.916706353354,0.234073085557"
+              }
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "https://offers.system.trans.eu/api/rest/v1/loads/396504956"
+          },
+          "offerer": {
+            "id": 459880,
+            "href": "https://companies.system.trans.eu/api/rest/v1/employees/459880"
+          },
+          "company": {
+            "id": 244310,
+            "href": "https://companies.system.trans.eu/api/rest/v1/companies/244310"
+          },
+          "contact_persons": {
+            "ids": [
+              459880
+            ],
+            "href": "https://companies.system.trans.eu/api/rest/v1/employees?filter={"id":[459880]}"
+          },
+          "required_truck_body": {
+            "id": "tent",
+            "href": "https://offers.system.trans.eu/api/rest/v1/truck-bodies/tent"
+          }
+        }
+      },
+      ]
+  },
+  "page_count": 1,
+  "page_size": 20,
+  "total_items": 1
+}
+</code></pre>
+
+<p><a class="anchor" name="malfunction_of_vehicle_executing_transit_search_for_vehicle_offers_in_the_area_which_can_replace_it"></a></p>
+
+<h2 id="6.-malfunction-of-vehicle-executing-transit.-search-for-vehicle-offers-in-the-area%2C-which-can-replace-it">6. Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it</h2>
+
+<ul>
+<li>User vehicle executes load transit from Warsaw to Berlin,</li>
+<li>During transit vehicle breaks,</li>
+<li>User wants to search for matching vehicle offer,</li>
+<li>User is able to browse matching vehicle offers details.</li>
+</ul>
+
+<h4 id="available-filters">Available filters</h4>
+
+<p><strong>URL with circle area (latitude, longitude):</strong> <code>https://offers.system.trans.eu/api/rest/v1/vehicles?filter={json_filter}</code></p>
+
+<ul>
+<li>Circle area</li>
+</ul>
+
+<pre><code class="json">{
+    "circle_area":{
+        "start":{
+            "latitude":"52,2296756",
+            "longitude":"21,0122287",
+            "distance":25000
+        },
+        "end":{
+            "latitude":"52,5234051",
+            "longitude":"13,4113999",
+            "distance":25000
+        }
+    }
+}
+</code></pre>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">GET /api/rest/v1/vehicles?filter={json_filter}
+Accept: application/hal+json
+Content-Type: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+</code></pre>
+
+<h4 id="response-body%3A">Response body:</h4>
+
+<pre><code class="json">{
+  "_links": {
+    "self": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000},"end":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000}}}&amp;page=1"
+    },
+    "first": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000},"end":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000}}}"
+    },
+    "last": {
+      "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":25000},"end":{"latitude":"52,5234051","longitude":"13,4113999","distance":25000}}}&amp;page=1"
+    }
+  },
+  "_embedded": {
+    "vehicles": [
+      {
+        "id": 396045311,
+        "creation_date": "2015-10-02T12:12:08 0000",
+        "publication_date": null,
+        "finish_date": "2015-10-05T19:00:00 0000",
+        "loading_place": {
+          "address": {
+            "country": "PL",
+            "postal_code": "00-001",
+            "locality": "Warszawa"
+          },
+          "geo": {
+            "latitude": 52.2445,
+            "longitude": 21.0291
+          }
+        },
+        "loading_date": "2015-10-03T13:00:00 0000",
+        "unloading_place": {
+          "address": {
+            "country": "DE",
+            "postal_code": "12043",
+            "locality": "Berlin"
+          },
+          "geo": {
+            "latitude": 52.4763,
+            "longitude": 13.4458
+          }
+        },
+        "unloading_date": "2015-10-05T19:00:00 0000",
+        "price": 0,
+        "price_currency": "PLN",
+        "description": "",
+        "type": "public",
+        "cargo_space_capacity": {
+          "value": 24,
+          "unit_code": "TNE"
+        },
+        "cargo_space_length": {
+          "value": null,
+          "unit_code": null
+        },
+        "cargo_space_height": {
+          "value": null,
+          "unit_code": null
+        },
+        "cargo_space_volume": {
+          "value": null,
+          "unit_code": null
+        },
+        "ltl_available": false,
+        "has_adr": true,
+        "has_lift": false,
+        "has_truck_crane": false,
+        "has_tir_cable": false,
+        "has_tir_carnet": false,
+        "has_pallet_bin": false,
+        "has_tracking_system": false,
+        "available_ways_of_loading": null,
+        "_embedded": {
+          "start_distance": {
+            "id": "0.911839,0.367027-0.911579806469,0.366732573997",
+            "value": 2012.332764,
+            "unit_code": "MTR",
+            "_links": {
+              "self": {
+                "href": "https://offers.system.trans.eu/api/rest/v1/distances/0.911839,0.367027-0.911579806469,0.366732573997"
+              }
+            }
+          },
+          "end_distance": {
+            "id": "0.915884,0.234673-0.916706353354,0.234073085557",
+            "value": 5738.689453,
+            "unit_code": "MTR",
+            "_links": {
+              "self": {
+                "href": "https://offers.system.trans.eu/api/rest/v1/distances/0.915884,0.234673-0.916706353354,0.234073085557"
+              }
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "https://offers.system.trans.eu/api/rest/v1/vehicles/396045311"
+          },
+          "offerer": {
+            "id": 402308,
+            "href": "https://companies.system.trans.eu/api/rest/v1/employees/402308"
+          },
+          "company": {
+            "id": 228588,
+            "href": "https://companies.system.trans.eu/api/rest/v1/companies/228588"
+          },
+          "contact_persons": {
+            "ids": [
+              402308
+            ],
+            "href": "https://companies.system.trans.eu/api/rest/v1/employees?filter={"id":[402308]}"
+          },
+          "truck_body": {
+            "id": "tent",
+            "href": "https://offers.system.trans.eu/api/rest/v1/truck-bodies/tent"
+          }
+        }
+      },
+      ...
+    ]
+  },
+  "page_count": 1,
+  "page_size": 20,
+  "total_items": 3
+}
+</code></pre>
+
+            </div>
+        </article>
+    </div>
+        </div>
+</div>
+<footer class="container">
+    &copy; 2016 TransConnect
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+<script src="/components/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-62971922-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script src="/components/highlightjs/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

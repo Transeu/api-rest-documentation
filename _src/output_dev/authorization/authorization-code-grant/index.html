@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authorization Code Grant &mdash; TransConnect &mdash; page for developers</title>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#ffffff">
+    <link href="/api-rest-documentation/favicon.ico" rel="icon" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="/components/highlightjs/styles/github.css"/>
+    <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code {
+            background-color: inherit;
+        }
+    </style>
+
+    <script type="application/javascript">
+        //FIXES: https://github.com/twbs/bootstrap/issues/1768
+        window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+    </script>
+
+                </head>
+<body>
+<header>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/"><img src="/images/transconnect.png"/></a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="/use-cases/authorization-use-cases/">Use cases</a></li>
+                        <li><a href="/authorization/authorization-overview/">Authorization</a></li>
+                        <li><a href="/api-specification/companies-api-endpoints-reference/">API Specification</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+</header>
+<div class="mainContent container">
+    <div class="row-fluid">
+            
+
+<div class="span3 sidebar">
+        <div class="well sidebar-nav">
+        <h4>Menu</h4>
+        <ul class="nav side-menu">
+                        <li><a href="/authorization/authorization-overview/"
+                     >
+                Authorization overview
+            </a></li>
+                        <li><a href="/authorization/registering-an-application/"
+                     >
+                Registering an application
+            </a></li>
+                        <li><a href="/authorization/multi-language-support/"
+                     >
+                Multi language support
+            </a></li>
+                        <li><a href="/authorization/authorization-code-grant/"
+                                            class="active"
+                     >
+                Authorization Code Grant (external users)
+            </a></li>
+                        <li><a href="/authorization/refreshing-an-access-token/"
+                     >
+                Refreshing an Access Token
+            </a></li>
+                        <li><a href="/authorization/resource-owner-password-credentials-grant/"
+                     >
+                Resource Owner Password Credentials Grant (internal users)
+            </a></li>
+                    </ul>
+    </div>
+        </div>
+<div class="span9">
+    
+        <article>
+            <header>
+                <h1>Authorization Code Grant
+                                        <small> (external users)</small>
+                                    </h1>
+
+            </header>
+            <div>
+                <blockquote>
+  <p><strong>Important note</strong>: To utilize this authentication flow your application must have <code>authorization_code</code> grant type admitted.</p>
+</blockquote>
+
+<p>For more general information please refer to <a href="/api-rest-documentation/authorization/authorization-overview/">authorization overview</a>.</p>
+
+<h2 id="authorization-request">Authorization request</h2>
+
+<h3 id="example">Example</h3>
+
+<pre><code class="http">GET /oauth2/authorize?client_id=example_app_client_id
+  &amp;response_type=code
+  &amp;redirect_uri=https%3a%2f%2fexample.com%2fapplicationendpoint
+  &amp;scope=offers.loads.manage HTTP/1.1
+Host: auth.system.trans.eu
+</code></pre>
+
+<h3 id="request-parameters-in-query-string">Request parameters (in query string)</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Required</th>
+  <th>Type</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>response_type</td>
+  <td>yes</td>
+  <td>string</td>
+  <td>Must be set to <code>code</code>.</td>
+</tr>
+<tr>
+  <td>client_id</td>
+  <td>yes</td>
+  <td>string</td>
+  <td>Client ID obtained during application registration.</td>
+</tr>
+<tr>
+  <td>redirect_uri</td>
+  <td>yes</td>
+  <td>string</td>
+  <td>One of previously specified application redirect endpoints.</td>
+</tr>
+<tr>
+  <td>state</td>
+  <td>no</td>
+  <td>string</td>
+  <td>Random generated string, that will be included in request response to prove response origin. Helps preventing <a href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">CSRF attacks</a>.</td>
+</tr>
+<tr>
+  <td>scope</td>
+  <td>no</td>
+  <td>string</td>
+  <td>Space separated list of scopes that application would like to access.</td>
+</tr>
+<tr>
+  <td>source</td>
+  <td>no</td>
+  <td>string</td>
+  <td>Choose service to verify credentials against. For details please refer to <a href="/api-rest-documentation/authorization/authorization-overview/">authorization overview</a>.</td>
+</tr>
+</tbody>
+</table>
+
+<p>The Trans Authorization Server will display page with details of requested scopes. If the user is not signed in, he first has to sign in using his Trans or Transplace credentials.</p>
+
+<h2 id="authorization-response">Authorization response</h2>
+
+<p>When user grants application access to requested scopes, Trans Authorization Server will redirect user back to URI specified in <code>redirect_uri</code> parameter along with generated <code>code</code>.</p>
+
+<h3 id="example">Example</h3>
+
+<pre><code class="http">HTTP/1.1 302 Found
+Location: https://example.com/applicationpoint?code=SDF41D54F54D45DF4
+</code></pre>
+
+<h3 id="response-parameters">Response parameters</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Type</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>code</td>
+  <td>string</td>
+  <td>Authorization code generated by the Trans Authorization Server.</td>
+</tr>
+<tr>
+  <td>state</td>
+  <td>string</td>
+  <td>Value of the <code>state</code> parameter provided in authorization request.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+  <p><strong>Warning:</strong> For security reasons <code>code</code> lifetime is limited to <strong>1 minute</strong>, after that period it becomes invalid.</p>
+</blockquote>
+
+<p>Also please note that not every error will cause a redirect. If the request fails due to a missing, invalid, or mismatching redirect URI or client id, the Trans Authorization Server inform user about this on its own page.</p>
+
+<h2 id="access-token-request">Access token request</h2>
+
+<p>After receiving valid code from the Trans Authorization Server, application can make request to the token endpoint and exchange code for access token.</p>
+
+<h3 id="example">Example</h3>
+
+<pre><code class="http">POST /oauth2/token
+Host: auth.system.trans.eu
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code
+&amp;code=a1c94032558c6d0ba98b998299a63135bce063b1
+&amp;redirect_uri=https%3a%2f%2fexample.com%2fapplicationendpoint
+&amp;client_id=example_app_client_id
+&amp;client_secret=example_app_secret
+</code></pre>
+
+<h3 id="request-parameters">Request parameters</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Required</th>
+  <th>Type</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>grant_type</td>
+  <td>yes</td>
+  <td>string</td>
+  <td>Must be set to <code>authorization_code</code>.</td>
+</tr>
+<tr>
+  <td>code</td>
+  <td>yes</td>
+  <td>string</td>
+  <td>Valid authorization code received from the Trans Authorization Server.</td>
+</tr>
+<tr>
+  <td>redirect_uri</td>
+  <td>yes</td>
+  <td>string</td>
+  <td>The same redirect_uri as provided when retrieving code.</td>
+</tr>
+<tr>
+  <td>client_id</td>
+  <td>no</td>
+  <td>string</td>
+  <td>Application client_id obtained during registration. Only required when <code>Authorization</code> header is not sent.</td>
+</tr>
+<tr>
+  <td>client_secret</td>
+  <td>no</td>
+  <td>string</td>
+  <td>Application client_secret obtained during registration. Only required when <code>Authorization</code> header is not sent.</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="header-parameters">Header parameters</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Required</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Authorization</td>
+  <td>yes</td>
+  <td>Base 64 encoded string that contains the client_id and client_secret keys. The field must have the format: <code>Authorization: Basic &lt;base64 encoded client_id:client_secret&gt;</code>.</td>
+</tr>
+<tr>
+  <td>Content-Type</td>
+  <td>yes</td>
+  <td>application/x-www-form-urlencoded</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="access-token-response">Access token response</h2>
+
+<h3 id="example">Example</h3>
+
+<pre><code class="http">HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "access_token": "59d9aa9b15cd59a61fc52014792efb6caa82373b",
+  "expires_in": 3600,
+  "token_type": "Bearer",
+  "scope": "offers.loads.manage",
+  "refresh_token": "d52d1d998d6533a3be8e7f26f904be513287938b"
+}
+</code></pre>
+
+<h3 id="response-parameters">Response parameters</h3>
+
+<table>
+<thead>
+<tr>
+  <th>Name</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>access_token</td>
+  <td>Access token to use by application for authorization.</td>
+</tr>
+<tr>
+  <td>expires_in</td>
+  <td>Time in seconds until token expires.</td>
+</tr>
+<tr>
+  <td>token_type</td>
+  <td>Type <code>Bearer</code> is returned as defined in <a href="http://tools.ietf.org/html/rfc6750">rfc6749</a>.</td>
+</tr>
+<tr>
+  <td>scope</td>
+  <td>Space separated list of scopes that access token has access to.</td>
+</tr>
+<tr>
+  <td>refresh_token</td>
+  <td>Single serving token that can be used to extend lifetime of access token.</td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+        </article>
+    </div>
+        </div>
+</div>
+<footer class="container">
+    &copy; 2016 TransConnect
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+<script src="/components/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-62971922-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script src="/components/highlightjs/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

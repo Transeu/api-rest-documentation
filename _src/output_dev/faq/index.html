@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FAQ &mdash; TransConnect &mdash; page for developers</title>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#ffffff">
+    <link href="/api-rest-documentation/favicon.ico" rel="icon" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="/components/highlightjs/styles/github.css"/>
+    <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code {
+            background-color: inherit;
+        }
+    </style>
+
+    <script type="application/javascript">
+        //FIXES: https://github.com/twbs/bootstrap/issues/1768
+        window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+    </script>
+
+                </head>
+<body>
+<header>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/"><img src="/images/transconnect.png"/></a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="/use-cases/authorization-use-cases/">Use cases</a></li>
+                        <li><a href="/authorization/authorization-overview/">Authorization</a></li>
+                        <li><a href="/api-specification/companies-api-endpoints-reference/">API Specification</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+</header>
+<div class="mainContent container">
+    <div class="row-fluid">
+            
+
+<div class="span3 sidebar">
+            <div class="well sidebar-nav">
+        <h4>Page content</h4>
+        <ul class="nav side-menu">
+                        <li><a href="/faq/#how_can_i_integrate_oauth2_with_desktop_application">
+                How can I integrate OAuth2 with desktop application?
+            </a></li>
+                        <li><a href="/faq/#can_i_accept_offer_using_rest_api">
+                Can I accept offer using REST API?
+            </a></li>
+                        <li><a href="/faq/#what_is_client_secret_and_client_id">
+                What is `client_sercret` and `client_id`?
+            </a></li>
+                        <li><a href="/faq/#how_do_i_secure_client_secret_for_my_web_app">
+                How do I secure `client_secret` for my web app?
+            </a></li>
+                        <li><a href="/faq/#what_is_the_difference_between_employeeid_companyid_and_transid">
+                What is the difference between `EmployeeId`, `CompanyId` and `TransId`?
+            </a></li>
+                        <li><a href="/faq/#when_requesting_authorization_token_using_code_i_am_receiving_400_bad_request_response">
+                When requesting authorization token using code I am receiving `400 Bad Request` response, What am I doing wrong?
+            </a></li>
+                        <li><a href="/faq/#when_i_request_offers_data_i_am_not_receiving_all_available_fields">
+                When I request offers data, I am not receiving all available fields. What’s happening?
+            </a></li>
+                        <li><a href="/faq/#when_i_am_posting_new_offer_i_get_response_you_are_not_authorized_to_do">
+                When I am posting new offer I get response “You are not authorized to do...” what’s the problem?
+            </a></li>
+                        <li><a href="/faq/#i_dont_have_transid_to_test_my_application_how_can_i_get_it">
+                I don’t have TransId to test my application, how can I get it?
+            </a></li>
+                        <li><a href="/faq/#are_dictionary_entries_translated">
+                Are dictionary entries translated?
+            </a></li>
+                        <li><a href="/faq/#i_am_getting_response_415_unsupported_media_type_what_is_wrong">
+                I am getting response `415 Unsupported Media Type` what is wrong?
+            </a></li>
+                        <li><a href="/faq/#and_or_in_filters_how_does_it_work">
+                AND &amp; OR in filters - how does it work?
+            </a></li>
+                        <li><a href="/faq/#403_forbidden_on_authorization_request">
+                403 forbidden on authorizatoin request
+            </a></li>
+                    </ul>
+    </div>
+    </div>
+<div class="span9">
+    
+        <article>
+            <header>
+                <h1>FAQ
+                                    </h1>
+
+            </header>
+            <div>
+                <p><a class="anchor" name="how_can_i_integrate_oauth2_with_desktop_application"></a></p>
+
+<h3 id="how-can-i-integrate-oauth2-with-desktop-application%3F">How can I integrate OAuth2 with desktop application?</h3>
+
+<p>Tags: <code>oauth</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>The <a href="http://wiki.oauth.net/w/page/27249271/OAuth%202%20for%20Native%20Apps">OAuth wiki</a> lists numerous options you can use. This question was also asked on stackoverflow: <a href="http://stackoverflow.com/questions/13753969/oauth-2-0-for-desktop-and-mobile-applications">OAuth 2.0 for desktop and mobile applications</a></p>
+
+<hr />
+
+<p><a class="anchor" name="can_i_accept_offer_using_rest_api"></a></p>
+
+<h3 id="can-i-accept-offer-using-rest-api%3F">Can I accept offer using REST API?</h3>
+
+<p>Tags: <code>api usage</code>, <code>available features</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>It's not possible to accept offer using REST API.</p>
+
+<p>However it's possible to accept offer after calling offer details modal window of Trans.eu and starting conversation about offer.</p>
+
+<hr />
+
+<p><a class="anchor" name="what_is_client_secret_and_client_id"></a></p>
+
+<h3 id="what-is-%60client_sercret%60-and-%60client_id%60%3F">What is <code>client_sercret</code> and <code>client_id</code>?</h3>
+
+<p>Tags: <code>oauth</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p><em><code>client_id</code></em> and <em><code>client_sercret</code></em> are client credentials used to authenticate the identity of your application. As specified in <a href="https://tools.ietf.org/html/rfc6749#section-2.3.1">RFC6749</a></p>
+
+<hr />
+
+<p><a class="anchor" name="how_do_i_secure_client_secret_for_my_web_app"></a></p>
+
+<h3 id="how-do-i-secure-%60client_secret%60-for-my-web-app%3F">How do I secure <code>client_secret</code> for my web app?</h3>
+
+<p>Tags:  <code>oauth</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p><em><code>client_secret</code></em> is used to authenticate the identity of your application to the service API. Don't send <em><code>client_secret</code></em> via HTTP allways use TLS encryption. Transmit <em><code>client_secret</code></em> only in the request-body and do not include it in the request URI. For more information see <a href="https://tools.ietf.org/html/rfc6749#section-2.3.1">RFC6749</a></p>
+
+<hr />
+
+<p><a class="anchor" name="what_is_the_difference_between_employeeid_companyid_and_transid"></a></p>
+
+<h3 id="what-is-the-difference-between-%60employeeid%60%2C-%60companyid%60-and-%60transid%60%3F">What is the difference between <code>EmployeeId</code>, <code>CompanyId</code> and <code>TransId</code>?</h3>
+
+<p>Tags: <code>api usage</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p><em><code>TransId</code></em> is composed of <em><code>CompanyId</code></em> and <em><code>EmployeeId</code></em> separated by a hypen sign.</p>
+
+<p>Example: <em><code>TransId = 12-1234</code></em>, so <em><code>CompanyId = 12 and EmployeeId = 1234</code></em>.</p>
+
+<hr />
+
+<p><a class="anchor" name="when_requesting_authorization_token_using_code_i_am_receiving_400_bad_request_response"></a></p>
+
+<h3 id="when-requesting-authorization-token-using-code-i-am-receiving-%60400-bad-request%60-response%2C-what-am-i-doing-wrong%3F">When requesting authorization token using code I am receiving <code>400 Bad Request</code> response, What am I doing wrong?</h3>
+
+<p>Tags: <code>oauth</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<ul>
+<li>Verify in documentation, if you are sending all required fields in proper format.</li>
+<li>Make sure you are properly sending data using <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.1">application/x-www-form-urlencoded</a> form content type.</li>
+</ul>
+
+<hr />
+
+<p><a class="anchor" name="when_i_request_offers_data_i_am_not_receiving_all_available_fields"></a></p>
+
+<h3 id="when-i-request-offers-data%2C-i-am-not-receiving-all-available-fields.-what%E2%80%99s-happening%3F">When I request offers data, I am not receiving all available fields. What’s happening?</h3>
+
+<p>Tags: <code>api usage</code>, <code>available features</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>Upon subscription expiry access to the fields is limited to subset of available fields of an offer.</p>
+
+<hr />
+
+<p><a class="anchor" name="when_i_am_posting_new_offer_i_get_response_you_are_not_authorized_to_do"></a></p>
+
+<h3 id="when-i-am-posting-new-offer-i-get-response-%E2%80%9Cyou-are-not-authorized-to-...%E2%80%9D-what%E2%80%99s-the-problem%3F">When I am posting new offer I get response “You are not authorized to [...]” what’s the problem?</h3>
+
+<p>Tags: <code>api usage</code>, <code>available features</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>Your company is not authorized to add offers. Make sure your company is authorized in Trans.eu platform and your subscription is active.</p>
+
+<hr />
+
+<p><a class="anchor" name="i_dont_have_transid_to_test_my_application_how_can_i_get_it"></a></p>
+
+<h3 id="i-don%E2%80%99t-have-transid-to-test-my-application%2C-how-can-i-get-it%3F">I don’t have TransId to test my application, how can I get it?</h3>
+
+<p>Tags: <code>api usage</code>, <code>available features</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>To obtain TransId please contact Grzegorz Patynek <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x67;&#112;&#97;&#116;&#x79;&#x6e;&#x65;&#107;&#64;&#116;&#x72;&#x61;&#x6e;&#115;&#46;e&#x75;">gpatynek@trans.eu</a>.</p>
+
+<hr />
+
+<p><a class="anchor" name="are_dictionary_entries_translated"></a></p>
+
+<h3 id="are-dictionary-entries-translated%3F">Are dictionary entries translated?</h3>
+
+<p>Tags: <code>api usage</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>In TransAPI dictionary entries are not being translated. If you need translations for dictionary entries, consider translating them on your application side.</p>
+
+<hr />
+
+<p><a class="anchor" name="i_am_getting_response_415_unsupported_media_type_what_is_wrong"></a></p>
+
+<h3 id="i-am-getting-response-%60415-unsupported-media-type%60-what-is-wrong%3F">I am getting response <code>415 Unsupported Media Type</code> what is wrong?</h3>
+
+<p>Tags: <code>api usage</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>You have to properly specify HTTP headers. Make sure you are sending headers <code>Content-Type</code> set to <code>application/json</code> and <code>Accept</code> set to <code>application/hal+json</code>.</p>
+
+<hr />
+
+<p><a class="anchor" name="and_or_in_filters_how_does_it_work"></a></p>
+
+<h3 id="and-%26-or-in-filters---how-does-it-work%3F">AND &amp; OR in filters - how does it work?</h3>
+
+<p>Tags: <code>api usage</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>All filters in TransAPI are using MongoDB filters syntax. Logical operators allow you to combine filters in API request.</p>
+
+<p>Examples:</p>
+
+<pre><code>$or: [ { quantity: { $lt: 20 } }, { price: 10 } ]
+$and: [ { price: { $ne: 1.99 } }, { price: { $exists: true } }
+</code></pre>
+
+<p>For more information checkout <a href="http://docs.mongodb.org/manual/reference/operator/query-logical/">Logical Query Operations</a> section of MongoDB reference.</p>
+
+<hr />
+
+<p><a class="anchor" name="403_forbidden_on_authorization_request"></a></p>
+
+<h3 id="when-sending-authorization-request-instead-of-%60302-found%60-response-i-am-getting-%60403-forbidden%60-what%27s-wrong%3F">When sending authorization request instead of <code>302 Found</code> response I am getting <code>403 Forbidden</code> what's wrong?</h3>
+
+<p>Tags: <code>api usage</code></p>
+
+<h4 id="answer%3A">Answer:</h4>
+
+<p>Make sure you are using <code>https</code> protocol not <code>http</code>.</p>
+
+            </div>
+        </article>
+    </div>
+        </div>
+</div>
+<footer class="container">
+    &copy; 2016 TransConnect
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/components/jquery/jquery.min.js"><\/script>')</script>
+<script src="/components/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-62971922-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script src="/components/highlightjs/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
