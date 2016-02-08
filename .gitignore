@@ -4,8 +4,8 @@
 /_src/app/config/sculpin_kernel_*.yml
 /_src/app/config/sculpin_site_*.yml
 /_src/app/logs/*
-/_src/output_*
-/_src/output_*/*
+/_src/output_prod/*
+/_src/output_dev/*
 /_src/source/components/
 /_src/vendor
 
