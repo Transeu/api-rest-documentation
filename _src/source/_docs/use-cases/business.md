@@ -542,7 +542,7 @@ Host: offers.system.trans.eu
 #### HTTP Request #####
 
 ```http
-POST /api/rest/v1/loads HTTP/1.1
+POST /api/rest/v1/vehicles HTTP/1.1
 Accept: application/hal+json
 Content-Type: application/hal+json
 Authorization: Bearer {access_token}
