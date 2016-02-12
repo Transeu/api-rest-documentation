@@ -63,8 +63,10 @@ GET /loads
 | circle_area.end.distance | integer | yes, if we filter also on *circle_area.end.latitude* and *circle_area.end.longitude* |
 | creation_date | range of timestamps | no |
 | loading_date | range of timestamps | no |
-| load_weight | range of floats | no |
-| load_length | range of floats | no |
+| load_weight (deprecated) | range of floats | no |
+| load_weight.value | range of floats | no |
+| load_length (deprecated) | range of floats | no |
+| load_length.value | range of floats | no |
 
 **Sort parameters**
 
@@ -469,8 +471,10 @@ GET /vehicles
 | circle_area.end.distance | integer | yes, if we filter also on *circle_area.end.latitude* and *circle_area.end.longitude* |
 | creation_date | range of timestamps | no |
 | loading_date | range of timestamps | no |
-| cargo_space_capacity | range of integers | no |
-| cargo_space_length | length range | no |
+| cargo_space_capacity (deprecated) | range of integers | no |
+| cargo_space_capacity.value | range of integers | no |
+| cargo_space_length (deprecated) | length range | no |
+| cargo_space_length.value | length range | no |
 
 **Sort parameters**
 
@@ -820,7 +824,7 @@ HTTP/1.1 204 No Content
 | price | float | Load offer price. Valid value should be between 0 and 999999.99.  |
 | price_currency | string | Load offer price currency (ISO 4217). |
 | description | string | Load offer description. Valid value should have min 1 and max 200 length. |
-| type | string | Load offer visibility:  `public`, `cluster`. |
+| type | string | Load offer visibility:  `public`, `cluster`, `private` |
 | load_length.value | float | Length of load. Valid value should be between 0.01 and 999.99.  |
 | load_length.unit_code | string | Load length measure unit. Only valid value is `MTR` (metre). |
 | load_height.value | float | Height of load. Valid value should be between 0.01 and 999.99. |
@@ -881,7 +885,7 @@ HTTP/1.1 204 No Content
 | price | float | Vehicle offer price. Valid value should be between 0 and 999999.99.  |
 | price_currency | string | Vehicle offer price currency (ISO 4217). |
 | description | string | Vehicle offer description. Valid value should have min 1 and max 200 length. |
-| type | string | Vehicle offer visibility: `public`, `cluster`. |
+| type | string | Vehicle offer visibility: `public`, `cluster`, `private` |
 | cargo_space_capacity.value | float |  Capacity of cargo space. Valid value should be between 0.01 and  9999.99 |
 | cargo_space_capacity.unit_code | string | Cargo space capacity measure unit. Only valid value is `MTQ` (cubic metre). |
 | cargo_space_length.value | float |  Length of cargo space. Valid value should be between 0.01 and  999.99  |
