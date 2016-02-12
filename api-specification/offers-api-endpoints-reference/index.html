@@ -250,12 +250,22 @@
   <td>no</td>
 </tr>
 <tr>
-  <td>load_weight</td>
+  <td>load_weight (deprecated)</td>
   <td>range of floats</td>
   <td>no</td>
 </tr>
 <tr>
-  <td>load_length</td>
+  <td>load_weight.value</td>
+  <td>range of floats</td>
+  <td>no</td>
+</tr>
+<tr>
+  <td>load_length (deprecated)</td>
+  <td>range of floats</td>
+  <td>no</td>
+</tr>
+<tr>
+  <td>load_length.value</td>
   <td>range of floats</td>
   <td>no</td>
 </tr>
@@ -1003,12 +1013,22 @@ Authorization: Bearer {access_token}
   <td>no</td>
 </tr>
 <tr>
-  <td>cargo_space_capacity</td>
+  <td>cargo_space_capacity (deprecated)</td>
   <td>range of integers</td>
   <td>no</td>
 </tr>
 <tr>
-  <td>cargo_space_length</td>
+  <td>cargo_space_capacity.value</td>
+  <td>range of integers</td>
+  <td>no</td>
+</tr>
+<tr>
+  <td>cargo_space_length (deprecated)</td>
+  <td>length range</td>
+  <td>no</td>
+</tr>
+<tr>
+  <td>cargo_space_length.value</td>
   <td>length range</td>
   <td>no</td>
 </tr>
@@ -1658,7 +1678,7 @@ Authorization: Bearer {access_token}
 <tr>
   <td>type</td>
   <td>string</td>
-  <td>Load offer visibility:  <code>public</code>, <code>cluster</code>.</td>
+  <td>Load offer visibility:  <code>public</code>, <code>cluster</code>, <code>private</code></td>
 </tr>
 <tr>
   <td>load_length.value</td>
@@ -1941,7 +1961,7 @@ Authorization: Bearer {access_token}
 <tr>
   <td>type</td>
   <td>string</td>
-  <td>Vehicle offer visibility: <code>public</code>, <code>cluster</code>.</td>
+  <td>Vehicle offer visibility: <code>public</code>, <code>cluster</code>, <code>private</code></td>
 </tr>
 <tr>
   <td>cargo_space_capacity.value</td>

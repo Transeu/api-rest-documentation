@@ -26,5 +26,5 @@ cp -rf _src/output_prod/* .
 rm -rf _src/output_*
 git add .
 git commit -m"update documentation content"
-git push
+git push origin feature/$BRANCH
 echo "Now please open a Pull Request in documentation repository https://github.com/Transeu/api-rest-documentation/"
