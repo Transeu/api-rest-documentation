@@ -16,7 +16,7 @@ side_menu:
 
 * **Public** - offer is visible and available for all Trans.eu platform users immediately. Regardless of whether they are employees of the same company, corporation, or whether they belong to a common cluster.
 * **Private** - offer is visible and available only for the employees of the same company as the oferrer.
-* **Cluster** - offer is visible and available to employees of companies that are members of the cluster. The offer becomes public in accordance with the settings of the cluster.
+* **Cluster** - offer is visible and available to employees of companies that are members of the cluster. The offer becomes visible in cluster right after being added.
 **Note:** a company can be a member of many clusters, and each of them has a separate identifier to be specified during offer adding. 
 For ex.
  
