@@ -29,9 +29,9 @@ table_of_content:
     url: /use-cases/transapi-business-use-cases/#finding_specific_vehicle_offer_type
   - title: Several different types of truck body
     url: /use-cases/transapi-business-use-cases/#several_different_types_of_truck_body
-    
-    
-    
+  - title: Adding load offer within cluster
+    url: /use-cases/transapi-business-use-cases/#adding_load_offer_within_cluster
+   
 ---
 
 <a class="anchor" name="adding_a_load_offer_based_on_an_order_in_external_system"></a>
@@ -1272,6 +1272,67 @@ Host: offers.system.trans.eu
 ...
 }
 ```
+
+#### HTTP Response #### 
+
+```HTTP
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+...
+}
+```
+
+<a class="anchor" name="adding_load_offer_within_cluster"></a>
+
+## 10. Adding load offers within cluster
+ - User of a system being integrated with Trans.eu platform (external system) wants wants to offer load for transporting to trusted company,
+ - User is a employee of company being a member of transport cluster in Trans.eu System
+ - Load transport offer is added within cluster
+ - Person or company belonging to the same cluster as offer was added is able to contact user using contact data provided.
+ 
+#### HTTP Request ####
+
+```http
+POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "load_weight": {
+    "value":12.00,
+    "unit_code": "TNE"
+  },
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Warszawa",
+      "postal_code": "00-125"
+    }
+  },
+  "required_truck_body": {
+    "id": "tent"
+  },
+  "loading_date": "2015-10-22T14:57:56+00:00",
+  "unloading_date" : "2015-10-23T14:59:56+00:00",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Wrocław",
+      "postal_code": "53-307"
+    }
+  },
+  "type": "cluster",
+    "clusters" : [
+      { "id": 10192}
+    ]
+}
+```
+
 
 #### HTTP Response #### 
 

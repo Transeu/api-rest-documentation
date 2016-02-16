@@ -36,7 +36,6 @@ Please also be aware that it will be required for development team to review cha
 
     ```
     cd _src
-    bin/sculpin install
     bin/sculpin generate --env=prod --url=http://transeu.github.io/api-rest-documentation
     ```    
     The site will be generated in `output_prod/`. 
