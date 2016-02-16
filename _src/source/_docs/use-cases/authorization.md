@@ -7,6 +7,8 @@ side_menu:
     active: true
   - title: TransAPI Business use cases
     url: /use-cases/transapi-business-use-cases/
+  - title: TransAPI Business dictionary
+    url: /use-cases/transapi-business-dictionary/
 ---
 
 TransAPI requires authorization for all processed requests. TransAPI authorization is based on [OAuth 2.0 authorization framework](http://tools.ietf.org/html/rfc6749).
