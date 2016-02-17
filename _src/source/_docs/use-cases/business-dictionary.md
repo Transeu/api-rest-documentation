@@ -20,9 +20,11 @@ side_menu:
 **Note:** a company can be a member of many clusters, and each of them has a separate identifier to be specified during offer adding. 
 For ex.
  
-```
+```json
+{
 "type":  "cluster",
 "clusters" : [
     { "id": 123}
-],
+ ]
+}
 ```

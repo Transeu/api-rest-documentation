@@ -367,7 +367,6 @@ Content-Type: application/hal+json
           }
         }
       },
-	  ...
     ]
   },
   "page_count": 1,
@@ -1007,7 +1006,6 @@ Host: offers.system.trans.eu
           }
         }
       },
-      ...
     ]
   },
   "page_count": 1,
@@ -1049,8 +1047,7 @@ Host: offers.system.trans.eu
       "locality": "Warszawa"
     },
   },
-  "unloading_date": "2016-03-09T07:00:00+0000",
-...
+  "unloading_date": "2016-03-09T07:00:00+0000"
 }
 ```
 
@@ -1061,8 +1058,7 @@ HTTP/1.1 201 Created
 Content-Type: application/hal+json
 
 {
-  "id": 123456789,
-...
+  "id": 123456789
 }
 ```
 
@@ -1092,8 +1088,7 @@ Host: offers.system.trans.eu
       "locality": "Warszawa"
     },
   },
-  "unloading_date": "2016-03-09T07:00:00+0000",
-...
+  "unloading_date": "2016-03-09T07:00:00+0000"
 }
 ```
 
@@ -1104,8 +1099,7 @@ HTTP/1.1 201 Created
 Content-Type: application/hal+json
 
 {
-  "id": 123456790,
-...
+  "id": 123456790
 }
 ```
 
@@ -1135,8 +1129,7 @@ Host: offers.system.trans.eu
       "locality": "Warszawa"
     },
   },
-  "unloading_date": "2016-03-09T07:00:00+0000",
-...
+  "unloading_date": "2016-03-09T07:00:00+0000"
 }
 ```
 
@@ -1147,8 +1140,7 @@ HTTP/1.1 201 Created
 Content-Type: application/hal+json
 
 {
-  "id": 123456791,
-...
+  "id": 123456791
 }
 ```
 
@@ -1170,8 +1162,7 @@ Authorization: Bearer {access_token}
 Host: offers.system.trans.eu
 
 {
-  "required_adr_classes": [ "1", "4.3", "5.2" ],
-...
+  "required_adr_classes": [ "1", "4.3", "5.2" ]
 }
 ```
 
@@ -1183,7 +1174,6 @@ Content-Type: application/hal+json
 
 {
   "id": 123456791,
-...
 }
 ```
 
@@ -1209,7 +1199,6 @@ Host: offers.system.trans.eu
  "required_truck_body" : {
     "id": "curtainsider"
   },
-...
 }
 ```
 
@@ -1221,7 +1210,6 @@ Content-Type: application/hal+json
 
 {
   "id": 123456791,
-...
 }
 ```
 
@@ -1239,7 +1227,6 @@ Host: offers.system.trans.eu
  "required_truck_body" : {
     "id": "tent"
   },
-...
 }
 ```
 
@@ -1251,7 +1238,6 @@ Content-Type: application/hal+json
 
 {
   "id": 123456791,
-...
 }
 ```
 
@@ -1269,7 +1255,6 @@ Host: offers.system.trans.eu
  "required_truck_body" : {
     "id": "coilmulde"
   },
-...
 }
 ```
 
@@ -1281,7 +1266,6 @@ Content-Type: application/hal+json
 
 {
   "id": 123456791,
-...
 }
 ```
 
@@ -1342,6 +1326,5 @@ Content-Type: application/hal+json
 
 {
   "id": 123456791,
-...
 }
 ```
