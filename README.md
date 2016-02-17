@@ -30,6 +30,22 @@ After script executes, please open a Pull Request in documentation repository [h
 
 Please also be aware that it will be required for development team to review changes and accept them before they will be published.
 
+## Code review notes publishing
+
+After content review has been done documentation content should be updated accordingly.
+
+It is not necessary to publish them to new branch and create a new Pull Request.
+
+It is possible to simply run
+
+```
+bash update.sh
+```
+
+and new content will be generated and pushed to current branch.
+
+Important note - script will not allow to push changes directly to `gh-pages` branch.
+
 ## Manual Deploy
 
 1. Generate production ready documentation
