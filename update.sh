@@ -16,5 +16,5 @@ cp -rf _src/output_prod/* .
 rm -rf _src/output_*
 git add .
 git commit -m"update documentation content after review"
-git push
+git push origin $BRANCH
 echo "Your branch on Github repository has been updated with recent changes"
