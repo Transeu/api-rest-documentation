@@ -34,6 +34,13 @@ table_of_content:
    
 ---
 
+During reading use cases below, please be aware that some of them may contain only partial requests. 
+
+Due to fact, that complete requests and responses are very long in many cases they were trimmed down
+to what's really important in given use case.
+
+For complete request and response information please take refer to [Offers API specification](/api-specification/offers-api-endpoints-reference)
+
 <a class="anchor" name="adding_a_load_offer_based_on_an_order_in_external_system"></a>
 
 ## 1. Adding a load offer based on an order in external system
