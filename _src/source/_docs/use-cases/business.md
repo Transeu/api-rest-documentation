@@ -7,6 +7,8 @@ side_menu:
   - title: TransAPI Business use cases
     url: /use-cases/transapi-business-use-cases/
     active: true
+  - title: TransAPI Business dictionary
+    url: /use-cases/transapi-business-dictionary/
 
 table_of_content:
   - title: Adding a load offer based on an order in external system
@@ -21,14 +23,30 @@ table_of_content:
     url: /use-cases/transapi-business-use-cases/#search_additional_loading_during_transit
   - title: Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it
     url: /use-cases/transapi-business-use-cases/#malfunction_of_vehicle_executing_transit_search_for_vehicle_offers_in_the_area_which_can_replace_it
+  - title:  Additional transport offer on route
+    url: /use-cases/transapi-business-use-cases/#additional_transport_offer_on_route
+  - title: Finding specific vehicle offer type
+    url: /use-cases/transapi-business-use-cases/#finding_specific_vehicle_offer_type
+  - title: Several different types of truck body
+    url: /use-cases/transapi-business-use-cases/#several_different_types_of_truck_body
+  - title: Adding load offer within cluster
+    url: /use-cases/transapi-business-use-cases/#adding_load_offer_within_cluster
+   
 ---
+
+During reading use cases below, please be aware that some of them may contain only partial requests. 
+
+Due to fact, that complete requests and responses are very long in many cases they were trimmed down
+to what's really important in given use case.
+
+For complete request and response information please take refer to [Offers API specification](/api-specification/offers-api-endpoints-reference)
 
 <a class="anchor" name="adding_a_load_offer_based_on_an_order_in_external_system"></a>
 
 ## 1. Adding a load offer based on an order in external system
 
 #### Scenario ####
-* User of external system receives a contract to transport a load, but doesn't have a contract with a transport company or doesn't have any vehicle available,
+* User of a system being integrated with Trans.eu platform (external system) receives a contract to transport a load, but doesn't have a contract with a transport company or doesn't have any vehicle available,
 * the user adds the load offer in Trans.eu based on existing offer in external system,
 * person or company interested in transport execution contacts owner of the offer.
 
@@ -72,7 +90,10 @@ Host: offers.system.trans.eu
 
 #### Expected response body: ####
 
-```json
+```http
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
 {
   "id": 123456789,
   "creation_date": "2015-10-21T08:54:23+0000",
@@ -161,8 +182,8 @@ Host: offers.system.trans.eu
 
 ## 2. Search offers with free vehicle to complete order in external system ##
 
-* User receives a contract to transport a load, but he doesn't have a contract with a transport company or doesn't have any vehicle available,
-* search vehicles in Trans.eu based on offer existing in external system,
+* User of a system being integrated with Trans.eu platform (external system) receives a contract to transport a load, but he doesn't have a contract with a transport company or doesn't have any vehicle available,
+* User performs search for vehicles in Trans.eu based on offer existing in external system,
 * user receives list of vehicles offers meeting his search criteria and can browse details of each offer.
 
 #### Available filters #####
@@ -228,7 +249,10 @@ Host: offers.system.trans.eu
 ```
 
 #### Response body: ####
-```json
+```http
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
 {
   "_links": {
     "self": {
@@ -350,7 +374,6 @@ Host: offers.system.trans.eu
           }
         }
       },
-	  ...
     ]
   },
   "page_count": 1,
@@ -363,7 +386,7 @@ Host: offers.system.trans.eu
 
 ## 3. Find load offers for driver with empty vehicle on a way back based on order in external system ##
 
-* User knows that chosen vehicle will drive a route from Warsaw to Berlin,
+* User of a system being integrated with Trans.eu platform (external system) knows that chosen vehicle will drive a route from Warsaw to Berlin,
 * User doesn't have a contract for load transit on the way back,
 * Based on the original order and the vehicle, user wants to search for a load offer with loading location near Berlin and unloading location near Warsaw.
 
@@ -534,7 +557,7 @@ Host: offers.system.trans.eu
 
 ## 4. Adding vehicle offer ##
 
-* User vehicle is not involved in any load transport at this moment,
+* User of a system being integrated with Trans.eu platform (external system) vehicle is not involved in any load transport at this moment,
 * user adds an offer of free vehicle in Trans.eu offers exchange,
 * person or company interested in that offer contacts user.
 
@@ -662,7 +685,7 @@ Host: offers.system.trans.eu
 
 ## 5. Search additional loading during transit ##
 
-* User vehicle will perform load transit from Warsaw to Berlin,
+* User of a system being integrated with Trans.eu platform (external system) vehicle will perform load transit from Warsaw to Berlin,
 * the vehicle has some free loading space left,
 * user wants to search for load offers matching available space at points along the vehicles route,
 * user receives list of matching load offers.
@@ -831,7 +854,7 @@ Host: offers.system.trans.eu
 <a class="anchor" name="malfunction_of_vehicle_executing_transit_search_for_vehicle_offers_in_the_area_which_can_replace_it"></a>
 
 ## 6. Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it ##
-* User vehicle executes load transit from Warsaw to Berlin,
+* User of a system being integrated with Trans.eu platform (external system) vehicle executes load transit from Warsaw to Berlin,
 * During transit vehicle breaks,
 * User wants to search for matching vehicle offer,
 * User is able to browse matching vehicle offers details.
@@ -990,11 +1013,325 @@ Host: offers.system.trans.eu
           }
         }
       },
-      ...
     ]
   },
   "page_count": 1,
   "page_size": 20,
   "total_items": 3
+}
+```
+
+<a class="anchor" name="additional_transport_offer_on_route"></a>
+
+## 7. Additional transport offer on route
+ - User of a system being integrated with Trans.eu platform (external system) has a vehicle executing transport, but not all cargo space is used,
+ - User adds single vehicle offer as a number of vehicle offers in Trans.eu platform with different cities placed on route to fill available cargo space,
+ - Person or company interested in vehicle offer contacts user using contact data provided,
+ - Each of load offers is deleted from Trans.eu platform by external system.
+
+###Offer 1### 
+#### HTTP Request #####
+```http
+POST /api/rest/v1/vehicles HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "80-858",
+      "locality": "Gdańsk"
+    },
+  },
+  "loading_date": "2016-03-07T07:00:00+0000",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "02-495",
+      "locality": "Warszawa"
+    },
+  },
+  "unloading_date": "2016-03-09T07:00:00+0000"
+}
+```
+
+#### HTTP Response ##### 
+
+```http
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456789
+}
+```
+
+###Offer 2###
+#### HTTP Request #####
+
+```http
+POST /api/rest/v1/vehicles HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "83-322",
+      "locality": "Malbork"
+    },
+  },
+  "loading_date": "2016-03-07T07:00:00+0000",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "02-495",
+      "locality": "Warszawa"
+    },
+  },
+  "unloading_date": "2016-03-09T07:00:00+0000"
+}
+```
+
+#### HTTP Response ##### 
+
+```http
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456790
+}
+```
+
+###Offer 3###
+#### HTTP Request #####
+
+```http
+POST /api/rest/v1/vehicles HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "06-500",
+      "locality": "Mława"
+    },
+  },
+  "loading_date": "2016-03-07T07:00:00+0000",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "02-495",
+      "locality": "Warszawa"
+    },
+  },
+  "unloading_date": "2016-03-09T07:00:00+0000"
+}
+```
+
+#### HTTP Response ##### 
+
+```HTTP
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791
+}
+```
+
+<a class="anchor" name="finding_specific_vehicle_offer_type"></a>
+
+## 8. Finding specific vehicle offer type
+ - User of a system being integrated with Trans.eu platform (external system) receives a contract to transport a hazardous load, but doesn't have contact with proper transport company or doesn't have any vehicle available with ADR license,
+ - User adds the load offer in Trans.eu based on existing offer in external system,
+ - Person or company interested in transport execution contacts user,
+ - When offer is accepted, it is removed from Trans.eu platform by external system.
+ 
+#### HTTP Request #####
+
+```http
+POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "required_adr_classes": [ "1", "4.3", "5.2" ]
+}
+```
+
+#### HTTP Response ##### 
+
+```HTTP
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+}
+```
+
+<a class="anchor" name="several_different_types_of_truck_body"></a>
+
+## 9. Several different types of truck body
+ - User of a system being integrated with Trans.eu platform (external system) wants to offer an available vehicle with 'mega' body,
+ - External system posts several vehicle offers with different truck body types corresponding to 'mega' body type ('curtainsider', 'tent' and 'colimulde')
+ - Person or company interested in using given vehicle contacts user,
+ - When offer is accepted, all vehicle offers are removed by external system.
+
+###Offer 1###
+#### HTTP Request #####
+
+```http
+POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+ "required_truck_body" : {
+    "id": "curtainsider"
+  },
+}
+```
+
+#### HTTP Response #### 
+
+```HTTP
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+}
+```
+
+###Offer 2###
+#### HTTP Request #####
+
+```http
+POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+ "required_truck_body" : {
+    "id": "tent"
+  },
+}
+```
+
+#### HTTP Response ####
+
+```HTTP
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+}
+```
+
+###Offer 3###
+#### HTTP Request #####
+
+```http
+POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+ "required_truck_body" : {
+    "id": "coilmulde"
+  },
+}
+```
+
+#### HTTP Response #### 
+
+```HTTP
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+}
+```
+
+<a class="anchor" name="adding_load_offer_within_cluster"></a>
+
+## 10. Adding load offers within cluster
+ - User of a system being integrated with Trans.eu platform (external system) wants wants to offer load for transporting to trusted company,
+ - User is a employee of company being a member of transport cluster in Trans.eu System
+ - Load transport offer is added within cluster
+ - Person or company belonging to the same cluster as offer was added is able to contact user using contact data provided.
+ 
+#### HTTP Request ####
+
+```http
+POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "load_weight": {
+    "value":12.00,
+    "unit_code": "TNE"
+  },
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Warszawa",
+      "postal_code": "00-125"
+    }
+  },
+  "required_truck_body": {
+    "id": "tent"
+  },
+  "loading_date": "2015-10-22T14:57:56+00:00",
+  "unloading_date" : "2015-10-23T14:59:56+00:00",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Wrocław",
+      "postal_code": "53-307"
+    }
+  },
+  "type": "cluster",
+    "clusters" : [
+      { "id": 10192}
+    ]
+}
+```
+
+
+#### HTTP Response #### 
+
+```HTTP
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
 }
 ```

@@ -73,6 +73,10 @@
                      >
                 TransAPI Business use cases
             </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/transapi-business-dictionary/"
+                     >
+                TransAPI Business dictionary
+            </a></li>
                     </ul>
     </div>
             <div class="well sidebar-nav">
@@ -96,6 +100,18 @@
                         <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/transapi-business-use-cases/#malfunction_of_vehicle_executing_transit_search_for_vehicle_offers_in_the_area_which_can_replace_it">
                 Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it
             </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/transapi-business-use-cases/#additional_transport_offer_on_route">
+                Additional transport offer on route
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/transapi-business-use-cases/#finding_specific_vehicle_offer_type">
+                Finding specific vehicle offer type
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/transapi-business-use-cases/#several_different_types_of_truck_body">
+                Several different types of truck body
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/transapi-business-use-cases/#adding_load_offer_within_cluster">
+                Adding load offer within cluster
+            </a></li>
                     </ul>
     </div>
     </div>
@@ -115,7 +131,7 @@
 <h4 id="scenario">Scenario</h4>
 
 <ul>
-<li>User of external system receives a contract to transport a load, but doesn't have a contract with a transport company or doesn't have any vehicle available,</li>
+<li>User of a system being integrated with Trans.eu platform (external system) receives a contract to transport a load, but doesn't have a contract with a transport company or doesn't have any vehicle available,</li>
 <li>the user adds the load offer in Trans.eu based on existing offer in external system,</li>
 <li>person or company interested in transport execution contacts owner of the offer.</li>
 </ul>
@@ -159,7 +175,10 @@ Host: offers.system.trans.eu
 
 <h4 id="expected-response-body%3A">Expected response body:</h4>
 
-<pre><code class="json">{
+<pre><code class="http">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
   "id": 123456789,
   "creation_date": "2015-10-21T08:54:23+0000",
   "publication_date": null,
@@ -248,8 +267,8 @@ Host: offers.system.trans.eu
 <h2 id="2.-search-offers-with-free-vehicle-to-complete-order-in-external-system">2. Search offers with free vehicle to complete order in external system</h2>
 
 <ul>
-<li>User receives a contract to transport a load, but he doesn't have a contract with a transport company or doesn't have any vehicle available,</li>
-<li>search vehicles in Trans.eu based on offer existing in external system,</li>
+<li>User of a system being integrated with Trans.eu platform (external system) receives a contract to transport a load, but he doesn't have a contract with a transport company or doesn't have any vehicle available,</li>
+<li>User performs search for vehicles in Trans.eu based on offer existing in external system,</li>
 <li>user receives list of vehicles offers meeting his search criteria and can browse details of each offer.</li>
 </ul>
 
@@ -318,7 +337,10 @@ Host: offers.system.trans.eu
 
 <h4 id="response-body%3A">Response body:</h4>
 
-<pre><code class="json">{
+<pre><code class="http">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
   "_links": {
     "self": {
       "href": "https://offers.system.trans.eu/api/rest/v1/vehicles?filter={"circle_area":{"start":{"latitude":"52,2296756","longitude":"21,0122287","distance":10000},"end":{"latitude":"51,108142","longitude":"17,037338","distance":10000}},"required_truck_body":{"id":"tent"},"cargo_space_capacity":{"$gt":0.965}}&amp;page=1"
@@ -439,7 +461,6 @@ Host: offers.system.trans.eu
           }
         }
       },
-      ...
     ]
   },
   "page_count": 1,
@@ -453,7 +474,7 @@ Host: offers.system.trans.eu
 <h2 id="3.-find-load-offers-for-driver-with-empty-vehicle-on-a-way-back-based-on-order-in-external-system">3. Find load offers for driver with empty vehicle on a way back based on order in external system</h2>
 
 <ul>
-<li>User knows that chosen vehicle will drive a route from Warsaw to Berlin,</li>
+<li>User of a system being integrated with Trans.eu platform (external system) knows that chosen vehicle will drive a route from Warsaw to Berlin,</li>
 <li>User doesn't have a contract for load transit on the way back,</li>
 <li>Based on the original order and the vehicle, user wants to search for a load offer with loading location near Berlin and unloading location near Warsaw.</li>
 </ul>
@@ -626,7 +647,7 @@ Host: offers.system.trans.eu
 <h2 id="4.-adding-vehicle-offer">4. Adding vehicle offer</h2>
 
 <ul>
-<li>User vehicle is not involved in any load transport at this moment,</li>
+<li>User of a system being integrated with Trans.eu platform (external system) vehicle is not involved in any load transport at this moment,</li>
 <li>user adds an offer of free vehicle in Trans.eu offers exchange,</li>
 <li>person or company interested in that offer contacts user.</li>
 </ul>
@@ -753,7 +774,7 @@ Host: offers.system.trans.eu
 <h2 id="5.-search-additional-loading-during-transit">5. Search additional loading during transit</h2>
 
 <ul>
-<li>User vehicle will perform load transit from Warsaw to Berlin,</li>
+<li>User of a system being integrated with Trans.eu platform (external system) vehicle will perform load transit from Warsaw to Berlin,</li>
 <li>the vehicle has some free loading space left,</li>
 <li>user wants to search for load offers matching available space at points along the vehicles route,</li>
 <li>user receives list of matching load offers.</li>
@@ -925,7 +946,7 @@ Host: offers.system.trans.eu
 <h2 id="6.-malfunction-of-vehicle-executing-transit.-search-for-vehicle-offers-in-the-area%2C-which-can-replace-it">6. Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it</h2>
 
 <ul>
-<li>User vehicle executes load transit from Warsaw to Berlin,</li>
+<li>User of a system being integrated with Trans.eu platform (external system) vehicle executes load transit from Warsaw to Berlin,</li>
 <li>During transit vehicle breaks,</li>
 <li>User wants to search for matching vehicle offer,</li>
 <li>User is able to browse matching vehicle offers details.</li>
@@ -1084,12 +1105,328 @@ Host: offers.system.trans.eu
           }
         }
       },
-      ...
     ]
   },
   "page_count": 1,
   "page_size": 20,
   "total_items": 3
+}
+</code></pre>
+
+<p><a class="anchor" name="additional_transport_offer_on_route"></a></p>
+
+<h2 id="7.-additional-transport-offer-on-route">7. Additional transport offer on route</h2>
+
+<ul>
+<li>User of a system being integrated with Trans.eu platform (external system) has a vehicle executing transport, but not all cargo space is used,</li>
+<li>User adds single vehicle offer as a number of vehicle offers in Trans.eu platform with different cities placed on route to fill available cargo space,</li>
+<li>Person or company interested in vehicle offer contacts user using contact data provided,</li>
+<li>Each of load offers is deleted from Trans.eu platform by external system.</li>
+</ul>
+
+<h3 id="offer-1">Offer 1</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/vehicles HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "80-858",
+      "locality": "Gdańsk"
+    },
+  },
+  "loading_date": "2016-03-07T07:00:00+0000",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "02-495",
+      "locality": "Warszawa"
+    },
+  },
+  "unloading_date": "2016-03-09T07:00:00+0000"
+}
+</code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<pre><code class="http">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456789
+}
+</code></pre>
+
+<h3 id="offer-2">Offer 2</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/vehicles HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "83-322",
+      "locality": "Malbork"
+    },
+  },
+  "loading_date": "2016-03-07T07:00:00+0000",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "02-495",
+      "locality": "Warszawa"
+    },
+  },
+  "unloading_date": "2016-03-09T07:00:00+0000"
+}
+</code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<pre><code class="http">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456790
+}
+</code></pre>
+
+<h3 id="offer-3">Offer 3</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/vehicles HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "06-500",
+      "locality": "Mława"
+    },
+  },
+  "loading_date": "2016-03-07T07:00:00+0000",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "postal_code": "02-495",
+      "locality": "Warszawa"
+    },
+  },
+  "unloading_date": "2016-03-09T07:00:00+0000"
+}
+</code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<pre><code class="HTTP">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791
+}
+</code></pre>
+
+<p><a class="anchor" name="finding_specific_vehicle_offer_type"></a></p>
+
+<h2 id="8.-finding-specific-vehicle-offer-type">8. Finding specific vehicle offer type</h2>
+
+<ul>
+<li>User of a system being integrated with Trans.eu platform (external system) receives a contract to transport a hazardous load, but doesn't have contact with proper transport company or doesn't have any vehicle available with ADR license,</li>
+<li>User adds the load offer in Trans.eu based on existing offer in external system,</li>
+<li>Person or company interested in transport execution contacts user,</li>
+<li>When offer is accepted, it is removed from Trans.eu platform by external system.</li>
+</ul>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "required_adr_classes": [ "1", "4.3", "5.2" ]
+}
+</code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<pre><code class="HTTP">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+}
+</code></pre>
+
+<p><a class="anchor" name="several_different_types_of_truck_body"></a></p>
+
+<h2 id="9.-several-different-types-of-truck-body">9. Several different types of truck body</h2>
+
+<ul>
+<li>User of a system being integrated with Trans.eu platform (external system) wants to offer an available vehicle with 'mega' body,</li>
+<li>External system posts several vehicle offers with different truck body types corresponding to 'mega' body type ('curtainsider', 'tent' and 'colimulde')</li>
+<li>Person or company interested in using given vehicle contacts user,</li>
+<li>When offer is accepted, all vehicle offers are removed by external system.</li>
+</ul>
+
+<h3 id="offer-1">Offer 1</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+ "required_truck_body" : {
+    "id": "curtainsider"
+  },
+}
+</code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<pre><code class="HTTP">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+}
+</code></pre>
+
+<h3 id="offer-2">Offer 2</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+ "required_truck_body" : {
+    "id": "tent"
+  },
+}
+</code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<pre><code class="HTTP">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+}
+</code></pre>
+
+<h3 id="offer-3">Offer 3</h3>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+ "required_truck_body" : {
+    "id": "coilmulde"
+  },
+}
+</code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<pre><code class="HTTP">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
+}
+</code></pre>
+
+<p><a class="anchor" name="adding_load_offer_within_cluster"></a></p>
+
+<h2 id="10.-adding-load-offers-within-cluster">10. Adding load offers within cluster</h2>
+
+<ul>
+<li>User of a system being integrated with Trans.eu platform (external system) wants wants to offer load for transporting to trusted company,</li>
+<li>User is a employee of company being a member of transport cluster in Trans.eu System</li>
+<li>Load transport offer is added within cluster</li>
+<li>Person or company belonging to the same cluster as offer was added is able to contact user using contact data provided.</li>
+</ul>
+
+<h4 id="http-request">HTTP Request</h4>
+
+<pre><code class="http">POST /api/rest/v1/loads HTTP/1.1
+Content-Type: application/hal+json
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+Host: offers.system.trans.eu
+
+{
+  "load_weight": {
+    "value":12.00,
+    "unit_code": "TNE"
+  },
+  "loading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Warszawa",
+      "postal_code": "00-125"
+    }
+  },
+  "required_truck_body": {
+    "id": "tent"
+  },
+  "loading_date": "2015-10-22T14:57:56+00:00",
+  "unloading_date" : "2015-10-23T14:59:56+00:00",
+  "unloading_place": {
+    "address": {
+      "country": "PL",
+      "locality": "Wrocław",
+      "postal_code": "53-307"
+    }
+  },
+  "type": "cluster",
+    "clusters" : [
+      { "id": 10192}
+    ]
+}
+</code></pre>
+
+<h4 id="http-response">HTTP Response</h4>
+
+<pre><code class="HTTP">HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+  "id": 123456791,
 }
 </code></pre>
 
