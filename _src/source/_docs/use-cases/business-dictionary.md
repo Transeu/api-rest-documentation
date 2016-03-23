@@ -28,3 +28,14 @@ For ex.
  ]
 }
 ```
+
+## Special identifiers
+
+Some APIs introduces special type of identifiers referred to as **special identifiers**. Special identifiers can be used
+instead of numerical identifiers (check API specifications where you can use them).
+
+Examples:
+
+- `@me` get resource in context of current user
+- `@company` get resource in context of current users company
+- `@company-contractor` get resource in context of current users company, where that company is in a role of contractor

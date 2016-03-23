@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exchange Transactions API Endpoints Reference &mdash; TransConnect &mdash; page for developers</title>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#ffffff">
+    <link href="/api-rest-documentation/favicon.ico" rel="icon" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="http://transeu.github.io/api-rest-documentation/components/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+    <link href="http://transeu.github.io/api-rest-documentation/css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="stylesheet" href="http://transeu.github.io/api-rest-documentation/components/highlightjs/styles/github.css"/>
+    <style>
+        /** quick fix because bootstrap <pre> has a background-color. */
+        pre code {
+            background-color: inherit;
+        }
+    </style>
+
+    <script type="application/javascript">
+        //FIXES: https://github.com/twbs/bootstrap/issues/1768
+        window.addEventListener("hashchange", function() { scrollBy(0, -50) });
+    </script>
+
+                </head>
+<body>
+<header>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="http://transeu.github.io/api-rest-documentation/"><img src="http://transeu.github.io/api-rest-documentation/images/transconnect.png"/></a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="http://transeu.github.io/api-rest-documentation/use-cases/authorization-use-cases/">Use cases</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/authorization/authorization-overview/">Authorization</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/api-specification/companies-api-endpoints-reference/">API Specification</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/faq">FAQ</a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+</header>
+<div class="mainContent container">
+    <div class="row-fluid">
+            
+
+<div class="span3 sidebar">
+        <div class="well sidebar-nav">
+        <h4>Menu</h4>
+        <ul class="nav side-menu">
+                        <li><a href="http://transeu.github.io/api-rest-documentation/api-specification/companies-api-endpoints-reference/"
+                     >
+                Companies API Endpoints Reference
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/api-specification/exchange-transactions-api-endpoints-reference/"
+                                            class="active"
+                     >
+                Exchange Transactions API Endpoints Reference
+            </a></li>
+                        <li><a href="http://transeu.github.io/api-rest-documentation/api-specification/offers-api-endpoints-reference/"
+                     >
+                Offers API Endpoints Reference
+            </a></li>
+                    </ul>
+    </div>
+        </div>
+<div class="span9">
+    
+        <article>
+            <header>
+                <h1>Exchange Transactions API Endpoints Reference
+                                    </h1>
+
+            </header>
+            <div>
+                <p><strong>Version:</strong> 1</p>
+
+<p><strong>Base URL:</strong> <code>https://exchange-transactions.system.trans.eu/api/rest/v1</code></p>
+
+<h2 id="resources">Resources</h2>
+
+<h3 id="load-transactions">Load transactions</h3>
+
+<h4 id="get-company-transactions-originated-from-load-offer%2C-where-company-is-in-a-role-of-offerer">Get company transactions originated from load offer, where company is in a role of offerer</h4>
+
+<p><strong>Scopes</strong>:</p>
+
+<ul>
+<li>exchange-transactions.load-transactions.company-offerer.read</li>
+</ul>
+
+<p><strong>Endpoint</strong></p>
+
+<pre><code>GET /load-transactions/@company-offerer
+</code></pre>
+
+<p><strong>Query parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Query parameter</th>
+  <th>Type</th>
+  <th>Required</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>filter</td>
+  <td>json</td>
+  <td>no</td>
+  <td>Filter values</td>
+</tr>
+<tr>
+  <td>page</td>
+  <td>integer</td>
+  <td>no</td>
+  <td>Result page number</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Filter parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>offer</td>
+  <td>object</td>
+  <td>no</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Response</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Http status</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>200</td>
+  <td>Return collection of transaction entities.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Example</strong></p>
+
+<pre><code class="http">GET /api/rest/v1/load-transactions/@company-offerer?filter={"offer":{"id":123}} HTTP/1.1
+Host: exchange-transactions.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+</code></pre>
+
+<pre><code class="http">HTTP/1.1 200 OK
+Content-Type: application/hal+json
+
+{
+  "_links": {
+    "self": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/load-transactions/@company-contractor"
+    }
+  },
+  "_embedded": {
+    "load_transactions": [
+       {
+         "id": "a83749c4-ae49-50e3-a2d9-c0b048ae2c8e",
+         "creation_date": "2016-02-23T15:20:59+01:00",
+         "_embedded": {
+           "load_offer": {
+             "id": 198218751,
+             "creation_date": "2016-02-23T14:20:39+0000",
+             "publication_date": null,
+             "finish_date": "2016-02-24T21:00:00+0000",
+             "loading_place": {
+               "address": {
+                 "country": "PL",
+                 "postal_code": "36-200",
+                 "locality": "Brzozów"
+               },
+               "geo": {
+                 "latitude": 49.695,
+                 "longitude": 22.0193
+               }
+             },
+             "loading_date": "2016-02-23T15:00:00+0000",
+             "unloading_place": {
+               "address": {
+                 "country": "PL",
+                 "postal_code": "36-016",
+                 "locality": "Chmielnik"
+               },
+               "geo": {
+                 "latitude": 49.9739,
+                 "longitude": 22.1454
+               }
+             },
+             "unloading_date": "2016-02-24T21:00:00+0000",
+             "price": 4,
+             "price_currency": "PLN",
+             "price_in_euro": 1,
+             "description": "",
+             "type": "public",
+             "load_length": {
+               "value": null,
+               "unit_code": null
+             },
+             "load_height": {
+               "value": null,
+               "unit_code": null
+             },
+             "load_volume": {
+               "value": null,
+               "unit_code": null
+             },
+             "load_weight": {
+               "value": 4,
+               "unit_code": "TNE"
+             },
+             "pallets": null,
+             "is_ltl": false,
+             "is_lift_required": false,
+             "is_truck_crane_required": false,
+             "is_tir_cable_required": false,
+             "is_tracking_system_required": false,
+             "is_for_clearance": false,
+             "required_ways_of_loading": null,
+             "required_adr_classes": null,
+             "_links": {
+               "offerer": {
+                 "id": 12345,
+                 "href": "http://companies.system.trans.eu/api/rest/v1/employees/12345"
+               },
+               "company": {
+                 "id": 123456,
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456"
+               },
+               "contact_persons": {
+                 "ids": [
+                   12345
+                 ],
+                 "href": "http://companies.system.trans.eu/api/rest/v1/employees?filter=%7B%22id%22:%5B12345%5D%7D"
+               },
+               "required_truck_body": {
+                 "id": "curtainsider",
+                 "href": "http://offers.system.trans.eu/api/rest/v1/truck-bodies/curtainsider"
+               }
+             }
+           },
+           "offerer_company": {
+             "id": 123456,
+             "legal_name": "Luke",
+             "short_name": "Levic corp",
+             "native_name": null,
+             "short_native_name": null,
+             "email": "testy-alfa@test.com",
+             "address": {
+               "postal_code": "koddd",
+               "locality": "Wrocław",
+               "street_address": "ulicaaaahhaq",
+               "country": "PL"
+             },
+             "vat_id": "PL8282828282",
+             "telephone": "(48) 12312312312",
+             "additional_telephones": null,
+             "url": null,
+             "registration_date": "2010-04-14T08:03:34+00:00",
+             "fax_number": null,
+             "company_number": null,
+             "registration_number": null,
+             "establishment_date": "-001-11-29T23:00:00+00:00",
+             "_links": {
+               "self": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456"
+               },
+               "certificates": {
+                 "id": "123456",
+                 "href": "http://company-certificates.system.trans.eu/api/rest/v1/companies/123456/certifications"
+               },
+               "stats": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/stats"
+               },
+               "ratings": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/ratings"
+               },
+               "trans-risk": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/trans-risk"
+               },
+               "structure": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/structure"
+               },
+               "legal-forms": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/legal-forms"
+               },
+               "services": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/services"
+               },
+               "employees": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/employees"
+               }
+             }
+           },
+           "offerer_employee": {
+             "id": 123456,
+             "given_name": "Luke",
+             "family_name": "Test",
+             "trans_id": "123456-1",
+             "email": "test@test.com",
+             "language": "PL",
+             "telephone": "(48) 1234556789",
+             "mobile_telephone": "(48) 987654321",
+             "additional_telephones": null,
+             "registration_date": "2010-04-14T08:03:35+00:00",
+             "last_login_date": "2016-03-17T12:31:33+00:00",
+             "entitled": true,
+             "hidden": false,
+             "is_driver": false,
+             "is_moderator": false,
+             "_links": {
+               "self": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/employees/123456"
+               },
+               "company": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456"
+               }
+             }
+           },
+           "contractor_company": {
+             "id": 123456,
+             "legal_name": "Test Sp. z o. o. Sp. k.",
+             "short_name": "Test",
+             "native_name": null,
+             "short_native_name": null,
+             "email": "test@test.com",
+             "address": {
+               "postal_code": "53-5341",
+               "locality": "Wrocław",
+               "street_address": "Testowa 1234",
+               "country": "PL"
+             },
+             "vat_id": "PL112233445566",
+             "telephone": "(48) 12345671",
+             "additional_telephones": null,
+             "url": "http://www.onet.pl",
+             "registration_date": "2009-05-12T14:08:13+00:00",
+             "fax_number": "1123",
+             "company_number": null,
+             "registration_number": null,
+             "establishment_date": "2009-05-12T14:08:13+00:00",
+             "_links": {
+               "self": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456"
+               },
+               "certificates": {
+                 "id": "123456",
+                 "href": "http://company-certificates.system.trans.eu/api/rest/v1/companies/123456/certifications"
+               },
+               "stats": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/stats"
+               },
+               "ratings": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/ratings"
+               },
+               "trans-risk": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/trans-risk"
+               },
+               "structure": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/structure"
+               },
+               "legal-forms": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/legal-forms"
+               },
+               "services": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/services"
+               },
+               "employees": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456/employees"
+               }
+             }
+           },
+           "contractor_employee": {
+             "id": 12345,
+             "given_name": "John",
+             "family_name": "Doe",
+             "trans_id": "123456-1",
+             "email": "john.doe@test.com",
+             "language": "PL",
+             "telephone": null,
+             "mobile_telephone": null,
+             "additional_telephones": null,
+             "registration_date": "2009-05-12T14:08:13+00:00",
+             "last_login_date": "2016-02-23T14:16:19+00:00",
+             "entitled": true,
+             "hidden": true,
+             "is_driver": false,
+             "is_moderator": false,
+             "_links": {
+               "self": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/employees/12345"
+               },
+               "company": {
+                 "href": "http://companies.system.trans.eu/api/rest/v1/companies/123456"
+               }
+             }
+           }
+         },
+         "_links": {
+           "self": {
+             "href": "http://exchange-transactions.system.trans.eu/api/rest/v1/load-transactions/a83749c4-ae49-50e3-a2d9-c0b048ae2c8e"
+           }
+         }
+       }
+     ]
+  },
+  "page_count": 1,
+  "page_size": 10,
+  "total_items": 1,
+  "page": 1
+}
+</code></pre>
+
+<h4 id="get-company-transactions-originated-from-load-offer%2C-where-company-is-in-a-role-of-contractor">Get company transactions originated from load offer, where company is in a role of contractor</h4>
+
+<p><strong>Scopes</strong>:</p>
+
+<ul>
+<li>exchange-transactions.load-transactions.company-contractor.read</li>
+</ul>
+
+<p><strong>Endpoint</strong></p>
+
+<pre><code>GET /load-transactions/@company-contractor
+</code></pre>
+
+<p><strong>Query parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Query parameter</th>
+  <th>Type</th>
+  <th>Required</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>filter</td>
+  <td>json</td>
+  <td>no</td>
+  <td>Filter values</td>
+</tr>
+<tr>
+  <td>page</td>
+  <td>integer</td>
+  <td>no</td>
+  <td>Result page number</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Filter parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>offer</td>
+  <td>object</td>
+  <td>no</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Response</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Http status</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>200</td>
+  <td>Return collection of transaction entities.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Example</strong></p>
+
+<p>See example usage of <code>/load-transactions/@company-offerer</code> endpoint.</p>
+
+<h3 id="vehicle-transactions">Vehicle transactions</h3>
+
+<h4 id="get-company-transactions-originated-from-vehicle-offer%2C-where-company-is-in-a-role-of-offerer">Get company transactions originated from vehicle offer, where company is in a role of offerer</h4>
+
+<p><strong>Scopes</strong>:</p>
+
+<ul>
+<li>exchange-transactions.vehicle-transactions.company-offerer.read</li>
+</ul>
+
+<p><strong>Endpoint</strong></p>
+
+<pre><code>GET /vehicle-transactions/@company-offerer
+</code></pre>
+
+<p><strong>Query parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Query parameter</th>
+  <th>Type</th>
+  <th>Required</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>filter</td>
+  <td>json</td>
+  <td>no</td>
+  <td>Filter values</td>
+</tr>
+<tr>
+  <td>page</td>
+  <td>integer</td>
+  <td>no</td>
+  <td>Result page number</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Filter parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>offer</td>
+  <td>object</td>
+  <td>no</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Response</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Http status</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>200</td>
+  <td>Return collection of transaction entities.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Example</strong></p>
+
+<pre><code class="http">GET /api/rest/v1/vehicle-transactions/@company-offerer?filter={"offer":{"id":123}} HTTP/1.1
+Host: exchange-transactions.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+</code></pre>
+
+<pre><code class="http">HTTP/1.1 200 OK
+Content-Type: application/hal+json
+
+{
+  "_links": {
+    "self": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-contractor"
+    }
+  },
+  "_embedded": {
+    "load_transactions": [
+        ... //transactions data (same as above)
+    ]
+  },
+  "page_count": 0,
+  "page_size": 10,
+  "total_items": 0,
+  "page": 0
+}
+</code></pre>
+
+<h4 id="get-collection-of-company-transactions-originated-from-vehicle-offer%2C-where-company-is-in-a-role-of-contractor">Get collection of company transactions originated from vehicle offer, where company is in a role of contractor</h4>
+
+<p><strong>Scopes</strong>:</p>
+
+<ul>
+<li>exchange-transactions.vehicle-transactions.company-contractor.read</li>
+</ul>
+
+<p><strong>Endpoint</strong></p>
+
+<pre><code>GET /vehicle-transactions/@company-contractor
+</code></pre>
+
+<p><strong>Query parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Query parameter</th>
+  <th>Type</th>
+  <th>Required</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>filter</td>
+  <td>json</td>
+  <td>no</td>
+  <td>Filter values</td>
+</tr>
+<tr>
+  <td>page</td>
+  <td>integer</td>
+  <td>no</td>
+  <td>Result page number</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Filter parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>offer</td>
+  <td>object</td>
+  <td>no</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Response</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Http status</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>200</td>
+  <td>Return collection of transaction entities.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Example</strong></p>
+
+<p>See example usage of <code>/vehicle-transactions/@company-offerer</code> endpoint.</p>
+
+            </div>
+        </article>
+    </div>
+        </div>
+</div>
+<footer class="container">
+    &copy; 2016 TransConnect
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://transeu.github.io/api-rest-documentation/components/jquery/jquery.min.js"><\/script>')</script>
+<script src="http://transeu.github.io/api-rest-documentation/components/bootstrap/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-62971922-2', 'auto');
+    ga('send', 'pageview');
+</script>
+<script src="http://transeu.github.io/api-rest-documentation/components/highlightjs/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

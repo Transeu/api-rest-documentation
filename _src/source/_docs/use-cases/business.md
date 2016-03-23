@@ -23,7 +23,7 @@ table_of_content:
     url: /use-cases/transapi-business-use-cases/#search_additional_loading_during_transit
   - title: Malfunction of vehicle executing transit. Search for vehicle offers in the area, which can replace it
     url: /use-cases/transapi-business-use-cases/#malfunction_of_vehicle_executing_transit_search_for_vehicle_offers_in_the_area_which_can_replace_it
-  - title:  Additional transport offer on route
+  - title: Additional transport offer on route
     url: /use-cases/transapi-business-use-cases/#additional_transport_offer_on_route
   - title: Finding specific vehicle offer type
     url: /use-cases/transapi-business-use-cases/#finding_specific_vehicle_offer_type
@@ -31,7 +31,12 @@ table_of_content:
     url: /use-cases/transapi-business-use-cases/#several_different_types_of_truck_body
   - title: Adding load offer within cluster
     url: /use-cases/transapi-business-use-cases/#adding_load_offer_within_cluster
-   
+  - title: Find contractor data from transaction based on particular vehicle offer
+    url: /use-cases/transapi-business-use-cases/#find_contractor_data_from_transaction_based_on_particular_vehicle_offer
+  - title: Listing transactions for vehicle offers published by company to search for contractors data
+    url: /use-cases/transapi-business-use-cases/#listing_transactions_for_vehicle_offers_published_by_company_to_search_for_contractors_data
+  - title: Listing transactions for load offers published by other companies
+    url: /use-cases/transapi-business-use-cases/#listing_transactions_for_load_offers_published_by_other_companies
 ---
 
 During reading use cases below, please be aware that some of them may contain only partial requests. 
@@ -1335,3 +1340,614 @@ Content-Type: application/hal+json
   "id": 123456791,
 }
 ```
+
+<a class="anchor" name="find_contractor_data_from_transaction_based_on_particular_vehicle_offer"></a>
+
+## 11. Find contractor data from transaction based on particular vehicle offer
+ - User of a system being integrated with Trans.eu platform (external system) adds new vehicle offer using external system,
+ - External system publishes vehicle offer via REST API integration with Trans.eu platform,
+ - External system receives and stores response containing vehicle offer identifier,
+ - Vehicle offer is accepted by both sides in Trans.eu exchange,
+ - External system requests for transaction associated with previously stored vehicle offer identifier,
+ - User of external system has now contractor data available within his system.
+
+### HTTP Request for finding collection of transactions:
+```http
+GET /api/rest/v1/load-transactions/@company-offerer?filter={"offer":{"id":12345}} HTTP/1.1
+Host: exchange-transactions.system.trans.eu
+Accept: application/hal+json
+Content-Type: application/hal+json
+Authorization: Bearer {access_token}
+```
+
+### Expected response body:
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-offerer?page=1"
+    },
+    "first": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-offerer"
+    },
+    "last": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-offerer?page=1"
+    },
+    "next": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-offerer?page=1"
+    }
+  },
+  "_embedded": {
+    "vehicle_transactions": [
+      {
+        "id": "2b77a99c-3001-549f-a4b3-17d3e5740e7d",
+        "creation_date": "2016-01-12T14:57:50+01:00",
+        "_embedded": {
+          "vehicle_offer": {
+            "id": 12345,
+            "creation_date": "2016-01-12T13:56:22+0000",
+            "publication_date": null,
+            "finish_date": "2016-01-13T20:00:00+0000",
+            "loading_place": {
+              "address": {
+                "country": "PL",
+                "postal_code": "12-345",
+                "locality": "Brześce"
+              },
+              "geo": {
+                "latitude": 11.0323,
+                "longitude": 1.1813
+              }
+            },
+            "loading_date": "2016-01-12T14:00:00+0000",
+            "unloading_place": {
+              "address": {
+                "country": "PL",
+                "postal_code": "12-345",
+                "locality": "Człuchów"
+              },
+              "geo": {
+                "latitude": 2.6672,
+                "longitude": 3.3588
+              }
+            },
+            "unloading_date": "2016-01-13T20:00:00+0000",
+            "price": 0,
+            "price_currency": "EUR",
+            "price_in_euro": 0,
+            "description": "",
+            "type": "public",
+            "cargo_space_capacity": {
+              "value": 1,
+              "unit_code": "TNE"
+            },
+            "cargo_space_length": {
+              "value": null,
+              "unit_code": null
+            },
+            "cargo_space_height": {
+              "value": null,
+              "unit_code": null
+            },
+            "cargo_space_volume": {
+              "value": null,
+              "unit_code": null
+            },
+            "ltl_available": false,
+            "has_adr": false,
+            "has_lift": false,
+            "has_truck_crane": false,
+            "has_tir_cable": false,
+            "has_tir_carnet": false,
+            "has_pallet_bin": false,
+            "has_tracking_system": false,
+            "available_ways_of_loading": [
+              "side",
+              "back"
+            ],
+            "_links": {
+              "offerer": {
+                "id": 5555,
+                "href": "https://companies.system.trans.eu/api/rest/v1/employees/5555"
+              },
+              "company": {
+                "id": 222,
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222"
+              },
+              "contact_persons": {
+                "ids": [
+                  5555
+                ],
+                "href": "https://companies.system.trans.eu/api/rest/v1/employees?filter=%7B%22id%22:%5B5555%5D%7D"
+              },
+              "truck_body": {
+                "id": "van",
+                "href": "https://offers.system.trans.eu/api/rest/v1/truck-bodies/van"
+              }
+            }
+          },
+          "offerer_company": {
+            "id": 222,
+            "legal_name": "Example company",
+            "short_name": "Example",
+            "native_name": null,
+            "short_native_name": null,
+            "email": "example@onet.pl",
+            "address": {
+              "postal_code": "45-1111",
+              "locality": "Warszawa",
+              "street_address": "ul Warszawska 100",
+              "country": "PL"
+            },
+            "vat_id": "123456",
+            "telephone": "(48) 123456789",
+            "additional_telephones": null,
+            "url": null,
+            "registration_date": "2012-11-05T10:50:03+00:00",
+            "fax_number": null,
+            "company_number": "123456789",
+            "registration_number": null,
+            "establishment_date": "2012-07-31T22:00:00+00:00",
+            "_links": {
+              "self": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222"
+              },
+              "certificates": {
+                "id": "222",
+                "href": "https://company-certificates.system.trans.eu/api/rest/v1/companies/222/certifications"
+              },
+              "stats": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/stats"
+              },
+              "ratings": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/ratings"
+              },
+              "trans-risk": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/trans-risk"
+              },
+              "structure": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/structure"
+              },
+              "legal-forms": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/legal-forms"
+              },
+              "services": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/services"
+              },
+              "employees": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/employees"
+              }
+            }
+          },
+          "offerer_employee": {
+            "id": 5555,
+            "given_name": "John",
+            "family_name": "Doe",
+            "trans_id": "123-123456",
+            "email": "test@test.pl",
+            "language": "PL",
+            "telephone": null,
+            "mobile_telephone": "(48) 531069683",
+            "additional_telephones": null,
+            "registration_date": "2015-11-05T10:50:03+00:00",
+            "last_login_date": "2016-03-30T03:56:58+00:00",
+            "entitled": true,
+            "hidden": false,
+            "is_driver": false,
+            "is_moderator": false,
+            "_links": {
+              "self": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/employees/5555"
+              },
+              "company": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222"
+              }
+            }
+          },
+          "contractor_company": {
+            "id": 444,
+            "legal_name": "Example company 2",
+            "short_name": "Example 2",
+            "native_name": null,
+            "short_native_name": null,
+            "email": "info@trans.test",
+            "address": {
+              "postal_code": "12-212",
+              "locality": "Warszawa",
+              "street_address": "Transowa 4",
+              "country": "PL"
+            },
+            "vat_id": "PL123456789",
+            "telephone": "(48) 123456789",
+            "additional_telephones": null,
+            "url": "http://trans.eu",
+            "registration_date": "2005-05-25T11:51:17+00:00",
+            "fax_number": "123456789",
+            "company_number": "123456789",
+            "registration_number": "123456789",
+            "establishment_date": "2003-04-30T22:00:00+00:00",
+            "_links": {
+              "self": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444"
+              },
+              "certificates": {
+                "id": "444",
+                "href": "https://company-certificates.system.trans.eu/api/rest/v1/companies/444/certifications"
+              },
+              "stats": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/stats"
+              },
+              "ratings": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/ratings"
+              },
+              "trans-risk": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/trans-risk"
+              },
+              "structure": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/structure"
+              },
+              "legal-forms": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/legal-forms"
+              },
+              "services": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/services"
+              },
+              "employees": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/employees"
+              }
+            }
+          },
+          "contractor_employee": {
+            "id": 11111,
+            "given_name": "John",
+            "family_name": "Doe",
+            "trans_id": "444-121",
+            "email": "info@trans.test",
+            "language": "PL",
+            "telephone": "(48) 123456789",
+            "mobile_telephone": "(48) 123456789",
+            "additional_telephones": null,
+            "registration_date": "2008-03-23T18:48:07+00:00",
+            "last_login_date": "2016-03-30T09:50:20+00:00",
+            "entitled": false,
+            "hidden": false,
+            "is_driver": false,
+            "is_moderator": false,
+            "_links": {
+              "self": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/employees/11111"
+              },
+              "company": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444"
+              }
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/2b77a99c-3001-549f-a4b3-17d3e5740e7d"
+          }
+        }
+      },
+    ]
+  },
+  "page_count": 1,
+  "page_size": 10,
+  "total_items": 1,
+  "page": 1
+}
+```
+
+<a class="anchor" name="listing_transactions_for_vehicle_offers_published_by_company_to_search_for_contractors_data"></a>
+
+## 12. Listing transactions for vehicle offers published by company to search for contractors data
+ - User of a system integrated with Trans.eu platform (external system) publishes offer using Trans communicator,
+ - External system does not have offer identifier of that offer,
+ - External system retrieves list of transactions concluded based on vehicle offers, where company was in the role of offerer,
+ - User of external system can now browse the transaction list and search for information about contractors.
+
+### HTTP Request for finding collection of transactions:
+```http
+GET /api/rest/v1/vehicle-transactions/@company-offerer HTTP/1.1
+Host: exchange-transactions.system.trans.eu
+Accept: application/hal+json
+Content-Type: application/hal+json
+Authorization: Bearer {access_token}
+```
+
+### Expected response body:
+```json
+{
+  "_links": {
+    "self": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-offerer?page=1"
+    },
+    "first": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-offerer"
+    },
+    "last": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-offerer?page=1"
+    },
+    "next": {
+      "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/@company-offerer?page=1"
+    }
+  },
+  "_embedded": {
+    "vehicle_transactions": [
+      {
+        "id": "2b77a99c-3001-549f-a4b3-17d3e5740e7d",
+        "creation_date": "2016-01-12T14:57:50+01:00",
+        "_embedded": {
+          "vehicle_offer": {
+            "id": 12345,
+            "creation_date": "2016-01-12T13:56:22+0000",
+            "publication_date": null,
+            "finish_date": "2016-01-13T20:00:00+0000",
+            "loading_place": {
+              "address": {
+                "country": "PL",
+                "postal_code": "12-345",
+                "locality": "Brześce"
+              },
+              "geo": {
+                "latitude": 11.0323,
+                "longitude": 1.1813
+              }
+            },
+            "loading_date": "2016-01-12T14:00:00+0000",
+            "unloading_place": {
+              "address": {
+                "country": "PL",
+                "postal_code": "12-345",
+                "locality": "Człuchów"
+              },
+              "geo": {
+                "latitude": 2.6672,
+                "longitude": 3.3588
+              }
+            },
+            "unloading_date": "2016-01-13T20:00:00+0000",
+            "price": 0,
+            "price_currency": "EUR",
+            "price_in_euro": 0,
+            "description": "",
+            "type": "public",
+            "cargo_space_capacity": {
+              "value": 1,
+              "unit_code": "TNE"
+            },
+            "cargo_space_length": {
+              "value": null,
+              "unit_code": null
+            },
+            "cargo_space_height": {
+              "value": null,
+              "unit_code": null
+            },
+            "cargo_space_volume": {
+              "value": null,
+              "unit_code": null
+            },
+            "ltl_available": false,
+            "has_adr": false,
+            "has_lift": false,
+            "has_truck_crane": false,
+            "has_tir_cable": false,
+            "has_tir_carnet": false,
+            "has_pallet_bin": false,
+            "has_tracking_system": false,
+            "available_ways_of_loading": [
+              "side",
+              "back"
+            ],
+            "_links": {
+              "offerer": {
+                "id": 5555,
+                "href": "https://companies.system.trans.eu/api/rest/v1/employees/5555"
+              },
+              "company": {
+                "id": 222,
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222"
+              },
+              "contact_persons": {
+                "ids": [
+                  5555
+                ],
+                "href": "https://companies.system.trans.eu/api/rest/v1/employees?filter=%7B%22id%22:%5B5555%5D%7D"
+              },
+              "truck_body": {
+                "id": "van",
+                "href": "https://offers.system.trans.eu/api/rest/v1/truck-bodies/van"
+              }
+            }
+          },
+          "offerer_company": {
+            "id": 222,
+            "legal_name": "Example company",
+            "short_name": "Example",
+            "native_name": null,
+            "short_native_name": null,
+            "email": "example@onet.pl",
+            "address": {
+              "postal_code": "45-1111",
+              "locality": "Warszawa",
+              "street_address": "ul Warszawska 100",
+              "country": "PL"
+            },
+            "vat_id": "123456",
+            "telephone": "(48) 123456789",
+            "additional_telephones": null,
+            "url": null,
+            "registration_date": "2012-11-05T10:50:03+00:00",
+            "fax_number": null,
+            "company_number": "123456789",
+            "registration_number": null,
+            "establishment_date": "2012-07-31T22:00:00+00:00",
+            "_links": {
+              "self": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222"
+              },
+              "certificates": {
+                "id": "222",
+                "href": "https://company-certificates.system.trans.eu/api/rest/v1/companies/222/certifications"
+              },
+              "stats": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/stats"
+              },
+              "ratings": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/ratings"
+              },
+              "trans-risk": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/trans-risk"
+              },
+              "structure": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/structure"
+              },
+              "legal-forms": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/legal-forms"
+              },
+              "services": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/services"
+              },
+              "employees": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222/employees"
+              }
+            }
+          },
+          "offerer_employee": {
+            "id": 5555,
+            "given_name": "John",
+            "family_name": "Doe",
+            "trans_id": "123-123456",
+            "email": "test@test.pl",
+            "language": "PL",
+            "telephone": null,
+            "mobile_telephone": "(48) 531069683",
+            "additional_telephones": null,
+            "registration_date": "2015-11-05T10:50:03+00:00",
+            "last_login_date": "2016-03-30T03:56:58+00:00",
+            "entitled": true,
+            "hidden": false,
+            "is_driver": false,
+            "is_moderator": false,
+            "_links": {
+              "self": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/employees/5555"
+              },
+              "company": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/222"
+              }
+            }
+          },
+          "contractor_company": {
+            "id": 444,
+            "legal_name": "Example company 2",
+            "short_name": "Example 2",
+            "native_name": null,
+            "short_native_name": null,
+            "email": "info@trans.test",
+            "address": {
+              "postal_code": "12-212",
+              "locality": "Warszawa",
+              "street_address": "Transowa 4",
+              "country": "PL"
+            },
+            "vat_id": "PL123456789",
+            "telephone": "(48) 123456789",
+            "additional_telephones": null,
+            "url": "http://trans.eu",
+            "registration_date": "2005-05-25T11:51:17+00:00",
+            "fax_number": "123456789",
+            "company_number": "123456789",
+            "registration_number": "123456789",
+            "establishment_date": "2003-04-30T22:00:00+00:00",
+            "_links": {
+              "self": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444"
+              },
+              "certificates": {
+                "id": "444",
+                "href": "https://company-certificates.system.trans.eu/api/rest/v1/companies/444/certifications"
+              },
+              "stats": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/stats"
+              },
+              "ratings": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/ratings"
+              },
+              "trans-risk": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/trans-risk"
+              },
+              "structure": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/structure"
+              },
+              "legal-forms": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/legal-forms"
+              },
+              "services": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/services"
+              },
+              "employees": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444/employees"
+              }
+            }
+          },
+          "contractor_employee": {
+            "id": 11111,
+            "given_name": "John",
+            "family_name": "Doe",
+            "trans_id": "444-121",
+            "email": "info@trans.test",
+            "language": "PL",
+            "telephone": "(48) 123456789",
+            "mobile_telephone": "(48) 123456789",
+            "additional_telephones": null,
+            "registration_date": "2008-03-23T18:48:07+00:00",
+            "last_login_date": "2016-03-30T09:50:20+00:00",
+            "entitled": false,
+            "hidden": false,
+            "is_driver": false,
+            "is_moderator": false,
+            "_links": {
+              "self": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/employees/11111"
+              },
+              "company": {
+                "href": "https://companies.system.trans.eu/api/rest/v1/companies/444"
+              }
+            }
+          }
+        },
+        "_links": {
+          "self": {
+            "href": "https://exchange-transactions.system.trans.eu/api/rest/v1/vehicle-transactions/2b77a99c-3001-549f-a4b3-17d3e5740e7d"
+          }
+        }
+      },
+    ]
+  },
+  "page_count": 2,
+  "page_size": 10,
+  "total_items": 1,
+  "page": 1
+}
+```
+
+<a class="anchor" name="listing_transactions_for_load_offers_published_by_other_companies"></a>
+
+## 13. Listing transactions for load offers published by other companies
+ - User of a system integrated with Trans.eu platform (external system) accepts load offer published by other company within Trans.eu exchange,
+ - User is employed by transport company, so all accepted transactions are based on load offers,
+ - External system retrieves list of transactions concluded based on load offers, where company was in the role of contractor,
+ - User of external system can now browse the transaction list and search information about offerers.
+
+### HTTP Request for finding collection of transactions:
+```http
+GET /api/rest/v1/load-transactions/@company-contractor HTTP/1.1
+Host: exchange-transactions.system.trans.eu
+Accept: application/hal+json
+Content-Type: application/hal+json
+Authorization: Bearer {access_token}
+```
+
+Response will look analogously to previous `exchange-transactions` service responses.
