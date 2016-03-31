@@ -31,8 +31,8 @@ For ex.
 
 ## Special identifiers
 
-Some APIs introduces special type of identifiers referred to as **special identifiers**. Special identifiers can be used
-instead of numerical identifiers (check API specifications where you can use them).
+Some APIs introduce special type of identifiers referred to as **special identifiers**. Special identifiers can be used
+instead of numerical identifiers (check respective API specifications where you can use them).
 
 Examples:
 
