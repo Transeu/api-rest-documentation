@@ -1,11 +1,13 @@
 ---
-title: Companies Api Endpoints Reference
+title: Companies API Endpoints Reference
 is_specification: true
 side_menu:
-  - title: Companies Api Endpoints Reference
+  - title: Companies API Endpoints Reference
     url: /api-specification/companies-api-endpoints-reference/
     active: true
-  - title: Offers Api Endpoints Reference 
+  - title: Exchange Transactions API Endpoints Reference
+    url: /api-specification/exchange-transactions-api-endpoints-reference/
+  - title: Offers API Endpoints Reference
     url: /api-specification/offers-api-endpoints-reference/
 ---
 
