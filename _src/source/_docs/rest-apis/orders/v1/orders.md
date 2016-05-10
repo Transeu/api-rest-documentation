@@ -25,120 +25,86 @@ side_menu:
 
 ##### Http status: `200`
 
+##### Response type: `application/hal+json`
+
 ##### Resposne data structure
 |Property|Type|Description|
 |:---|:---|:---|
 |id|String|Unique order id|
-|number|String|Unique order number|
-|route|Object|Route details|
-|payment|Object|Payment details|
-|carrier|Object|Carrier details|
-|shipper|Object|Shipper details|
-|loads|Array|Loads array|
-|_links|Object|External resources references|   
+|number|String|Assigned order number (unique in scope of company)|
+|route|Object ([Route](#GET.route))|Route details|
+|payment|Object ([Payment](#GET.payment))|Payment details|
+|carrier|Object ([Contractor](#GET.contractor))|Carrier details|
+|shipper|Object ([Contractor](#GET.contractor))|Shipper details|
+|loads|Array (of [Load](#GET.load))|Loads details|
+|_links|Object|External resources references|
 
-###### {route} object structure
+###### <a name="GET.route"></a>`Route` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|events|Array|Array with loading/unloading events|
+|events|Array (of [RouteEvent](#GET.route.event))|Sorted list of route events|
 
-###### {route.events} array single item structure
+###### <a name="GET.route.event"></a>`RouteEvent` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|place|Object|Loading/unloading place details|
-|type|String|Event type ('loading' or 'unloading')|
+|place|Object ([Place](#GET.place))|Details of event place|
+|type|Enum|Event type. <br />Possible values: `loading`, `unloading`|
 
-###### {route.events[i].place} object structure
+###### <a name="GET.place"></a>`Place` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|address|Object|Address details|
+|address|Object ([Address](#GET.address))|Address details|
 
-###### {route.events[i].place.address} object structure
+###### <a name="GET.address"></a>`Address` object structure
 |Field|Type|Description|
 |:---|:---|:---|
 |locality|String|City name|
 |postal_code|String|Postal code|
-|country|String|Country code (ie. 'PL')|
+|country|String|Country code in format [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) <br /> Example: `PL`|
 
-###### {payment} object structure
+###### <a name="GET.payment"></a>`Payment` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|price|Object|Price details|
-|interval|String|Payment interval (see http://php.net/manual/pl/dateinterval.construct.php for more information)|
+|price|Object ([Price](#GET.payment.price))|Price definition|
+|interval|String|Payment date interval in days, ISO 8601 formatted (see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)|
 
-###### {payment.price} object structure
+###### <a name="GET.payment.price"></a>`Price` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|value|Integer|Price value|
-|currency|String|Price currency|
+|value|Number|Price value|
+|currency|String|Price currency ([ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)) <br />Supported currencies: `BAM`, `BGN`, `BYR`, `CHF`, `CZK`, `DKK`, `EUR`, `GBP`, `HRK`, `HUF`, `ISK`, `KZT`, `MDL`, `MKD`, `NOK`, `PLN`, `RON`, `RSD`, `RUB`, `SEK`, `TRY`, `UAH`, `USD`|
 
-###### {carrier} object structure
+###### <a name="GET.contractor"></a>`Contractor` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|company|Object|Carrier company details|
-|contact_person|Object|Contact person details|
+|company|Object ([Company](#GET.company))|Contractor company details|
+|contact_person|Object ([ContactPerson](#GET.contact_person))|Contact person details|
 
-###### {carrier.company} object structure
+###### <a name="GET.company"></a>`Company` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|id|Integer|Carrier company unique id|
-|name|String|Carrier company name|
-|vat_id||String|Carrier company VAT id|
-|address|Object|Carrier company address details|
+|name|String|Company name|
+|vat_id|String|Company VAT id|
+|address|Object ([Address](#GET.address))|Company address details|
 
-###### {carrier.company.address} object structure
+###### <a name="GET.contact_person"></a>`ContactPerson` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|locality|String|Carrier company city name|
-|postal_code|String|Carrier company postal code|
-|country|String|Carrier company country code (ie. 'PL')|
+|family_name|String|Person's last name|
+|given_name|String|Person's given name|
+|email|String|E-mail address|
+|telephone|String|Telephone number in format: `(XX) XXXXXXXXX`|
 
-###### {carrier.contact_person} object structure
+###### <a name="GET.load"></a>`Load` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|family_name|String|Carrier contact person last name|
-|given_name|String|Carrier contact person given name|
-|email|String|Carrier contact person email address|
-|telephon|String|Carrier contact person telephone|
+|weight|Object ([Weight](#GET.load.weight))|Load weight details|
 
-###### {shipper} object structure
+###### <a name="GET.load.weight"></a>`Weight` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|company|Object|Shipper details|
-|contact_person|Object|Shipper contact person|
-
-###### {shipper.company} object structure
-|Field|Type|Description|
-|:---|:---|:---|
-|name|String|Shipper company name|
-|vat_id||String|Shipper company VAT id|
-|address|Object|Shipper company address details|
-
-###### {shipper.company.address} object structure
-|Field|Type|Description|
-|:---|:---|:---|
-|locality|String|Shipper company city name|
-|postal_code|String|Shipper company postal code|
-|country|String|Shipper company country code (ie. 'PL')|
-
-###### {shipper.contact_person} object structure
-|Field|Type|Description|
-|:---|:---|:---|
-|family_name|String|Shipper contact person last name|
-|given_name|String|Shipper contact person given name|
-|email|String|Shipper contact person email address|
-|telephon|String|Shipper contact person telephone|
-
-###### {loads[i]} array item structure
-|Field|Type|Description|
-|:---|:---|:---|
-|weight|Object|Load weight details|
-
-###### {loads[i].weight} array item structure
-|Field|Type|Description|
-|:---|:---|:---|
-|value|Integer|Weight value|
-|unit|String|Weight unit|
+|value|Number|Weight value|
+|unit|String|Weight unit <br />Possible values: `T` (tons), `KG` (kilograms)|
 
 ###### Example call and response:
 ```
@@ -174,7 +140,7 @@ Content-Type: application/hal+json
                         "country": "PL"
                     }
                 },
-                "type": "unloading"  
+                "type": "unloading"
             }
         ]
     },
@@ -253,7 +219,7 @@ Content-Type: application/hal+json
 ---
 ### POST
 	POST /shipping-orders HTTP/1.1
-    
+
 #### Query params
 |Param|Type|Description|Required|
 |:---|:---|:---|:---|
@@ -267,25 +233,25 @@ Content-Type: application/hal+json
 
 ###### {payment} object structure
 |Field|Type|Description|Required|
-|:---|:---:|:---|:---:|
+|:---|:---|:---|:---|
 |price|Object|Price details|yes|
-|interval|String|Payment date interval in ISO 8601 (see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)|yes|
+|interval|String|Payment date interval in days, ISO 8601 formatted (see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)|yes|
 
 ###### {payment.price} object structure
 |Field|Type|Description|Required|
-|:---|:---:|:---|:---|
+|:---|:---|:---|:---|
 |value|Number|Price value|yes|
 |currency|String|Price currency|yes|
 
 ##### {shipper} object structure
 |Field|Type|Description|Required|
-|:---|:---:|:---|:---|
+|:---|:---|:---|:---|
 |company|Object|Shipper company details|no|
 |contact_person|Object|Shipper contact person details|no|
 
 ##### {shipper.company} object structure
 |Field|Type|Description|Required|
-|:---|:---:|:---|:---|
+|:---|:---|:---|:---|
 |name|String|Shipper company name|yes|
 |vat_id|String|Shipper company VAT id|no|
 |address|Object|Shipper company address details|no|
