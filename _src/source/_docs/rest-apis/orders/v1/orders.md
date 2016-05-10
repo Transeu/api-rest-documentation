@@ -72,7 +72,7 @@ side_menu:
 |Field|Type|Description|
 |:---|:---|:---|
 |value|Number|Price value|
-|currency|String|Price currency ([ISO 4217](https://en.wikipedia.org/wiki/ISO_4217)) <br />Supported currencies: `BAM`, `BGN`, `BYR`, `CHF`, `CZK`, `DKK`, `EUR`, `GBP`, `HRK`, `HUF`, `ISK`, `KZT`, `MDL`, `MKD`, `NOK`, `PLN`, `RON`, `RSD`, `RUB`, `SEK`, `TRY`, `UAH`, `USD`|
+|currency|String|Price currency ([ISO 4217](https://en.wikipedia.org/wiki/ISO_4217))|
 
 ###### <a name="GET.contractor"></a>`Contractor` object structure
 |Field|Type|Description|
@@ -90,8 +90,8 @@ side_menu:
 ###### <a name="GET.contact_person"></a>`ContactPerson` object structure
 |Field|Type|Description|
 |:---|:---|:---|
-|family_name|String|Person's last name|
 |given_name|String|Person's given name|
+|family_name|String|Person's last name|
 |email|String|E-mail address|
 |telephone|String|Telephone number in format: `(XX) XXXXXXXXX`|
 
@@ -153,7 +153,6 @@ Content-Type: application/hal+json
     },
     "carrier": {
         "company" : {
-            "id": 1,
             "name": "Carrier Trans.eu",
             "vat_id": "00011114444",
             "address": {
@@ -223,115 +222,139 @@ Content-Type: application/hal+json
 #### Query params
 |Param|Type|Description|Required|
 |:---|:---|:---|:---|
-|payment|Object|Payment details|yes|
-|number|String|Unique order number|yes|
-|shipper|Object|Shipper details|no|
-|carrier|Object|Carrier details|no|
-|route|Object|Route details|yes|
-|loads|Array|Loads details|no|
-|body_type|String|Body type name|no|
+|number|String|Order number _(unique in scope of your company)_|yes|
+|payment|Object ([Payment](#POST.payment))|Payment details|yes|
+|route|Object ([Route](#POST.route))|Route details|yes|
+|shipper|Object ([Contractor](#POST.contractor))|Shipper details|no|
+|carrier|Object ([Contractor](#POST.contractor))|Carrier details|no|
+|loads|Array (of [Load](#POST.load))|Loads details|no|
+|body_type|String ([BodyType](#POST.body_type))|Body type name|no|
 
-###### {payment} object structure
+###### <a name="POST.payment"></a>`Payment` object structure
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
-|price|Object|Price details|yes|
-|interval|String|Payment date interval in days, ISO 8601 formatted (see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)|yes|
+|price|Object ([Price](#POST.payment.price))|Price definition|yes|
+|interval|String|Payment date interval _(in days, ISO 8601 formatted - see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)_|yes|
 
-###### {payment.price} object structure
+###### <a name="POST.payment.price"></a>`Price` object structure
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
-|value|Number|Price value|yes|
-|currency|String|Price currency|yes|
+|value|Number|Price value _(positive number)_|yes|
+|currency|String ([Currency](#POST.payment.currency))|Price currency ([ISO 4217](https://en.wikipedia.org/wiki/ISO_4217))|yes|
 
-##### {shipper} object structure
+###### <a name="POST.contractor"></a>`Contractor` object structure
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
-|company|Object|Shipper company details|no|
-|contact_person|Object|Shipper contact person details|no|
+|company|Object ([Company](#POST.company))|Contractor company details|no|
+|contact_person|Object ([ContactPerson](#POST.contact_person))|Contractor contact person details|no|
 
-##### {shipper.company} object structure
+###### <a name="POST.company"></a>`Company` object structure
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
-|name|String|Shipper company name|yes|
-|vat_id|String|Shipper company VAT id|no|
-|address|Object|Shipper company address details|no|
+|name|String|Company name|yes|
+|vat_id|String|Company VAT id|no|
+|address|Object ([Address](#POST.address))|Company address details|no|
 
-###### {shipper.company.address} object structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|locality|String|Shipper company city name|no|
-|postal_code|String|Shipper company postal code|no|
-|country|String|Shipper company country code (ie. 'PL')|no|
-
-###### {shipper.contact_person} object structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|family_name|String|Shipper contact person last name|yes|
-|given_name|String|Shipper contact person given name|yes|
-|email|String|Shipper contact person email address|yes|
-|telephone|String|Shipper contact person telephone|no|
-
-###### {carrier} object structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|company|Object|Carrier company details|no|
-|contact_person|Object|Carrier contact details|no|
-
-###### {carrier.company} object structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|name|String|Carrier company name|yes|
-|vat_id||String|Carrier company VAT id|no|
-|address|Object|Carrier company address details|no|
-
-###### {carrier.company.address} object structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|locality|String|Carrier company city name|yes|
-|postal_code|String|Carrier company postal code|yes|
-|country|String|Carrier company country code (ie. 'PL')|yes|
-
-###### {carrier.contact_person} object structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|family_name|String|Carrier contact person last name|yes|
-|given_name|String|Carrier contact person given name|yes|
-|email|String|Carrier contact person email address|yes|
-|telephon|String|Carrier contact person telephone|no|
-
-###### {route} object structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|events|Array|Array with loading/unloading events|yes|
-
-###### {route.events} array single item structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|place|Object|Loading/unloading place details|yes|
-|type|String|Event type ('loading' or 'unloading')|yes|
-
-###### {route.events[i].place} object structure
-|Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|address|Object|Address details|yes|
-
-###### {route.events[i].place.address} object structure
+###### <a name="POST.address"></a>`Address` object structure
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
 |locality|String|City name|yes|
 |postal_code|String|Postal code|yes|
-|country|String|Country code (ie. 'PL')|yes|
+|country|String|Country code in format [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) <br /> Example: `PL`|yes|
 
-###### {loads[i]} array item structure
+###### <a name="POST.contact_person"></a>`ContactPerson` object structure
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
-|weight|Object|Load weight details|yes|
+|given_name|String|Person's first name|yes|
+|family_name|String|Person's last name|yes|
+|email|String|E-mail address|yes|
+|telephone|String|Phone number in format: `(XX) XXXXXXXXX`|no|
 
-###### {loads[i].weight} array item structure
+###### <a name="POST.route"></a>`Route` object structure
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
-|value|Integer|Weight value|yes|
-|unit|String|Weight unit ("T" or "KG")|yes|
+|events|Array (of [RouteEvent](#POST.route.event))|Array with route events|yes|
+
+###### <a name="POST.route.event"></a>`RouteEvent` object structure
+|Field|Type|Description|Required|
+|:---|:---|:---|:---|
+|place|Object ([Place](#POST.place))|Details of event place|yes|
+|type|String|Event type. <br />Possible values: `loading`, `unloading`|yes|
+
+###### <a name="POST.place"></a>`Place` object structure
+|Field|Type|Description|Required|
+|:---|:---|:---|:---|
+|address|Object ([Address](#POST.address))|Address details|yes|
+
+###### <a name="POST.load"></a>`Load` object structure
+|Field|Type|Description|Required|
+|:---|:---|:---|:---|
+|weight|Object ([Weight](#POST.load.weight))|Load weight details|yes|
+
+###### <a name="POST.load.weight"></a>`Weight` object structure
+|Field|Type|Description|Required|
+|:---|:---|:---|:---|
+|value|Number|Weight value|yes|
+|unit|String|Weight unit <br />Possible values: `T` (tons), `KG` (kilograms)|yes|
+
+##### <a name="POST.payment.currency"></a> Supported `Currency` list
+|Value (code)|Currency name|
+|:---|:---|
+|`BAM`|Bosnia and Herzegovina Convertible Mark|
+|`BGN`|Bulgarian Lev|
+|`BYR`|Belarussan Ruble|
+|`CHF`|Swiss Franc|
+|`CZK`|Czech Koruna|
+|`DKK`|Danish Krone|
+|`EUR`|European Euro|
+|`GBP`|Pound Sterling|
+|`HRK`|Croatian Kuna|
+|`HUF`|Hungarian Forint|
+|`ISK`|Icelandic Krona|
+|`KZT`|Kazakhstani Tenge|
+|`MDL`|Moldovan Leu|
+|`MKD`|Macedonian Denar|
+|`NOK`|Norwegian Krone|
+|`PLN`|Polish Zloty|
+|`RON`|Romanian Leu|
+|`RSD`|Serbian Dinar|
+|`RUB`|Russian Ruble|
+|`SEK`|Swedish Krone|
+|`TRY`|Turkish Lira|
+|`UAH`|Ukrainian Hryvnia|
+|`USD`|US Dollars|
+
+##### <a name="POST.body_type"></a> Supported `BodyType` list
++ `tent`
++ `isotherm`
++ `box-truck`
++ `spacious`
++ `car-transporter`
++ `double-trailer`
++ `van`
++ `mega`
++ `coilmulde`
++ `walking-floor`
++ `low-suspension`
++ `flatbed`
++ `chemical-tanker`
++ `food-tanker`
++ `petroleum-tanker`
++ `gas-tanker`
++ `log-trailer`
++ `oversized-cargo`
++ `hook-lift`
++ `container-20-40`
++ `dump-truck`
++ `koffer`
++ `swap-body-system`
++ `jumbo`
++ `cooler`
++ `curtainsider`
++ `tanker`
++ `silos`
++ `removal-truck`
++ `other`
 
 ###### Example call and response:
 
@@ -344,6 +367,13 @@ Authorization: Bearer {access_token}
 
 {
     "number": "DE/3455/4460",
+    "payment": {
+        "price": {
+            "value": 34,
+            "currency": "PLN"
+        },
+        "interval": "P10D"
+    },
     "route" : {
         "events": [
             {
@@ -367,13 +397,6 @@ Authorization: Bearer {access_token}
                 "type": "unloading"
             }
         ]
-    },
-    "payment": {
-        "price": {
-            "value": 34,
-            "currency": "PLN"
-        },
-        "interval": "P10D"
     }
 }
 ```
