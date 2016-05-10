@@ -60,7 +60,7 @@ side_menu:
 |:---|:---|:---|
 |locality|String|City name|
 |postal_code|String|Postal code|
-|country|String|Country code in format [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) <br /> Example: `PL`|
+|country|String|Country code in format [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)|
 
 ###### <a name="GET.payment"></a>`Payment` object structure
 |Field|Type|Description|
