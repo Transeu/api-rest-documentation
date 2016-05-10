@@ -1,3 +1,18 @@
+---
+title: Orders API Endpoints Reference
+is_specification: true
+side_menu:
+  - title: Companies API Endpoints Reference
+    url: /api-specification/companies-api-endpoints-reference/
+  - title: Exchange Transactions API Endpoints Reference
+    url: /api-specification/exchange-transactions-api-endpoints-reference/
+  - title: Offers API Endpoints Reference
+    url: /api-specification/offers-api-endpoints-reference/
+  - title: Orders API Endpoints Reference
+    url: /api-specification/orders-api-endpoints-reference/
+    active: true
+---
+
 # TransOrders API Endpoints Reference
 **Version:** 1.0.0  
 **Base URL:** `https://orders.system.trans.eu/api/rest/1`
@@ -252,25 +267,25 @@ Content-Type: application/hal+json
 
 ###### {payment} object structure
 |Field|Type|Description|Required|
-|:---|:---|:---|:---|
+|:---|:---:|:---|:---:|
 |price|Object|Price details|yes|
-|interval|String|Payment interval (see http://php.net/manual/pl/dateinterval.construct.php for more information)|yes|
+|interval|String|Payment date interval in ISO 8601 (see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)|yes|
 
 ###### {payment.price} object structure
 |Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|value|Integer|Price value|yes|
+|:---|:---:|:---|:---|
+|value|Number|Price value|yes|
 |currency|String|Price currency|yes|
 
-##### {shipper} object structur
+##### {shipper} object structure
 |Field|Type|Description|Required|
-|:---|:---|:---|:---|
-|company|Object|Description|Shipper company details|no|
+|:---|:---:|:---|:---|
+|company|Object|Shipper company details|no|
 |contact_person|Object|Shipper contact person details|no|
 
-##### {shipper.company} object structur
+##### {shipper.company} object structure
 |Field|Type|Description|Required|
-|:---|:---|:---|:---|
+|:---|:---:|:---|:---|
 |name|String|Shipper company name|yes|
 |vat_id|String|Shipper company VAT id|no|
 |address|Object|Shipper company address details|no|
@@ -288,7 +303,7 @@ Content-Type: application/hal+json
 |family_name|String|Shipper contact person last name|yes|
 |given_name|String|Shipper contact person given name|yes|
 |email|String|Shipper contact person email address|yes|
-|telephon|String|Shipper contact person telephone|no|
+|telephone|String|Shipper contact person telephone|no|
 
 ###### {carrier} object structure
 |Field|Type|Description|Required|
@@ -350,7 +365,7 @@ Content-Type: application/hal+json
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
 |value|Integer|Weight value|yes|
-|unit|String|Weight unit|yes|
+|unit|String|Weight unit ("T" or "KG")|yes|
 
 ###### Example call and response:
 
