@@ -113,7 +113,7 @@ side_menu:
 
 ###### Example call and response:
 ```
-GET /api/rest/v1/orders/123456 HTTP/1.1
+GET /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000 HTTP/1.1
 Host: orders.system.trans.eu
 Accept: application/hal+json
 Authorization: Bearer {access_token}
@@ -123,7 +123,7 @@ HTTP/1.1 200 OK
 Content-Type: application/hal+json
 
 {
-    "id": "123456",
+    "id": "123e4567-e89b-12d3-a456-426655440000",
     "number": "PL/2016/05/05/1234",
     "route": {
         "events": [
@@ -411,7 +411,7 @@ HTTP/1.1 201 Created
 Content-Type: application/hal+json
 
 {
-	id: '56acf700-1774-11e6-8ab6-0002a5d5c51b',
+	"id": "56acf700-1774-11e6-8ab6-0002a5d5c51b",
     ...
 }
 ```
