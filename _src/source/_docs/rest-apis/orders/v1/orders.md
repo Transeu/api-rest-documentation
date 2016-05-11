@@ -21,7 +21,12 @@ side_menu:
 ### GET
     GET /orders/{order-id} HTTP/1.1
 
-#### Success Response
+#### Query params
+|Param|Type|Description|Required|
+|:---|:---|:---|:---|
+|order-id|String|Order identifier received with [POST response](#POST.response) in `id` field|yes|
+
+#### <a name="GET.response"></a>Success Response
 
 ##### Http status: `200`
 
@@ -30,7 +35,7 @@ side_menu:
 ##### Resposne data structure
 |Property|Type|Description|
 |:---|:---|:---|
-|id|String|Unique order id|
+|id|String|Unique order id _(as UUID)_|
 |number|String|Assigned order number (unique in scope of company)|
 |route|Object ([Route](#GET.route))|Route details|
 |payment|Object ([Payment](#GET.payment))|Payment details|
@@ -400,15 +405,17 @@ Authorization: Bearer {access_token}
     }
 }
 ```
+<a name="POST.response"></a>
 ```
 HTTP/1.1 201 Created
 Content-Type: application/hal+json
 
 {
-	id: '123456',
+	id: '56acf700-1774-11e6-8ab6-0002a5d5c51b',
     ...
 }
 ```
+POST response data structure is identical to [GET response structure](#GET.response).
 
 #### Error Responses
 |Http status|Description|
