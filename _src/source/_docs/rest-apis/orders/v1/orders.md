@@ -188,7 +188,7 @@ Content-Type: application/hal+json
             "family_name": "John",
             "given_name": "Doo",
             "email": "john.doo@email.com",
-            "telephone": "1001000100"
+            "telephone": "(48) 1001000100"
         }
     },
     "shipper": {
@@ -205,7 +205,7 @@ Content-Type: application/hal+json
             "family_name": "Miss",
             "given_name": "Foo",
             "email": "miss.foo@email.com",
-            "telephone": "1001000100"
+            "telephone": "(48) 1001000100"
         }
     },
     "loads" : [
@@ -252,7 +252,6 @@ POST /shipping-orders
 |number|String|Order number _(unique in scope of your company)_|yes|
 |payment|Object ([Payment](#ShippingOrders.POST.payment))|Payment details|yes|
 |route|Object ([Route](#ShippingOrders.POST.route))|Route details|yes|
-|shipper|Object ([Contractor](#ShippingOrders.POST.contractor))|Shipper details|no|
 |carrier|Object ([Contractor](#ShippingOrders.POST.contractor))|Carrier details|no|
 |loads|Array (of [Load](#ShippingOrders.POST.load))|Loads details|no|
 |body_type|String ([BodyType](#ShippingOrders.POST.body_type))|Body type name|no|
