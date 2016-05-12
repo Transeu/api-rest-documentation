@@ -254,7 +254,6 @@ POST /shipping-orders
 |route|Object ([Route](#ShippingOrders.POST.route))|Route details|yes|
 |carrier|Object ([Contractor](#ShippingOrders.POST.contractor))|Carrier details|no|
 |loads|Array (of [Load](#ShippingOrders.POST.load))|Loads details|no|
-|body_type|String ([BodyType](#ShippingOrders.POST.body_type))|Body type name|no|
 
 ***<a name="ShippingOrders.POST.payment"></a>`Payment` object structure***
 |Field|Type|Description|Required|
@@ -349,39 +348,6 @@ POST /shipping-orders
 |`TRY`|Turkish Lira|
 |`UAH`|Ukrainian Hryvnia|
 |`USD`|US Dollars|
-
-***<a name="ShippingOrders.POST.body_type"></a> Supported `BodyType` list***
-
-+ `tent`
-+ `isotherm`
-+ `box-truck`
-+ `spacious`
-+ `car-transporter`
-+ `double-trailer`
-+ `van`
-+ `mega`
-+ `coilmulde`
-+ `walking-floor`
-+ `low-suspension`
-+ `flatbed`
-+ `chemical-tanker`
-+ `food-tanker`
-+ `petroleum-tanker`
-+ `gas-tanker`
-+ `log-trailer`
-+ `oversized-cargo`
-+ `hook-lift`
-+ `container-20-40`
-+ `dump-truck`
-+ `koffer`
-+ `swap-body-system`
-+ `jumbo`
-+ `cooler`
-+ `curtainsider`
-+ `tanker`
-+ `silos`
-+ `removal-truck`
-+ `other`
 
 **<a name="ShippingOrders.POST.response"></a>Responses**
 
