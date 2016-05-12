@@ -224,7 +224,7 @@ Content-Type: application/hal+json
     ],
     "_links": {
         "self": {
-            "href": "http://orders.system.trans.eu/api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000"
+            "href": "https://orders.system.trans.eu/api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000"
         }
     }
 }
