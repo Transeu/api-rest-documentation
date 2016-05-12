@@ -2086,7 +2086,7 @@ Content-Type: application/hal+json
     },
     "_links": {
         "self": {
-            "href": "http://orders.system.trans.eu/api/rest/v1/orders/56acf700-1774-11e6-8ab6-0002a5d5c51b"
+            "href": "https://orders.system.trans.eu/api/rest/v1/orders/56acf700-1774-11e6-8ab6-0002a5d5c51b"
         }
     }
 }
@@ -2097,7 +2097,7 @@ Content-Type: application/hal+json
 
  - User of a system (i.e. _"Jan Kowalski"_) once added an order from external system to process it in Trans.eu system.
  - User wants to export processed order back to external system.
- - User gets the order using its unique identifier.
+ - User gets the order data using its unique identifier.
 
 ### HTTP Request for getting an order from Trans.eu system
 
@@ -2178,7 +2178,7 @@ Content-Type: application/hal+json
     },
     "_links": {
         "self": {
-            "href": "http://orders.system.trans.eu/api/rest/v1/orders/56acf700-1774-11e6-8ab6-0002a5d5c51b"
+            "href": "https://orders.system.trans.eu/api/rest/v1/orders/56acf700-1774-11e6-8ab6-0002a5d5c51b"
         }
     }
 }
