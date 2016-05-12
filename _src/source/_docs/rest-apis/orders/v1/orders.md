@@ -25,7 +25,7 @@ side_menu:
 
 **Scopes**
 
-* orders.get
+* orders.orders.basic.read
 
 **Endpoint**
 ```http
@@ -238,7 +238,7 @@ Content-Type: application/hal+json
 
 **Scopes**
 
-* orders.shipping-orders.add
+* orders.shipping-orders.basic.create
 
 **Endpoint**
 ```http
