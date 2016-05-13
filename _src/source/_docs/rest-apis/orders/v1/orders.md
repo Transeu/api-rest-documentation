@@ -357,6 +357,7 @@ POST /shipping-orders
 |400|Bad request|
 |401|Unauthorized|
 |403|Forbidden _(i.e. wrong or missing access token)_|
+|409|Conflict _(i.e. order number already exists)_|
 |422|Unprocessable entity _(i.e. invalid or missing request parameter)_|
 |500|Internal Server Error|
 
