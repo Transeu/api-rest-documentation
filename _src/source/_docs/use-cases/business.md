@@ -37,6 +37,10 @@ table_of_content:
     url: /use-cases/transapi-business-use-cases/#listing_transactions_for_vehicle_offers_published_by_company_to_search_for_contractors_data
   - title: Listing transactions for load offers published by other companies
     url: /use-cases/transapi-business-use-cases/#listing_transactions_for_load_offers_published_by_other_companies
+  - title: Adding an order based on an order in external system
+    url: /use-cases/transapi-business-use-cases/#adding_an_order_based_on_an_order_in_external_system
+  - title: Retrieving order added from external system
+    url: /use-cases/transapi-business-use-cases/#getting_an_order_added_from_external_system
 ---
 
 During reading use cases below, please be aware that some of them may contain only partial requests. 
@@ -1951,3 +1955,231 @@ Authorization: Bearer {access_token}
 ```
 
 Response will look analogously to previous `exchange-transactions` service responses.
+
+<a class="anchor" name="adding_an_order_based_on_an_order_in_external_system"></a>
+## 14. Adding an order based on an order in external system
+
+ - User of a system (i.e. _"Jan Kowalski"_) integrated with Trans.eu platform (external system) has a contract with carrier (i.e. _"Michał Nowak" from "Transport Company"_) concerning transporting a load.
+ - User adds order based on existing order in external system. As a result he retrieves unique identifier of added order.
+ - User can now use features provided by Orders module of Trans.eu system
+
+### HTTP Request for adding an order from external system
+```
+POST /api/rest/v1/orders HTTP/1.1
+Host: orders.system.trans.eu
+Accept: application/hal+json
+Content-Type: application/json
+Authorization: Bearer {access_token}
+
+{
+    "number": "DE/3455/4460",
+    "payment": {
+        "price": {
+            "value": 34,
+            "currency": "PLN"
+        },
+        "interval": "P10D"
+    },
+    "carrier": {
+        "company": {
+            "name": "Transport Company"
+        },
+        "contact_person": {
+            "given_name": "Michał",
+            "family_name": "Nowak",
+            "email": "michal.nowak@transport-company.pl",
+            "telephone": "(48) 313131313"
+        }
+    },
+    "route" : {
+        "events": [
+            {
+                "place": {
+                    "address": {
+                        "locality": "Berlin",
+                        "postal_code": "3456",
+                        "country": "DE"
+                    }
+                },
+                "type": "loading"
+            },
+            {
+                "place": {
+                    "address": {
+                        "locality": "Wysoka",
+                        "postal_code": "12345",
+                        "country": "PL"
+                    }
+                },
+                "type": "unloading"
+            }
+        ]
+    }
+}
+```
+### Expected HTTP Response
+```
+HTTP/1.1 201 Created
+Content-Type: application/hal+json
+
+{
+    "id": "56acf700-1774-11e6-8ab6-0002a5d5c51b",
+    "number": "DE/3455/4460",
+    "payment": {
+        "price": {
+            "value": 34,
+            "currency": "PLN"
+        },
+        "interval": "P10D"
+    },
+    "shipper": {
+        "company": {
+            "name": "Shipping Company",
+            "vat_id": "PL0123456789",
+            "address": {
+                "locality": "Wrocław",
+                "postal_code": "50-572",
+                "country": "PL"
+            }
+        },
+        "contact_person": {
+            "given_name": "Jan",
+            "family_name": "Kowalski",
+            "email": "jan.kowalski@shipping-company.pl",
+            "telephone": "(48) 111222333"
+        }
+    },
+    "carrier": {
+        "company": {
+            "name": "Transport Company"
+        },
+        "contact_person": {
+            "given_name": "Michał",
+            "family_name": "Nowak",
+            "email": "michal.nowak@transport-company.pl",
+            "telephone": "(48) 313131313"
+        }
+    },
+    "route" : {
+        "events": [
+            {
+                "place": {
+                    "address": {
+                        "locality": "Berlin",
+                        "postal_code": "3456",
+                        "country": "DE"
+                    }
+                },
+                "type": "loading"
+            },
+            {
+                "place": {
+                    "address": {
+                        "locality": "Wysoka",
+                        "postal_code": "12345",
+                        "country": "PL"
+                    }
+                },
+                "type": "unloading"
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://orders.system.trans.eu/api/rest/v1/orders/56acf700-1774-11e6-8ab6-0002a5d5c51b"
+        }
+    }
+}
+```
+
+<a class="anchor" name="getting_an_order_added_from_external_system"></a>
+### 15. Retrieving order added from external system
+
+ - User of a system (i.e. _"Jan Kowalski"_) once added an order from external system to process it in Trans.eu system.
+ - User wants to export processed order back to external system.
+ - User gets the order data using its unique identifier.
+
+### HTTP Request for getting an order from Trans.eu system
+
+```
+GET /api/rest/v1/orders/56acf700-1774-11e6-8ab6-0002a5d5c51b HTTP/1.1
+Host: orders.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+```
+
+### Expected HTTP Response
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/hal+json
+
+{
+    "id": "56acf700-1774-11e6-8ab6-0002a5d5c51b",
+    "number": "DE/3455/4460",
+    "payment": {
+        "price": {
+            "value": 34,
+            "currency": "PLN"
+        },
+        "interval": "P10D"
+    },
+    "shipper": {
+        "company": {
+            "name": "Shipping Company",
+            "vat_id": "PL0123456789",
+            "address": {
+                "locality": "Wrocław",
+                "postal_code": "50-572",
+                "country": "PL"
+            }
+        },
+        "contact_person": {
+            "given_name": "Jan",
+            "family_name": "Kowalski",
+            "email": "jan.kowalski@shipping-company.pl",
+            "telephone": "(48) 111222333"
+        }
+    },
+    "carrier": {
+        "company": {
+            "name": "Transport Company"
+        },
+        "contact_person": {
+            "given_name": "Michał",
+            "family_name": "Nowak",
+            "email": "michal.nowak@transport-company.pl",
+            "telephone": "(48) 313131313"
+        }
+    },
+    "route" : {
+        "events": [
+            {
+                "place": {
+                    "address": {
+                        "locality": "Berlin",
+                        "postal_code": "3456",
+                        "country": "DE"
+                    }
+                },
+                "type": "loading"
+            },
+            {
+                "place": {
+                    "address": {
+                        "locality": "Wysoka",
+                        "postal_code": "12345",
+                        "country": "PL"
+                    }
+                },
+                "type": "unloading"
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "https://orders.system.trans.eu/api/rest/v1/orders/56acf700-1774-11e6-8ab6-0002a5d5c51b"
+        }
+    }
+}
+```

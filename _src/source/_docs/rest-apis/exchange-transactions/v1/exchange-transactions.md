@@ -9,6 +9,8 @@ side_menu:
     active: true
   - title: Offers API Endpoints Reference
     url: /api-specification/offers-api-endpoints-reference/
+  - title: Orders API Endpoints Reference
+    url: /api-specification/orders-api-endpoints-reference/
 ---
 
 **Version:** 1
