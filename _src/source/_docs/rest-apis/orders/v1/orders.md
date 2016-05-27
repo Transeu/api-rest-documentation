@@ -127,7 +127,7 @@ GET /orders/{order-id}
 |Field|Type|Description|
 |:---|:---|:---|
 |value|Number|Weight value|
-|unit|String|Weight unit <br />Possible values: `T` (tons), `KG` (kilograms)|
+|unit|String|Weight unit <br />Possible values: `T` (tons)|
 
 **Example**
 ```
@@ -320,7 +320,7 @@ POST /shipping-orders
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
 |value|Number|Weight value|yes|
-|unit|String|Weight unit <br />Possible values: `T` (tons), `KG` (kilograms)|yes|
+|unit|String|Weight unit <br />Possible values: `T` (tons)|yes|
 
 ***<a name="ShippingOrders.POST.payment.currency"></a> Supported `Currency` list***
 |Value (code)|Currency name|
