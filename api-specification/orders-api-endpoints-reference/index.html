@@ -95,7 +95,7 @@
             <div>
                 <p><strong>Version:</strong> 1</p>
 
-<p><strong>Base URL:</strong> <code>https://orders.system.trans.eu/api/rest/1</code></p>
+<p><strong>Base URL:</strong> <code>https://orders.system.trans.eu/api/rest/v1</code></p>
 
 <h2 id="resources">Resources</h2>
 
@@ -477,9 +477,9 @@
   <td align="left">Weight value</td>
 </tr>
 <tr>
-  <td align="left">unit</td>
+  <td align="left">unit_code</td>
   <td align="left">String</td>
-  <td align="left">Weight unit <br />Possible values: <code>T</code> (tons), <code>KG</code> (kilograms)</td>
+  <td align="left">Weight unit code <br />Possible values: <code>TNE</code> (tons)</td>
 </tr>
 </tbody>
 </table></p>
@@ -567,13 +567,13 @@ Content-Type: application/hal+json
         {
             "weight" : {
                 "value" : 23,
-                "unit" : "T"
+                "unit_code" : "T"
             }
         },
         {
             "weight" : {
                 "value" : 4,
-                "unit" : "T"
+                "unit_code" : "T"
             }
         }
     ],
@@ -931,9 +931,9 @@ Content-Type: application/hal+json
   <td align="left">yes</td>
 </tr>
 <tr>
-  <td align="left">unit</td>
+  <td align="left">unit_code</td>
   <td align="left">String</td>
-  <td align="left">Weight unit <br />Possible values: <code>T</code> (tons), <code>KG</code> (kilograms)</td>
+  <td align="left">Weight unit code<br />Possible values: <code>TNE</code> (tons)</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
