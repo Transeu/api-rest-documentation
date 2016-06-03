@@ -15,7 +15,7 @@ side_menu:
 
 **Version:** 1
 
-**Base URL:** `https://orders.system.trans.eu/api/rest/1`
+**Base URL:** `https://orders.system.trans.eu/api/rest/v1`
 
 ## Resources
 
