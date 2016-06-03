@@ -329,7 +329,7 @@
   <td align="left">Price definition</td>
 </tr>
 <tr>
-  <td align="left">date_interval</td>
+  <td align="left">interval_of_days</td>
   <td align="left">String</td>
   <td align="left">Payment date interval in days, ISO 8601 formatted (see <a href="http://php.net/manual/pl/dateinterval.construct.php">PHP DateInterval</a> for more information)</td>
 </tr>
@@ -527,7 +527,7 @@ Content-Type: application/hal+json
             "value": 50,
             "currency": "PLN"
         },
-        "date_interval": "P10D"
+        "interval_of_days": "P10D"
     },
     "carrier": {
         "company" : {
@@ -665,7 +665,7 @@ Content-Type: application/hal+json
   <td align="left">yes</td>
 </tr>
 <tr>
-  <td align="left">date_interval</td>
+  <td align="left">interval_of_days</td>
   <td align="left">String</td>
   <td align="left">Payment date interval <em>(in days, ISO 8601 formatted - see <a href="http://php.net/manual/pl/dateinterval.construct.php">PHP DateInterval</a> for more information)</em></td>
   <td align="left">yes</td>
@@ -1099,7 +1099,7 @@ Authorization: Bearer {access_token}
             "value": 34,
             "currency": "PLN"
         },
-        "date_interval": "P10D"
+        "interval_of_days": "P10D"
     },
     "route" : {
         "events": [

@@ -89,7 +89,7 @@ GET /orders/{order-id}
 |Field|Type|Description|
 |:---|:---|:---|
 |price|Object ([Price](#Orders.GET.payment.price))|Price definition|
-|date_interval|String|Payment date interval in days, ISO 8601 formatted (see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)|
+|interval_of_days|String|Payment date interval in days, ISO 8601 formatted (see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)|
 
 ***<a name="Orders.GET.payment.price"></a>`Price` object structure***
 |Field|Type|Description|
@@ -172,7 +172,7 @@ Content-Type: application/hal+json
             "value": 50,
             "currency": "PLN"
         },
-        "date_interval": "P10D"
+        "interval_of_days": "P10D"
     },
     "carrier": {
         "company" : {
@@ -259,7 +259,7 @@ POST /shipping-orders
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
 |price|Object ([Price](#ShippingOrders.POST.payment.price))|Price definition|yes|
-|date_interval|String|Payment date interval _(in days, ISO 8601 formatted - see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)_|yes|
+|interval_of_days|String|Payment date interval _(in days, ISO 8601 formatted - see [PHP DateInterval](http://php.net/manual/pl/dateinterval.construct.php) for more information)_|yes|
 
 ***<a name="ShippingOrders.POST.payment.price"></a>`Price` object structure***
 |Field|Type|Description|Required|
@@ -377,7 +377,7 @@ Authorization: Bearer {access_token}
             "value": 34,
             "currency": "PLN"
         },
-        "date_interval": "P10D"
+        "interval_of_days": "P10D"
     },
     "route" : {
         "events": [
