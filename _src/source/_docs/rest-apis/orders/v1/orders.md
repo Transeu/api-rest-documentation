@@ -127,7 +127,7 @@ GET /orders/{order-id}
 |Field|Type|Description|
 |:---|:---|:---|
 |value|Number|Weight value|
-|unit|String|Weight unit <br />Possible values: `T` (tons)|
+|unit_code|String|Weight unit code <br />Possible values: `TNE` (tons)|
 
 **Example**
 ```
@@ -212,13 +212,13 @@ Content-Type: application/hal+json
         {
             "weight" : {
                 "value" : 23,
-                "unit" : "T"
+                "unit_code" : "T"
             }
         },
         {
             "weight" : {
                 "value" : 4,
-                "unit" : "T"
+                "unit_code" : "T"
             }
         }
     ],
@@ -320,7 +320,7 @@ POST /shipping-orders
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
 |value|Number|Weight value|yes|
-|unit|String|Weight unit <br />Possible values: `T` (tons)|yes|
+|unit_code|String|Weight unit code<br />Possible values: `TNE` (tons)|yes|
 
 ***<a name="ShippingOrders.POST.payment.currency"></a> Supported `Currency` list***
 |Value (code)|Currency name|
