@@ -11,6 +11,8 @@ side_menu:
     url: /api-specification/offers-api-endpoints-reference/
   - title: Orders API Endpoints Reference
     url: /api-specification/orders-api-endpoints-reference/
+  - title: TFS API Endpoints Reference
+    url: /api-specification/tfs-api-endpoints-reference/
 ---
 
 **Version:** 1

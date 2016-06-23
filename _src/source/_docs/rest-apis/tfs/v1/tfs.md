@@ -57,6 +57,7 @@ GET /dedicated-orders/{order-id}
 |:---|:---|:---|
 |id|String|Unique order id _(as UUID)_|
 |number|String|Assigned order number (unique in scope of company)|
+|status|String|{`pending`,`accepted`}|
 |route|Object ([Route](#DedicatedOrders.GET.route))|Route details|
 |payment|Object ([Payment](#DedicatedOrders.GET.payment))|Payment details|
 |carrier|Object ([Contractor](#DedicatedOrders.GET.contractor))|Carrier details|
