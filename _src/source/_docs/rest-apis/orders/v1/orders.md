@@ -11,6 +11,8 @@ side_menu:
   - title: Orders API Endpoints Reference
     url: /api-specification/orders-api-endpoints-reference/
     active: true
+  - title: TFS API Endpoints Reference
+    url: /api-specification/tfs-api-endpoints-reference/
 ---
 
 **Version:** 1
@@ -143,6 +145,7 @@ Content-Type: application/hal+json
 {
     "id": "123e4567-e89b-12d3-a456-426655440000",
     "number": "PL/2016/05/05/1234",
+    "status": "pending",
     "route": {
         "events": [
             {

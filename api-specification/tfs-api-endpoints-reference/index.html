@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Orders API Endpoints Reference &mdash; TransConnect &mdash; page for developers</title>
+    <title>TFS API Endpoints Reference &mdash; TransConnect &mdash; page for developers</title>
     <meta charset="utf-8">
     <meta name="theme-color" content="#ffffff">
     <link href="/api-rest-documentation/favicon.ico" rel="icon" type="image/png">
@@ -77,11 +77,11 @@
                 Offers API Endpoints Reference
             </a></li>
                         <li><a href="http://transeu.github.io/api-rest-documentation/api-specification/orders-api-endpoints-reference/"
-                                            class="active"
                      >
                 Orders API Endpoints Reference
             </a></li>
                         <li><a href="http://transeu.github.io/api-rest-documentation/api-specification/tfs-api-endpoints-reference/"
+                                            class="active"
                      >
                 TFS API Endpoints Reference
             </a></li>
@@ -92,30 +92,30 @@
     
         <article>
             <header>
-                <h1>Orders API Endpoints Reference
+                <h1>TFS API Endpoints Reference
                                     </h1>
 
             </header>
             <div>
                 <p><strong>Version:</strong> 1</p>
 
-<p><strong>Base URL:</strong> <code>https://orders.system.trans.eu/api/rest/v1</code></p>
+<p><strong>Base URL:</strong> <code>https://tfs.system.trans.eu/api/rest/v1</code></p>
 
 <h2 id="resources">Resources</h2>
 
-<h3 id="orders">Orders</h3>
+<h3 id="tfs">TFS</h3>
 
-<h4 id="get-order">Get order</h4>
+<h4 id="get-dedicated-order">Get dedicated order</h4>
 
 <p><strong>Scopes</strong></p>
 
 <ul>
-<li>orders.orders.basic.read</li>
+<li>tfs.dedicated-orders.basic.read</li>
 </ul>
 
 <p><strong>Endpoint</strong></p>
 
-<pre><code class="http">GET /orders/{order-id}
+<pre><code class="http">GET /dedicated-orders/{order-id}
 </code></pre>
 
 <p><strong>Query parameters</strong></p>
@@ -133,13 +133,13 @@
 <tr>
   <td align="left">order-id</td>
   <td align="left">String</td>
-  <td align="left">Order identifier received with <a href="#ShippingOrders.POST.response">POST response</a> in <code>id</code> field</td>
+  <td align="left">Order identifier received with <a href="#DedicatedOrders.POST.response">POST response</a> in <code>id</code> field</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
 </table>
 
-<p><strong><a name="Orders.GET.response"></a>Responses</strong></p>
+<p><strong><a name="DedicatedOrders.GET.response"></a>Responses</strong></p>
 
 <table>
 <thead>
@@ -151,7 +151,7 @@
 <tbody>
 <tr>
   <td align="left">200</td>
-  <td align="left">Returned the order entity</td>
+  <td align="left">Returned the dedicated order entity</td>
 </tr>
 <tr>
   <td align="left">400</td>
@@ -167,7 +167,7 @@
 </tr>
 <tr>
   <td align="left">404</td>
-  <td align="left">Order not found</td>
+  <td align="left">Dedicated order not found</td>
 </tr>
 <tr>
   <td align="left">500</td>
@@ -198,28 +198,33 @@
   <td align="left">Assigned order number (unique in scope of company)</td>
 </tr>
 <tr>
+  <td align="left">status</td>
+  <td align="left">String</td>
+  <td align="left">{<code>pending</code>,<code>accepted</code>}</td>
+</tr>
+<tr>
   <td align="left">route</td>
-  <td align="left">Object (<a href="#Orders.GET.route">Route</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.route">Route</a>)</td>
   <td align="left">Route details</td>
 </tr>
 <tr>
   <td align="left">payment</td>
-  <td align="left">Object (<a href="#Orders.GET.payment">Payment</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.payment">Payment</a>)</td>
   <td align="left">Payment details</td>
 </tr>
 <tr>
   <td align="left">carrier</td>
-  <td align="left">Object (<a href="#Orders.GET.contractor">Contractor</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.contractor">Contractor</a>)</td>
   <td align="left">Carrier details</td>
 </tr>
 <tr>
   <td align="left">shipper</td>
-  <td align="left">Object (<a href="#Orders.GET.contractor">Contractor</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.contractor">Contractor</a>)</td>
   <td align="left">Shipper details</td>
 </tr>
 <tr>
   <td align="left">loads</td>
-  <td align="left">Array (of <a href="#Orders.GET.load">Load</a>)</td>
+  <td align="left">Array (of <a href="#DedicatedOrders.GET.load">Load</a>)</td>
   <td align="left">Loads details</td>
 </tr>
 <tr>
@@ -230,7 +235,7 @@
 </tbody>
 </table>
 
-<p><strong><em><a name="Orders.GET.route"></a><code>Route</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.route"></a><code>Route</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -242,13 +247,13 @@
 <tbody>
 <tr>
   <td align="left">events</td>
-  <td align="left">Array (of <a href="#Orders.GET.route.event">RouteEvent</a>)</td>
+  <td align="left">Array (of <a href="#DedicatedOrders.GET.route.event">RouteEvent</a>)</td>
   <td align="left">Sorted list of route events</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.route.event"></a><code>RouteEvent</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.route.event"></a><code>RouteEvent</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -260,7 +265,7 @@
 <tbody>
 <tr>
   <td align="left">place</td>
-  <td align="left">Object (<a href="#Orders.GET.place">Place</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.place">Place</a>)</td>
   <td align="left">Details of event place</td>
 </tr>
 <tr>
@@ -271,7 +276,7 @@
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.place"></a><code>Place</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.place"></a><code>Place</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -283,13 +288,13 @@
 <tbody>
 <tr>
   <td align="left">address</td>
-  <td align="left">Object (<a href="#Orders.GET.address">Address</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.address">Address</a>)</td>
   <td align="left">Address details</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.address"></a><code>Address</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.address"></a><code>Address</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -317,7 +322,7 @@
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.payment"></a><code>Payment</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.payment"></a><code>Payment</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -329,18 +334,18 @@
 <tbody>
 <tr>
   <td align="left">price</td>
-  <td align="left">Object (<a href="#Orders.GET.payment.price">Price</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.payment.price">Price</a>)</td>
   <td align="left">Price definition</td>
 </tr>
 <tr>
-  <td align="left">interval_of_days</td>
+  <td align="left">date_interval</td>
   <td align="left">String</td>
   <td align="left">Payment date interval in days, ISO 8601 formatted (see <a href="http://php.net/manual/pl/dateinterval.construct.php">PHP DateInterval</a> for more information)</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.payment.price"></a><code>Price</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.payment.price"></a><code>Price</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -363,7 +368,7 @@
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.contractor"></a><code>Contractor</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.contractor"></a><code>Contractor</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -375,18 +380,18 @@
 <tbody>
 <tr>
   <td align="left">company</td>
-  <td align="left">Object (<a href="#Orders.GET.company">Company</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.company">Company</a>)</td>
   <td align="left">Contractor company details</td>
 </tr>
 <tr>
   <td align="left">contact_person</td>
-  <td align="left">Object (<a href="#Orders.GET.contact_person">ContactPerson</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.contact_person">ContactPerson</a>)</td>
   <td align="left">Contact person details</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.company"></a><code>Company</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.company"></a><code>Company</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -408,13 +413,13 @@
 </tr>
 <tr>
   <td align="left">address</td>
-  <td align="left">Object (<a href="#Orders.GET.address">Address</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.address">Address</a>)</td>
   <td align="left">Company address details</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.contact_person"></a><code>ContactPerson</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.contact_person"></a><code>ContactPerson</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -447,7 +452,7 @@
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.load"></a><code>Load</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.load"></a><code>Load</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -459,13 +464,13 @@
 <tbody>
 <tr>
   <td align="left">weight</td>
-  <td align="left">Object (<a href="#Orders.GET.load.weight">Weight</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.GET.load.weight">Weight</a>)</td>
   <td align="left">Load weight details</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.load.weight"></a><code>Weight</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.GET.load.weight"></a><code>Weight</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -481,17 +486,17 @@
   <td align="left">Weight value</td>
 </tr>
 <tr>
-  <td align="left">unit_code</td>
+  <td align="left">unit</td>
   <td align="left">String</td>
-  <td align="left">Weight unit code <br />Possible values: <code>TNE</code> (tons)</td>
+  <td align="left">Weight unit <br />Possible values: <code>T</code> (tons)</td>
 </tr>
 </tbody>
 </table></p>
 
 <p><strong>Example</strong></p>
 
-<pre><code>GET /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000 HTTP/1.1
-Host: orders.system.trans.eu
+<pre><code>GET /api/rest/v1/dedicated-orders/123e4567-e89b-12d3-a456-426655440000 HTTP/1.1
+Host: tfs.system.trans.eu
 Accept: application/hal+json
 Authorization: Bearer {access_token}
 </code></pre>
@@ -502,7 +507,6 @@ Content-Type: application/hal+json
 {
     "id": "123e4567-e89b-12d3-a456-426655440000",
     "number": "PL/2016/05/05/1234",
-    "status": "pending",
     "route": {
         "events": [
             {
@@ -532,59 +536,25 @@ Content-Type: application/hal+json
             "value": 50,
             "currency": "PLN"
         },
-        "interval_of_days": "P10D"
-    },
-    "carrier": {
-        "company" : {
-            "name": "Carrier Trans.eu",
-            "vat_id": "00011114444",
-            "address": {
-                "locality": "Paris",
-                "postal_code": "333",
-                "country": "FR"
-            }
-        },
-        "contact_person": {
-            "family_name": "John",
-            "given_name": "Doo",
-            "email": "john.doo@email.com",
-            "telephone": "(48) 1001000100"
-        }
-    },
-    "shipper": {
-        "company" : {
-            "name": "Trans.eu",
-            "vat_id": "000111122222",
-            "address": {
-                "locality": "London",
-                "postal_code": "L333",
-                "country": "GB"
-            }
-        },
-        "contact_person": {
-            "family_name": "Miss",
-            "given_name": "Foo",
-            "email": "miss.foo@email.com",
-            "telephone": "(48) 1001000100"
-        }
+        "date_interval": "P10D"
     },
     "loads" : [
         {
             "weight" : {
                 "value" : 23,
-                "unit_code" : "T"
+                "unit" : "T"
             }
         },
         {
             "weight" : {
                 "value" : 4,
-                "unit_code" : "T"
+                "unit" : "T"
             }
         }
     ],
     "_links": {
         "self": {
-            "href": "https://orders.system.trans.eu/api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000"
+            "href": "https://tfs.system.trans.eu/api/rest/v1/dedicated-orders/123e4567-e89b-12d3-a456-426655440000"
         }
     }
 }
@@ -592,19 +562,19 @@ Content-Type: application/hal+json
 
 <hr />
 
-<h3 id="shipping-orders">Shipping Orders</h3>
+<h3 id="dedicated-orders">Dedicated Orders</h3>
 
-<h4 id="add-shipping-order">Add shipping order</h4>
+<h4 id="add-dedicated-order">Add dedicated order</h4>
 
 <p><strong>Scopes</strong></p>
 
 <ul>
-<li>orders.shipping-orders.basic.create</li>
+<li>tfs.dedicated-orders.basic.create</li>
 </ul>
 
 <p><strong>Endpoint</strong></p>
 
-<pre><code class="http">POST /shipping-orders
+<pre><code class="http">POST /dedicated-orders
 </code></pre>
 
 <p><strong>Request body data</strong></p>
@@ -627,32 +597,32 @@ Content-Type: application/hal+json
 </tr>
 <tr>
   <td align="left">payment</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.payment">Payment</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.payment">Payment</a>)</td>
   <td align="left">Payment details</td>
   <td align="left">yes</td>
 </tr>
 <tr>
   <td align="left">route</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.route">Route</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.route">Route</a>)</td>
   <td align="left">Route details</td>
   <td align="left">yes</td>
 </tr>
 <tr>
   <td align="left">carrier</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.contractor">Contractor</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.contractor">Contractor</a>)</td>
   <td align="left">Carrier details</td>
   <td align="left">no</td>
 </tr>
 <tr>
   <td align="left">loads</td>
-  <td align="left">Array (of <a href="#ShippingOrders.POST.load">Load</a>)</td>
+  <td align="left">Array (of <a href="#DedicatedOrders.POST.load">Load</a>)</td>
   <td align="left">Loads details</td>
   <td align="left">no</td>
 </tr>
 </tbody>
 </table>
 
-<p><strong><em><a name="ShippingOrders.POST.payment"></a><code>Payment</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.payment"></a><code>Payment</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -665,12 +635,12 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">price</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.payment.price">Price</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.payment.price">Price</a>)</td>
   <td align="left">Price definition</td>
   <td align="left">yes</td>
 </tr>
 <tr>
-  <td align="left">interval_of_days</td>
+  <td align="left">date_interval</td>
   <td align="left">String</td>
   <td align="left">Payment date interval <em>(in days, ISO 8601 formatted - see <a href="http://php.net/manual/pl/dateinterval.construct.php">PHP DateInterval</a> for more information)</em></td>
   <td align="left">yes</td>
@@ -678,7 +648,7 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.payment.price"></a><code>Price</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.payment.price"></a><code>Price</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -697,14 +667,14 @@ Content-Type: application/hal+json
 </tr>
 <tr>
   <td align="left">currency</td>
-  <td align="left">String (<a href="#ShippingOrders.POST.payment.currency">Currency</a>)</td>
+  <td align="left">String (<a href="#DedicatedOrders.POST.payment.currency">Currency</a>)</td>
   <td align="left">Price currency (<a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a>)</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.contractor"></a><code>Contractor</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.contractor"></a><code>Contractor</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -717,20 +687,20 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">company</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.company">Company</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.company">Company</a>)</td>
   <td align="left">Contractor company details</td>
   <td align="left">no</td>
 </tr>
 <tr>
   <td align="left">contact_person</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.contact_person">ContactPerson</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.contact_person">ContactPerson</a>)</td>
   <td align="left">Contractor contact person details</td>
   <td align="left">no</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.company"></a><code>Company</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.company"></a><code>Company</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -755,14 +725,14 @@ Content-Type: application/hal+json
 </tr>
 <tr>
   <td align="left">address</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.address">Address</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.address">Address</a>)</td>
   <td align="left">Company address details</td>
   <td align="left">no</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.address"></a><code>Address</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.address"></a><code>Address</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -794,7 +764,7 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.contact_person"></a><code>ContactPerson</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.contact_person"></a><code>ContactPerson</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -832,7 +802,7 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.route"></a><code>Route</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.route"></a><code>Route</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -845,14 +815,14 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">events</td>
-  <td align="left">Array (of <a href="#ShippingOrders.POST.route.event">RouteEvent</a>)</td>
+  <td align="left">Array (of <a href="#DedicatedOrders.POST.route.event">RouteEvent</a>)</td>
   <td align="left">Array with route events</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.route.event"></a><code>RouteEvent</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.route.event"></a><code>RouteEvent</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -865,7 +835,7 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">place</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.place">Place</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.place">Place</a>)</td>
   <td align="left">Details of event place</td>
   <td align="left">yes</td>
 </tr>
@@ -878,7 +848,7 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.place"></a><code>Place</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.place"></a><code>Place</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -891,14 +861,14 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">address</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.address">Address</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.address">Address</a>)</td>
   <td align="left">Address details</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.load"></a><code>Load</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.load"></a><code>Load</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -911,14 +881,14 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">weight</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.load.weight">Weight</a>)</td>
+  <td align="left">Object (<a href="#DedicatedOrders.POST.load.weight">Weight</a>)</td>
   <td align="left">Load weight details</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.load.weight"></a><code>Weight</code> object structure</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.load.weight"></a><code>Weight</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -936,15 +906,15 @@ Content-Type: application/hal+json
   <td align="left">yes</td>
 </tr>
 <tr>
-  <td align="left">unit_code</td>
+  <td align="left">unit</td>
   <td align="left">String</td>
-  <td align="left">Weight unit code<br />Possible values: <code>TNE</code> (tons)</td>
+  <td align="left">Weight unit <br />Possible values: <code>T</code> (tons)</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.payment.currency"></a> Supported <code>Currency</code> list</em></strong>
+<p><strong><em><a name="DedicatedOrders.POST.payment.currency"></a> Supported <code>Currency</code> list</em></strong>
 <table>
 <thead>
 <tr>
@@ -1048,7 +1018,7 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><a name="ShippingOrders.POST.response"></a>Responses</strong></p>
+<p><strong><a name="DedicatedOrders.POST.response"></a>Responses</strong></p>
 
 <table>
 <thead>
@@ -1075,10 +1045,6 @@ Content-Type: application/hal+json
   <td align="left">Forbidden <em>(i.e. wrong or missing access token)</em></td>
 </tr>
 <tr>
-  <td align="left">409</td>
-  <td align="left">Conflict <em>(i.e. order number already exists)</em></td>
-</tr>
-<tr>
   <td align="left">422</td>
   <td align="left">Unprocessable entity <em>(i.e. invalid or missing request parameter)</em></td>
 </tr>
@@ -1091,21 +1057,14 @@ Content-Type: application/hal+json
 
 <p><strong>Example</strong></p>
 
-<pre><code class="http">POST /api/rest/v1/orders HTTP/1.1
-Host: orders.system.trans.eu
+<pre><code class="http">POST /api/rest/v1/dedicated-orders HTTP/1.1
+Host: tfs.system.trans.eu
 Accept: application/hal+json
 Content-Type: application/json
 Authorization: Bearer {access_token}
 
 {
     "number": "DE/3455/4460",
-    "payment": {
-        "price": {
-            "value": 34,
-            "currency": "PLN"
-        },
-        "interval_of_days": "P10D"
-    },
     "route" : {
         "events": [
             {
@@ -1129,7 +1088,28 @@ Authorization: Bearer {access_token}
                 "type": "unloading"
             }
         ]
-    }
+    },
+    "payment": {
+        "price": {
+            "value": 34,
+            "currency": "PLN"
+        },
+        "date_interval": "P10D"
+    },  
+    "loads" : [
+        {
+            "weight" : {
+                "value" : 13,
+                "unit" : "T"
+            }
+        },
+        {
+            "weight" : {
+                "value" : 14,
+                "unit" : "T"
+            }
+        }
+    ]   
 }
 </code></pre>
 
@@ -1142,7 +1122,7 @@ Content-Type: application/hal+json
 }
 </code></pre>
 
-<p>POST response data structure is identical to <a href="#Orders.GET.response">GET response structure</a>.</p>
+<p>POST response data structure is identical to <a href="#DedicatedOrders.GET.response">GET response structure</a>.</p>
 
             </div>
         </article>
