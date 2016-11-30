@@ -64,7 +64,7 @@ POST /orders
 | timespans | Object ([TimeSpans](#OrdersRepository.TimeSpans)) | |
 | type | Enum | Event type. <br />Possible values: `loading`, `unloading` |
 | notes | Array (of String) | |
-| loads | Array (of String) | Can be used to hold references to specific loads by load.custom_id |
+| loads | Array (of String) | Can be used to hold references to specific loads by [Load.custom_id](#OrdersRepository.Load) |
 
 ***<a name="OrdersRepository.Place"></a>`Place` object structure***
 
@@ -263,7 +263,7 @@ POST /orders
 |:---|:---|:---|
 |is_ftl| Boolean | whether shipper requires vehicles exclusively for purpose of carrying the loads |
 |has_gps| Boolean | whether shipper requires GPS tracking of carrier's vehicles |
-|shipping_remarks| String | |
+|shipping_remarks| String | place for shippers additional remarks & requirements |
 
 **Responses**
 
