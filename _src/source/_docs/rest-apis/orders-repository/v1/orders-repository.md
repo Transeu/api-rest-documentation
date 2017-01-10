@@ -513,6 +513,61 @@ Authorization: Bearer {access_token}
 **Endpoint**
 
 ```
+GET /orders
+```
+
+**Query parameters**
+
+| Query parameter | Type | Required | Value |
+|---|---|---|---|
+| page | integer | no | result page number |
+
+**Responses**
+
+| Http status | Description |
+|---|---|
+| 200 | OK |
+| 403 | Forbidden |
+| 409 | Page not found |
+
+**Example**
+
+```http
+GET /api/rest/v1/orders
+Host: orders-repository.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+```
+```http
+HTTP/1.1 200 OK
+Content-Type: application/hal+json
+{
+  "_links": {
+    "self": {
+      "href": "http://orders-repository.system.trans.eu/api/rest/v1/orders?page=1"
+    },
+    "first": {
+      "href": "http://orders-repository.system.trans.eu/api/rest/v1/orders"
+    },
+    "last": {
+      "href": "http://orders-repository.system.trans.eu/api/rest/v1/orders?page=1"
+    }
+  },
+  "_embedded": {
+    "orders": [
+        ...
+    ]
+   },
+  "page_count": 1,
+  "page_size": 25,
+  "total_items": 1,
+  "page": 1
+}
+```
+
+**Endpoint**
+
+```
 GET /orders/{ID}
 ```
 
@@ -818,4 +873,94 @@ DELETE /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000
 Host: orders-repository.system.trans.eu
 Accept: application/hal+json
 Authorization: Bearer {access_token}
+```
+
+### Permissions
+
+#### Grant access to edit order for other companies
+
+**Endpoint**
+
+```
+POST /orders/{ID}/permissions
+```
+**Request body data**
+
+| Field | Type | Required |
+|---|---|
+| companies | Array(of [CompanyId](#OrdersRepository.CompanyId)) | true |
+
+***<a name="OrdersRepository.CompanyId"></a>`CompanyId` object structure***
+
+| Field | Type | Required |
+|---|---|
+| id | integer | true |
+
+**Responses**
+
+| Http status | Description |
+|---|---|
+| 201 | Granted access |
+| 403 | Forbidden |
+| 422 | Unprocessable entity |
+
+**Example**
+
+```http
+POST /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000/permissions
+Host: orders-repository.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+
+{
+  "companies": [
+    {
+      "id": 12
+    },
+    {
+      "id": 56
+    }
+  ]
+}
+```
+
+#### Revoke access to edit order for other companies
+
+**Endpoint**
+
+```
+DELETE /orders/{ID}/permissions
+```
+**Request body data**
+
+| Field | Type | Required |
+|---|---|
+| companies | Array(of [CompanyId](#OrdersRepository.CompanyId)) | true |
+
+**Responses**
+
+| Http status | Description |
+|---|---|
+| 204 | Revoked access |
+| 403 | Forbidden |
+| 404 | Access has not been granted |
+
+**Example**
+
+```http
+DELETE /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000/permissions
+Host: orders-repository.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+
+{
+  "companies": [
+    {
+      "id": 12
+    },
+    {
+      "id": 56
+    }
+  ]
+}
 ```
