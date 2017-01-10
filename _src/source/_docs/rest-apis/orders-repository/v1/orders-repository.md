@@ -902,6 +902,7 @@ POST /orders/{ID}/permissions
 |---|---|
 | 201 | Granted access |
 | 403 | Forbidden |
+| 404 | Order not found |
 | 422 | Unprocessable entity |
 
 **Example**

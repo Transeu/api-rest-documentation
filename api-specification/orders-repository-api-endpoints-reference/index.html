@@ -1284,6 +1284,91 @@ Authorization: Bearer {access_token}
 
 <p><strong>Endpoint</strong></p>
 
+<pre><code>GET /orders
+</code></pre>
+
+<p><strong>Query parameters</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Query parameter</th>
+  <th>Type</th>
+  <th>Required</th>
+  <th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>page</td>
+  <td>integer</td>
+  <td>no</td>
+  <td>result page number</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Responses</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Http status</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>200</td>
+  <td>OK</td>
+</tr>
+<tr>
+  <td>403</td>
+  <td>Forbidden</td>
+</tr>
+<tr>
+  <td>409</td>
+  <td>Page not found</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Example</strong></p>
+
+<pre><code class="http">GET /api/rest/v1/orders
+Host: orders-repository.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+</code></pre>
+
+<pre><code class="http">HTTP/1.1 200 OK
+Content-Type: application/hal+json
+{
+  "_links": {
+    "self": {
+      "href": "http://orders-repository.system.trans.eu/api/rest/v1/orders?page=1"
+    },
+    "first": {
+      "href": "http://orders-repository.system.trans.eu/api/rest/v1/orders"
+    },
+    "last": {
+      "href": "http://orders-repository.system.trans.eu/api/rest/v1/orders?page=1"
+    }
+  },
+  "_embedded": {
+    "orders": [
+        ...
+    ]
+   },
+  "page_count": 1,
+  "page_size": 25,
+  "total_items": 1,
+  "page": 1
+}
+</code></pre>
+
+<p><strong>Endpoint</strong></p>
+
 <pre><code>GET /orders/{ID}
 </code></pre>
 
@@ -1647,13 +1732,178 @@ Accept: application/hal+json
 Authorization: Bearer {access_token}
 </code></pre>
 
+<h3 id="permissions">Permissions</h3>
+
+<h4 id="grant-access-to-edit-order-for-other-companies">Grant access to edit order for other companies</h4>
+
+<p><strong>Endpoint</strong></p>
+
+<pre><code>POST /orders/{ID}/permissions
+</code></pre>
+
+<p><strong>Request body data</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>companies</td>
+  <td>Array(of <a href="#OrdersRepository.CompanyId">CompanyId</a>)</td>
+  <td>true</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong><em><a name="OrdersRepository.CompanyId"></a><code>CompanyId</code> object structure</em></strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>id</td>
+  <td>integer</td>
+  <td>true</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Responses</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Http status</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>201</td>
+  <td>Granted access</td>
+</tr>
+<tr>
+  <td>403</td>
+  <td>Forbidden</td>
+</tr>
+<tr>
+  <td>404</td>
+  <td>Order not found</td>
+</tr>
+<tr>
+  <td>422</td>
+  <td>Unprocessable entity</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Example</strong></p>
+
+<pre><code class="http">POST /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000/permissions
+Host: orders-repository.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+
+{
+  "companies": [
+    {
+      "id": 12
+    },
+    {
+      "id": 56
+    }
+  ]
+}
+</code></pre>
+
+<h4 id="revoke-access-to-edit-order-for-other-companies">Revoke access to edit order for other companies</h4>
+
+<p><strong>Endpoint</strong></p>
+
+<pre><code>DELETE /orders/{ID}/permissions
+</code></pre>
+
+<p><strong>Request body data</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Type</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>companies</td>
+  <td>Array(of <a href="#OrdersRepository.CompanyId">CompanyId</a>)</td>
+  <td>true</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Responses</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>Http status</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>204</td>
+  <td>Revoked access</td>
+</tr>
+<tr>
+  <td>403</td>
+  <td>Forbidden</td>
+</tr>
+<tr>
+  <td>404</td>
+  <td>Access has not been granted</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Example</strong></p>
+
+<pre><code class="http">DELETE /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000/permissions
+Host: orders-repository.system.trans.eu
+Accept: application/hal+json
+Authorization: Bearer {access_token}
+
+{
+  "companies": [
+    {
+      "id": 12
+    },
+    {
+      "id": 56
+    }
+  ]
+}
+</code></pre>
+
             </div>
         </article>
     </div>
         </div>
 </div>
 <footer class="container">
-    &copy; 2016 TransConnect
+    &copy; 2017 TransConnect
 </footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
