@@ -130,7 +130,7 @@ GET /dedicated-orders/{order-id}
 |Field|Type|Description|
 |:---|:---|:---|
 |value|Number|Weight value|
-|unit|String|Weight unit <br />Possible values: `T` (tons)|
+|unit|String|Weight unit <br />Possible values: `TNE` (tons)|
 
 **Example**
 ```
@@ -289,7 +289,7 @@ POST /dedicated-orders
 |Field|Type|Description|Required|
 |:---|:---|:---|:---|
 |value|Number|Weight value|yes|
-|unit|String|Weight unit <br />Possible values: `T` (tons)|yes|
+|unit|String|Weight unit <br />Possible values: `TNE` (tons)|yes|
 
 ***<a name="DedicatedOrders.POST.payment.currency"></a> Supported `Currency` list***
 |Value (code)|Currency name|
