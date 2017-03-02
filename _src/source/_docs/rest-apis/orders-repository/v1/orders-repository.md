@@ -353,7 +353,7 @@ Authorization: Bearer {access_token}
         "unit_code": "M3"
       },
       "amount": 5,
-      "carrying_requirements": {
+      "requirements": {
         "required_ways_of_loading": ["side", "back"],
         "required_truck_bodies": ["freezer"],
         "required_adr_classes": ["2", 4.1"],
@@ -653,7 +653,7 @@ Authorization: Bearer {access_token}
         "unit_code": "M3"
       },
       "amount": 5,
-      "carrying_requirements": {
+      "requirements": {
         "required_ways_of_loading": ["side", "back"],
         "required_truck_bodies": ["freezer"],
         "required_adr_classes": ["2", 4.1"],
