@@ -627,7 +627,7 @@
   <td align="left">whether shipper requires vehicles exclusively for purpose of carrying the loads</td>
 </tr>
 <tr>
-  <td align="left">is_tracking_system</td>
+  <td align="left">is_tracking_system_required</td>
   <td align="left">Boolean</td>
   <td align="left">whether shipper requires GPS tracking of carrier's vehicles</td>
 </tr>
@@ -640,30 +640,6 @@
 </table>
 
 <p><strong><em><a name="OrdersRepository.Contractor"></a><code>Contractor</code> object structure</em></strong></p>
-
-<table>
-<thead>
-<tr>
-  <th align="left">Field</th>
-  <th align="left">Type</th>
-  <th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td align="left">company</td>
-  <td align="left">Object (<a href="#OrdersRepository.Company">Company</a>)</td>
-  <td align="left"></td>
-</tr>
-<tr>
-  <td align="left">contact_persons</td>
-  <td align="left">Array ( of <a href="#OrdersRepository.Person">Person</a>)</td>
-  <td align="left"></td>
-</tr>
-</tbody>
-</table>
-
-<p><strong><em><a name="OrdersRepository.Company"></a><code>Company</code> object structure</em></strong></p>
 
 <table>
 <thead>
@@ -712,6 +688,11 @@
 <tr>
   <td align="left">address</td>
   <td align="left">Object (<a href="#OrdersRepository.Address">Address</a>)</td>
+  <td align="left"></td>
+</tr>
+<tr>
+  <td align="left">contact_persons</td>
+  <td align="left">Array ( of <a href="#OrdersRepository.Person">Person</a>)</td>
   <td align="left"></td>
 </tr>
 </tbody>
@@ -1124,25 +1105,23 @@ Authorization: Bearer {access_token}
         "is_for_clearance": true,
         "is_tir_cable_required": false,
         "is_ftl": true,
-        "is_tracking_system": true,
+        "is_tracking_system_required": true,
         "shipping_remarks": "just one small thing"
       }
     }
   ],
   "shipper": {
-    "company" : {
-      "name": "Trans.eu",
-      "vat_id": "000111122222",
-      "telephone": "(22)332-21-13",
-      "fax": "(22) 332 21 14",
-      "address": {
-        "locality": "London",
-        "postal_code": "L333",
-        "country": "GB",
-        "street": "Some Avenue",
-        "number": "5"
-      }
-    },
+    "name": "Trans.eu",
+    "vat_id": "000111122222",
+    "telephone": "(22)332-21-13",
+    "fax": "(22) 332 21 14",
+    "address": {
+      "locality": "London",
+      "postal_code": "L333",
+      "country": "GB",
+      "street": "Some Avenue",
+      "number": "5"
+    }
     "contact_persons": [
       {
         "family_name": "Test",
@@ -1154,20 +1133,18 @@ Authorization: Bearer {access_token}
     ]
   },
   "carrier": {
-    "company" : {
-      "trans_company_id": 2134,
-      "custom_id": "ABC001",
-      "name": "Carrier Trans.eu",
-      "vat_id": "00011114444",
-      "email": "carrier@trans.eu",
-      "address": {
-        "locality": "Wroclaw",
-        "postal_code": "50-539",
-        "country": "PL",
-        "street": "Krynicka",
-        "number": "2A/20"
-      }
-    },
+    "trans_company_id": 2134,
+    "custom_id": "ABC001",
+    "name": "Carrier Trans.eu",
+    "vat_id": "00011114444",
+    "email": "carrier@trans.eu",
+    "address": {
+      "locality": "Wroclaw",
+      "postal_code": "50-539",
+      "country": "PL",
+      "street": "Krynicka",
+      "number": "2A/20"
+    }
     "contact_persons": [
       {
         "trans_id": "2134-2",
@@ -1180,17 +1157,15 @@ Authorization: Bearer {access_token}
     ]
   },
   "payer": {
-    "company" : {
-      "name": "Trans.eu",
-      "vat_id": "000111122222",
-      "address": {
-        "locality": "London",
-        "postal_code": "L333",
-        "country": "GB",
-        "street": "Some Avenue",
-        "number": "5"
-      }
-    },
+    "name": "Trans.eu",
+    "vat_id": "000111122222",
+    "address": {
+      "locality": "London",
+      "postal_code": "L333",
+      "country": "GB",
+      "street": "Some Avenue",
+      "number": "5"
+    }
     "contact_persons": [
       {
         "family_name": "Test",
@@ -1478,26 +1453,24 @@ Authorization: Bearer {access_token}
         "is_lift_required": false,
         "is_for_clearance": true,
         "is_tir_cable_required": false,
-        "is_tracking_system": true,
+        "is_tracking_system_required": true,
         "is_ftl": true,
         "shipping_remarks": "just one small thing"
       }
     }
   ],
   "shipper": {
-    "company" : {
-      "name": "Trans.eu",
-      "vat_id": "000111122222",
-      "telephone": "(22)332-21-13",
-      "fax": "(22) 332 21 14",
-      "address": {
-        "locality": "London",
-        "postal_code": "L333",
-        "country": "GB",
-        "street": "Some Avenue",
-        "number": "5"
-      }
-    },
+    "name": "Trans.eu",
+    "vat_id": "000111122222",
+    "telephone": "(22)332-21-13",
+    "fax": "(22) 332 21 14",
+    "address": {
+      "locality": "London",
+      "postal_code": "L333",
+      "country": "GB",
+      "street": "Some Avenue",
+      "number": "5"
+    }
     "contact_persons": [
       {
         "family_name": "Test",
@@ -1509,20 +1482,18 @@ Authorization: Bearer {access_token}
     ]
   },
   "carrier": {
-    "company" : {
-      "trans_company_id": 2134,
-      "custom_id": "ABC001",
-      "name": "Carrier Trans.eu",
-      "vat_id": "00011114444",
-      "email": "carrier@trans.eu",
-      "address": {
-        "locality": "Wroclaw",
-        "postal_code": "50-539",
-        "country": "PL",
-        "street": "Krynicka",
-        "number": "2A/20"
-      }
-    },
+    "trans_company_id": 2134,
+    "custom_id": "ABC001",
+    "name": "Carrier Trans.eu",
+    "vat_id": "00011114444",
+    "email": "carrier@trans.eu",
+    "address": {
+      "locality": "Wroclaw",
+      "postal_code": "50-539",
+      "country": "PL",
+      "street": "Krynicka",
+      "number": "2A/20"
+    }
     "contact_persons": [
       {
         "trans_id": "2134-2",
@@ -1535,17 +1506,15 @@ Authorization: Bearer {access_token}
     ]
   },
   "payer": {
-    "company" : {
-      "name": "Trans.eu",
-      "vat_id": "000111122222",
-      "address": {
-        "locality": "London",
-        "postal_code": "L333",
-        "country": "GB",
-        "street": "Some Avenue",
-        "number": "5"
-      }
-    },
+    "name": "Trans.eu",
+    "vat_id": "000111122222",
+    "address": {
+      "locality": "London",
+      "postal_code": "L333",
+      "country": "GB",
+      "street": "Some Avenue",
+      "number": "5"
+    }
     "contact_persons": [
       {
         "family_name": "Test",
