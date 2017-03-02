@@ -54,7 +54,6 @@ POST /orders
 | documents | Array (of [Document](#OrdersRepository.Document)) |  | false |
 | vehicles | Array (of [OrderVehicle](#OrdersRepository.OrderVehicle)) |  | false |
 | drivers | Array (of [Driver](#OrdersRepository.Driver)) |  | false |
-| requirements | Object ([Requirements](#OrdersRepository.Requirements)) |  | false |
 
 ***<a name="OrdersRepository.RouteEvent"></a>`RouteEvent` object structure***
 
@@ -111,8 +110,7 @@ POST /orders
 |length|Object ([Length](#OrdersRepository.Length))||
 |capacity|Object ([Capacity](#OrdersRepository.Capacity))||
 |amount|positive Integer||
-|adr| Enum (ADR classess) | one of [hazard classes](https://en.wikipedia.org/wiki/ADR_(treaty)) ie. `4.1` |
-|carrying_requirements|Object ([Capacity](#OrdersRepository.CarryingRequirements))||
+|requirements|Object ([Requirements](#OrdersRepository.Requirements))||
 |shipper|Object ([Contractor](#OrdersRepository.Contractor))||
 |carrier|Object ([Contractor](#OrdersRepository.Contractor))||
 |payer|Object ([Contractor](#OrdersRepository.Contractor))||
@@ -152,16 +150,20 @@ POST /orders
 |value| positive float| [precision: 3 digits]|
 |unit_code| String | ISO 2955 c/i value ie. `M3` |
 
-***<a name="OrdersRepository.CarryingRequirements"></a>`CarryingRequirements` object structure***
+***<a name="OrdersRepository.Requirements"></a>`Requirements` object structure***
 
 |Field|Type|Description|
 |:---|:---|:---|
-|loading_methods| Array (of Enum) | Enum values: `top`, `side`, `back`. Says which side load should be put into the vehicle|
-|vehicle_body_types| Array (of String) | which type of vehicle/trailer body should be used to carry the load|
-|has_hds| Boolean ||
-|has_elevator_lift| Boolean ||
-|is_ready_to_declare| Boolean |whether load should be "ready to declare" - to excise on country border|
-|has_securing_rope| Boolean |whether load should be secured by ropes|
+|required_ways_of_loading| Array (of Enum) | Enum values: `top`, `side`, `back`. Says which side load should be put into the vehicle|
+|required_truck_bodies| Array (of String) | which type of vehicle/trailer body should be used to carry the load|
+|required_adr_classes| Array (of Enum) | Enum values: [hazard classes](https://en.wikipedia.org/wiki/ADR_(treaty)) ie. `4.1` |
+|is_truck_crane_required| Boolean ||
+|is_lift_required| Boolean ||
+|is_for_clearance| Boolean |whether load should be "ready to declare" - to excise on country border|
+|is_tir_cable_required| Boolean |whether load should be secured by ropes|
+|is_ftl| Boolean | whether shipper requires vehicles exclusively for purpose of carrying the loads |
+|is_tracking_system| Boolean | whether shipper requires GPS tracking of carrier's vehicles |
+|shipping_remarks| String | place for shippers additional remarks & requirements |
 
 ***<a name="OrdersRepository.Contractor"></a>`Contractor` object structure***
 
@@ -256,14 +258,6 @@ POST /orders
 |id_card_number| String | driver's ID card number |
 |email| String | valid e-mail |
 |telephone| String  | digits, and `+-()` characters and whitespaces |
-
-***<a name="OrdersRepository.Requirements"></a>`Requirements` object structure***
-
-|Field|Type|Description|
-|:---|:---|:---|
-|is_ftl| Boolean | whether shipper requires vehicles exclusively for purpose of carrying the loads |
-|has_gps| Boolean | whether shipper requires GPS tracking of carrier's vehicles |
-|shipping_remarks| String | place for shippers additional remarks & requirements |
 
 **Responses**
 
@@ -365,14 +359,17 @@ Authorization: Bearer {access_token}
         "unit_code": "M3"
       },
       "amount": 5,
-      "adr": "4.1",
       "carrying_requirements": {
-        "loading_methods": ["side",  "back"],
-        "vehicle_body_types": ["freezer"],
-        "has_hds": true,
-        "has_elevator_lift": false,
-        "is_ready_to_declare": true,
-        "has_securing_rope": false
+        "required_ways_of_loading": ["side", "back"],
+        "required_truck_bodies": ["freezer"],
+        "required_adr_classes": ["2", 4.1"],
+        "is_truck_crane_required": true,
+        "is_lift_required": false,
+        "is_for_clearance": true,
+        "is_tir_cable_required": false,
+        "is_ftl": true,
+        "is_tracking_system": true,
+        "shipping_remarks": "just one small thing"
       }
     }
   ],
@@ -495,12 +492,7 @@ Authorization: Bearer {access_token}
       "email": "test@rst.com.pl",
       "telephone": "1001000100"
     }
-  ],
-  "requirements": {
-    "has_gps": true,
-    "is_ftl": true,
-    "shipping_remarks": "just one small thing"
-  }
+  ]
 }
 ```
 
@@ -673,14 +665,17 @@ Authorization: Bearer {access_token}
         "unit_code": "M3"
       },
       "amount": 5,
-      "adr": "4.1",
       "carrying_requirements": {
-        "loading_methods": ["side",  "back"],
-        "vehicle_body_types": ["freezer"],
-        "has_hds": true,
-        "has_elevator_lift": false,
-        "is_ready_to_declare": true,
-        "has_securing_rope": false
+        "required_ways_of_loading": ["side", "back"],
+        "required_truck_bodies": ["freezer"],
+        "required_adr_classes": ["2", 4.1"],
+        "is_truck_crane_required": true,
+        "is_lift_required": false,
+        "is_for_clearance": true,
+        "is_tir_cable_required": false,
+        "is_tracking_system": true,
+        "is_ftl": true,
+        "shipping_remarks": "just one small thing"
       }
     }
   ],
@@ -796,10 +791,6 @@ Authorization: Bearer {access_token}
       "telephone": "1001000100"
     }
   ],
-  "requirements": {
-    "has_gps": true,
-    "is_ftl": true
-  },
   "_links": {
     "self": {
       "href": "http://orders.system.trans.eu/api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000"

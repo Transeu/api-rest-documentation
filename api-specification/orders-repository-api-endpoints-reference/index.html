@@ -218,12 +218,6 @@
   <td align="left"></td>
   <td align="left">false</td>
 </tr>
-<tr>
-  <td align="left">requirements</td>
-  <td align="left">Object (<a href="#OrdersRepository.Requirements">Requirements</a>)</td>
-  <td align="left"></td>
-  <td align="left">false</td>
-</tr>
 </tbody>
 </table>
 
@@ -439,13 +433,8 @@
   <td align="left"></td>
 </tr>
 <tr>
-  <td align="left">adr</td>
-  <td align="left">Enum (ADR classess)</td>
-  <td align="left">one of <a href="https://en.wikipedia.org/wiki/ADR_(treaty)">hazard classes</a> ie. <code>4.1</code></td>
-</tr>
-<tr>
-  <td align="left">carrying_requirements</td>
-  <td align="left">Object (<a href="#OrdersRepository.CarryingRequirements">Capacity</a>)</td>
+  <td align="left">requirements</td>
+  <td align="left">Object (<a href="#OrdersRepository.Requirements">Requirements</a>)</td>
   <td align="left"></td>
 </tr>
 <tr>
@@ -586,7 +575,7 @@
 </tbody>
 </table>
 
-<p><strong><em><a name="OrdersRepository.CarryingRequirements"></a><code>CarryingRequirements</code> object structure</em></strong></p>
+<p><strong><em><a name="OrdersRepository.Requirements"></a><code>Requirements</code> object structure</em></strong></p>
 
 <table>
 <thead>
@@ -598,34 +587,54 @@
 </thead>
 <tbody>
 <tr>
-  <td align="left">loading_methods</td>
+  <td align="left">required_ways_of_loading</td>
   <td align="left">Array (of Enum)</td>
   <td align="left">Enum values: <code>top</code>, <code>side</code>, <code>back</code>. Says which side load should be put into the vehicle</td>
 </tr>
 <tr>
-  <td align="left">vehicle_body_types</td>
+  <td align="left">required_truck_bodies</td>
   <td align="left">Array (of String)</td>
   <td align="left">which type of vehicle/trailer body should be used to carry the load</td>
 </tr>
 <tr>
-  <td align="left">has_hds</td>
+  <td align="left">required_adr_classes</td>
+  <td align="left">Array (of Enum)</td>
+  <td align="left">Enum values: <a href="https://en.wikipedia.org/wiki/ADR_(treaty)">hazard classes</a> ie. <code>4.1</code></td>
+</tr>
+<tr>
+  <td align="left">is_truck_crane_required</td>
   <td align="left">Boolean</td>
   <td align="left"></td>
 </tr>
 <tr>
-  <td align="left">has_elevator_lift</td>
+  <td align="left">is_lift_required</td>
   <td align="left">Boolean</td>
   <td align="left"></td>
 </tr>
 <tr>
-  <td align="left">is_ready_to_declare</td>
+  <td align="left">is_for_clearance</td>
   <td align="left">Boolean</td>
   <td align="left">whether load should be "ready to declare" - to excise on country border</td>
 </tr>
 <tr>
-  <td align="left">has_securing_rope</td>
+  <td align="left">is_tir_cable_required</td>
   <td align="left">Boolean</td>
   <td align="left">whether load should be secured by ropes</td>
+</tr>
+<tr>
+  <td align="left">is_ftl</td>
+  <td align="left">Boolean</td>
+  <td align="left">whether shipper requires vehicles exclusively for purpose of carrying the loads</td>
+</tr>
+<tr>
+  <td align="left">is_tracking_system</td>
+  <td align="left">Boolean</td>
+  <td align="left">whether shipper requires GPS tracking of carrier's vehicles</td>
+</tr>
+<tr>
+  <td align="left">shipping_remarks</td>
+  <td align="left">String</td>
+  <td align="left">place for shippers additional remarks &amp; requirements</td>
 </tr>
 </tbody>
 </table>
@@ -990,35 +999,6 @@
 </tbody>
 </table>
 
-<p><strong><em><a name="OrdersRepository.Requirements"></a><code>Requirements</code> object structure</em></strong></p>
-
-<table>
-<thead>
-<tr>
-  <th align="left">Field</th>
-  <th align="left">Type</th>
-  <th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td align="left">is_ftl</td>
-  <td align="left">Boolean</td>
-  <td align="left">whether shipper requires vehicles exclusively for purpose of carrying the loads</td>
-</tr>
-<tr>
-  <td align="left">has_gps</td>
-  <td align="left">Boolean</td>
-  <td align="left">whether shipper requires GPS tracking of carrier's vehicles</td>
-</tr>
-<tr>
-  <td align="left">shipping_remarks</td>
-  <td align="left">String</td>
-  <td align="left">place for shippers additional remarks &amp; requirements</td>
-</tr>
-</tbody>
-</table>
-
 <p><strong>Responses</strong></p>
 
 <table>
@@ -1135,14 +1115,17 @@ Authorization: Bearer {access_token}
         "unit_code": "M3"
       },
       "amount": 5,
-      "adr": "4.1",
       "carrying_requirements": {
-        "loading_methods": ["side",  "back"],
-        "vehicle_body_types": ["freezer"],
-        "has_hds": true,
-        "has_elevator_lift": false,
-        "is_ready_to_declare": true,
-        "has_securing_rope": false
+        "required_ways_of_loading": ["side", "back"],
+        "required_truck_bodies": ["freezer"],
+        "required_adr_classes": ["2", 4.1"],
+        "is_truck_crane_required": true,
+        "is_lift_required": false,
+        "is_for_clearance": true,
+        "is_tir_cable_required": false,
+        "is_ftl": true,
+        "is_tracking_system": true,
+        "shipping_remarks": "just one small thing"
       }
     }
   ],
@@ -1265,12 +1248,7 @@ Authorization: Bearer {access_token}
       "email": "test@rst.com.pl",
       "telephone": "1001000100"
     }
-  ],
-  "requirements": {
-    "has_gps": true,
-    "is_ftl": true,
-    "shipping_remarks": "just one small thing"
-  }
+  ]
 }
 </code></pre>
 
@@ -1492,14 +1470,17 @@ Authorization: Bearer {access_token}
         "unit_code": "M3"
       },
       "amount": 5,
-      "adr": "4.1",
       "carrying_requirements": {
-        "loading_methods": ["side",  "back"],
-        "vehicle_body_types": ["freezer"],
-        "has_hds": true,
-        "has_elevator_lift": false,
-        "is_ready_to_declare": true,
-        "has_securing_rope": false
+        "required_ways_of_loading": ["side", "back"],
+        "required_truck_bodies": ["freezer"],
+        "required_adr_classes": ["2", 4.1"],
+        "is_truck_crane_required": true,
+        "is_lift_required": false,
+        "is_for_clearance": true,
+        "is_tir_cable_required": false,
+        "is_tracking_system": true,
+        "is_ftl": true,
+        "shipping_remarks": "just one small thing"
       }
     }
   ],
@@ -1615,10 +1596,6 @@ Authorization: Bearer {access_token}
       "telephone": "1001000100"
     }
   ],
-  "requirements": {
-    "has_gps": true,
-    "is_ftl": true
-  },
   "_links": {
     "self": {
       "href": "http://orders.system.trans.eu/api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000"
