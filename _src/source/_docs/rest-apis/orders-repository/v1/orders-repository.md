@@ -108,7 +108,7 @@ POST /orders
 |height|Object ([Height](#OrdersRepository.Height))||
 |width|Object ([Width](#OrdersRepository.Width))||
 |length|Object ([Length](#OrdersRepository.Length))||
-|capacity|Object ([Capacity](#OrdersRepository.Capacity))||
+|volume|Object ([Volume](#OrdersRepository.Volume))||
 |amount|positive Integer||
 |requirements|Object ([Requirements](#OrdersRepository.Requirements))||
 |shipper|Object ([Contractor](#OrdersRepository.Contractor))||
@@ -143,7 +143,7 @@ POST /orders
 |value| positive float| [precision: 3 digits]|
 |unit_code| String | ISO 2955 c/i value ie. `M` |
 
-***<a name="OrdersRepository.Capacity"></a>`Capacity` object structure***
+***<a name="OrdersRepository.Volume"></a>`Volume` object structure***
 
 |Field|Type|Description|
 |:---|:---|:---|
@@ -230,7 +230,7 @@ POST /orders
 |custom_id| String | ID of vehicle in user's external system |
 |registration_plate_number| String | |
 |body_type| String | |
-|bearing_capacity| Object ([Capacity](#OrdersRepository.Capacity)) | |
+|bearing_capacity| Object ([Volume](#OrdersRepository.Volume)) | |
 
 ***<a name="OrdersRepository.Trailer"></a>`Trailer` object structure***
 
@@ -239,7 +239,7 @@ POST /orders
 |custom_id| String | ID of trailer in user's external system |
 |registration_plate_number| String | |
 |body_type| String | |
-|bearing_capacity| Object ([Capacity](#OrdersRepository.Capacity)) | |
+|bearing_capacity| Object ([Volume](#OrdersRepository.Volume)) | |
 
 ***<a name="OrdersRepository.Driver"></a>`Driver` object structure***
 
@@ -348,7 +348,7 @@ Authorization: Bearer {access_token}
         "value": 1.2,
         "unit_code": "M"
       },
-      "capacity": {
+      "volume": {
         "value": 1.8,
         "unit_code": "M3"
       },
@@ -648,7 +648,7 @@ Authorization: Bearer {access_token}
         "value": 1.2,
         "unit_code": "M"
       },
-      "capacity": {
+      "volume": {
         "value": 1.8,
         "unit_code": "M3"
       },
