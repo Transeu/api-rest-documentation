@@ -103,7 +103,7 @@ POST /orders
 |custom_id|String ||
 |name|String ||
 |description|String ||
-|load_type|String ||
+|type_of_load|String ||
 |weight|Object ([Weight](#OrdersRepository.Weight))||
 |height|Object ([Height](#OrdersRepository.Height))||
 |width|Object ([Width](#OrdersRepository.Width))||
@@ -331,7 +331,7 @@ Authorization: Bearer {access_token}
       "custom_id": "1",
       "name": "Some load",
       "description": "Some random load desc",
-      "load_type": "box",
+      "type_of_load": "box",
       "weight" : {
         "value" : 23,
         "unit_code" : "TNE"
@@ -631,7 +631,7 @@ Authorization: Bearer {access_token}
   "loads" : [
     {
       "description": "Some random load",
-      "load_type": "box",
+      "type_of_load": "box",
       "weight" : {
         "value" : 23,
         "unit_code" : "TNE"
