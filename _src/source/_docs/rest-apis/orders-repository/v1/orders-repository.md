@@ -40,7 +40,7 @@ POST /orders
 
 | Field | Type | Description | Required |
 |:---|:---|:---|:---|
-| custom_ids | Array (of [CustomIds](#OrdersRepository.CustomIds)) | optional external system ID | false |
+| custom_ids | Array (of [CustomId](#OrdersRepository.CustomId)) | optional external system ID | false |
 | number | String | order number | false |
 | status | String | optional external system status | false |
 | terms | String | order terms | false |
@@ -55,7 +55,7 @@ POST /orders
 | vehicles | Array (of [OrderVehicle](#OrdersRepository.OrderVehicle)) |  | false |
 | drivers | Array (of [Driver](#OrdersRepository.Driver)) |  | false |
 
-***<a name="OrdersRepository.CustomIds"></a>`CustomIds` object structure***
+***<a name="OrdersRepository.CustomId"></a>`CustomId` object structure***
 
 | Field | Type | Description |
 |:---|:---|:---|
