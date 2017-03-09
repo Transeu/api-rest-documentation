@@ -40,7 +40,7 @@ POST /orders
 
 | Field | Type | Description | Required |
 |:---|:---|:---|:---|
-| custom_id | String | optional external system ID | false |
+| custom_ids | Array (of [CustomId](#OrdersRepository.CustomId)) | optional external system ID | false |
 | number | String | order number | false |
 | status | String | optional external system status | false |
 | terms | String | order terms | false |
@@ -54,6 +54,13 @@ POST /orders
 | documents | Array (of [Document](#OrdersRepository.Document)) |  | false |
 | vehicles | Array (of [OrderVehicle](#OrdersRepository.OrderVehicle)) |  | false |
 | drivers | Array (of [Driver](#OrdersRepository.Driver)) |  | false |
+
+***<a name="OrdersRepository.CustomId"></a>`CustomId` object structure***
+
+| Field | Type | Description |
+|:---|:---|:---|
+| id | String | External system ID |
+| source | String | External system alias |
 
 ***<a name="OrdersRepository.RouteEvent"></a>`RouteEvent` object structure***
 
@@ -270,7 +277,12 @@ Accept: application/hal+json
 Authorization: Bearer {access_token}
 
 {
-  "custom_id": "12345",
+  "custom_ids": [
+    {
+      "id": "12345",
+      "source": "TransOrders"
+    }
+  ],
   "number": "DE/3455/4444",
   "status": "pending",
   "terms": "Some long order terms...",
@@ -572,7 +584,16 @@ Authorization: Bearer {access_token}
 ```http
 {
   "id": "123e4567-e89b-12d3-a456-426655440000",
-  "custom_id": "12345",
+  "custom_ids": [
+    {
+      "id": "123456",
+      "source": "TransOrders"
+    },
+    {
+      "id": "AB45",
+      "source": "SomeExternalSystem"
+    }
+  ],
   "number": "DE/3455/4444",
   "status": "pending",
   "terms": "Some long order terms...",

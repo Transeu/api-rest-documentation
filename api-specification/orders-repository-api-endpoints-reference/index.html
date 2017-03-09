@@ -135,8 +135,8 @@
 </thead>
 <tbody>
 <tr>
-  <td align="left">custom_id</td>
-  <td align="left">String</td>
+  <td align="left">custom_ids</td>
+  <td align="left">Array (of <a href="#OrdersRepository.CustomId">CustomId</a>)</td>
   <td align="left">optional external system ID</td>
   <td align="left">false</td>
 </tr>
@@ -217,6 +217,30 @@
   <td align="left">Array (of <a href="#OrdersRepository.Driver">Driver</a>)</td>
   <td align="left"></td>
   <td align="left">false</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong><em><a name="OrdersRepository.CustomId"></a><code>CustomId</code> object structure</em></strong></p>
+
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">id</td>
+  <td align="left">String</td>
+  <td align="left">External system ID</td>
+</tr>
+<tr>
+  <td align="left">source</td>
+  <td align="left">String</td>
+  <td align="left">External system alias</td>
 </tr>
 </tbody>
 </table>
@@ -1013,7 +1037,12 @@ Accept: application/hal+json
 Authorization: Bearer {access_token}
 
 {
-  "custom_id": "12345",
+  "custom_ids": [
+    {
+      "id": "12345",
+      "source": "TransOrders"
+    }
+  ],
   "number": "DE/3455/4444",
   "status": "pending",
   "terms": "Some long order terms...",
@@ -1364,7 +1393,16 @@ Authorization: Bearer {access_token}
 
 <pre><code class="http">{
   "id": "123e4567-e89b-12d3-a456-426655440000",
-  "custom_id": "12345",
+  "custom_ids": [
+    {
+      "id": "123456",
+      "source": "TransOrders"
+    },
+    {
+      "id": "AB45",
+      "source": "SomeExternalSystem"
+    }
+  ],
   "number": "DE/3455/4444",
   "status": "pending",
   "terms": "Some long order terms...",
