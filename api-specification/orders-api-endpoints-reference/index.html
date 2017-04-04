@@ -137,7 +137,7 @@
 <tr>
   <td align="left">order-id</td>
   <td align="left">String</td>
-  <td align="left">Order identifier received with <a href="#ShippingOrders.POST.response">POST response</a> in <code>id</code> field</td>
+  <td align="left">Order identifier received with <a href="#Orders.POST.response">POST response</a> in <code>id</code> field</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
@@ -207,9 +207,9 @@
   <td align="left">Route details</td>
 </tr>
 <tr>
-  <td align="left">payment</td>
-  <td align="left">Object (<a href="#Orders.GET.payment">Payment</a>)</td>
-  <td align="left">Payment details</td>
+  <td align="left">loads</td>
+  <td align="left">Array (of <a href="#Orders.GET.load">Load</a>)</td>
+  <td align="left">Loads details</td>
 </tr>
 <tr>
   <td align="left">carrier</td>
@@ -217,14 +217,29 @@
   <td align="left">Carrier details</td>
 </tr>
 <tr>
-  <td align="left">shipper</td>
+  <td align="left">payer</td>
   <td align="left">Object (<a href="#Orders.GET.contractor">Contractor</a>)</td>
-  <td align="left">Shipper details</td>
+  <td align="left">Payer details</td>
 </tr>
 <tr>
-  <td align="left">loads</td>
-  <td align="left">Array (of <a href="#Orders.GET.load">Load</a>)</td>
-  <td align="left">Loads details</td>
+  <td align="left">payment</td>
+  <td align="left">Object (<a href="#Orders.GET.payment">Payment</a>)</td>
+  <td align="left">Payment details</td>
+</tr>
+<tr>
+  <td align="left">vehicle</td>
+  <td align="left">Object (<a href="#Orders.GET.Vehicle">Vehicle</a>)</td>
+  <td align="left">Vehicle details</td>
+</tr>
+<tr>
+  <td align="left">driver</td>
+  <td align="left">Object (<a href="#Orders.GET.Driver">Driver</a>)</td>
+  <td align="left">Driver details</td>
+</tr>
+<tr>
+  <td align="left">requirements</td>
+  <td align="left">Object (<a href="#Orders.GET.Requirements">Requirements</a>)</td>
+  <td align="left">Requirements</td>
 </tr>
 <tr>
   <td align="left">_links</td>
@@ -268,9 +283,14 @@
   <td align="left">Details of event place</td>
 </tr>
 <tr>
+  <td align="left">time_frame</td>
+  <td align="left">Object (<a href="#Orders.GET.TimeFrame">TimeFrame</a>)</td>
+  <td align="left">Details of loads TimeFrame</td>
+</tr>
+<tr>
   <td align="left">type</td>
   <td align="left">Enum</td>
-  <td align="left">Event type. <br />Possible values: <code>loading</code>, <code>unloading</code></td>
+  <td align="left">Single value can be choose. Event type. <br />Possible values: <code>loading</code>, <code>unloading</code></td>
 </tr>
 </tbody>
 </table></p>
@@ -293,6 +313,34 @@
 </tbody>
 </table></p>
 
+<p><strong><em><a name="Orders.GET.TimeFrame"></a><code>TimeFrame</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">day</td>
+  <td align="left">Date</td>
+  <td align="left"><code>[YYYY-MM-DD]</code></td>
+</tr>
+<tr>
+  <td align="left">time_from</td>
+  <td align="left">Date</td>
+  <td align="left"><code>[hh]:[mm]:[ss]Z</code> ie. <code>11:20:00+01:00</code></td>
+</tr>
+<tr>
+  <td align="left">time_to</td>
+  <td align="left">Date</td>
+  <td align="left"><code>[hh]:[mm]:[ss]Z</code> ie. <code>11:20:00+01:00</code></td>
+</tr>
+</tbody>
+</table></p>
+
 <p><strong><em><a name="Orders.GET.address"></a><code>Address</code> object structure</em></strong>
 <table>
 <thead>
@@ -303,6 +351,16 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td align="left">street</td>
+  <td align="left">String</td>
+  <td align="left">Street name</td>
+</tr>
+<tr>
+  <td align="left">number</td>
+  <td align="left">String</td>
+  <td align="left">Street number</td>
+</tr>
 <tr>
   <td align="left">locality</td>
   <td align="left">String</td>
@@ -339,7 +397,7 @@
 <tr>
   <td align="left">interval_of_days</td>
   <td align="left">String</td>
-  <td align="left">Payment date interval in days, ISO 8601 formatted (see <a href="http://php.net/manual/pl/dateinterval.construct.php">PHP DateInterval</a> for more information)</td>
+  <td align="left">Payment date interval in days, ISO 8601 formatted (see <a href="https://php.net/manual/pl/dateinterval.construct.php">PHP DateInterval</a> for more information)</td>
 </tr>
 </tbody>
 </table></p>
@@ -378,29 +436,6 @@
 </thead>
 <tbody>
 <tr>
-  <td align="left">company</td>
-  <td align="left">Object (<a href="#Orders.GET.company">Company</a>)</td>
-  <td align="left">Contractor company details</td>
-</tr>
-<tr>
-  <td align="left">contact_person</td>
-  <td align="left">Object (<a href="#Orders.GET.contact_person">ContactPerson</a>)</td>
-  <td align="left">Contact person details</td>
-</tr>
-</tbody>
-</table></p>
-
-<p><strong><em><a name="Orders.GET.company"></a><code>Company</code> object structure</em></strong>
-<table>
-<thead>
-<tr>
-  <th align="left">Field</th>
-  <th align="left">Type</th>
-  <th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
   <td align="left">name</td>
   <td align="left">String</td>
   <td align="left">Company name</td>
@@ -415,6 +450,11 @@
   <td align="left">Object (<a href="#Orders.GET.address">Address</a>)</td>
   <td align="left">Company address details</td>
 </tr>
+<tr>
+  <td align="left">contact_person</td>
+  <td align="left">Object (<a href="#Orders.GET.contact_person">ContactPerson</a>)</td>
+  <td align="left">Contact person details</td>
+</tr>
 </tbody>
 </table></p>
 
@@ -428,6 +468,21 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td align="left">contact_id</td>
+  <td align="left">String</td>
+  <td align="left">Person's contact id</td>
+</tr>
+<tr>
+  <td align="left">employee_id</td>
+  <td align="left">String</td>
+  <td align="left">Employee id from Companies API</td>
+</tr>
+<tr>
+  <td align="left">trans_id</td>
+  <td align="left">String</td>
+  <td align="left">Person's TransID</td>
+</tr>
 <tr>
   <td align="left">given_name</td>
   <td align="left">String</td>
@@ -462,14 +517,49 @@
 </thead>
 <tbody>
 <tr>
+  <td align="left">name</td>
+  <td align="left">String</td>
+  <td align="left">Load name</td>
+</tr>
+<tr>
+  <td align="left">type_of_load</td>
+  <td align="left">Enum</td>
+  <td align="left">Possible values: [<code>adr</code>,<code>bags</code>,<code>unit</code>,<code>logs</code>,<code>envelope</code>,<code>box</code>,<code>barrel</code>,<code>pallet</code>,<code>other</code>]</td>
+</tr>
+<tr>
   <td align="left">weight</td>
-  <td align="left">Object (<a href="#Orders.GET.load.weight">Weight</a>)</td>
+  <td align="left">Object (<a href="#Orders.GET.load.Weight">Weight</a>)</td>
   <td align="left">Load weight details</td>
+</tr>
+<tr>
+  <td align="left">volume</td>
+  <td align="left">Object (<a href="#Orders.GET.load.Volume">Volume</a>)</td>
+  <td align="left">Load weight details</td>
+</tr>
+<tr>
+  <td align="left">height</td>
+  <td align="left">Object (<a href="#Orders.GET.load.Dimension">Dimension</a>)</td>
+  <td align="left">Load height Dimension</td>
+</tr>
+<tr>
+  <td align="left">width</td>
+  <td align="left">Object (<a href="#Orders.GET.load.Dimension">Dimension</a>)</td>
+  <td align="left">Load width Dimension</td>
+</tr>
+<tr>
+  <td align="left">length</td>
+  <td align="left">Object (<a href="#Orders.GET.load.Dimension">Dimension</a>)</td>
+  <td align="left">Load length Dimension</td>
+</tr>
+<tr>
+  <td align="left">amount</td>
+  <td align="left">Number</td>
+  <td align="left">Amount of loads</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="Orders.GET.load.weight"></a><code>Weight</code> object structure</em></strong>
+<p><strong><em><a name="Orders.GET.load.Weight"></a><code>Weight</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -492,9 +582,192 @@
 </tbody>
 </table></p>
 
+<p><strong><em><a name="Orders.GET.load.Volume"></a><code>Volume</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">value</td>
+  <td align="left">Number</td>
+  <td align="left">Volume value</td>
+</tr>
+<tr>
+  <td align="left">unit_code</td>
+  <td align="left">String</td>
+  <td align="left">Volume unit code <br />Possible values: <code>M3</code> (cubic meter)</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.GET.load.Dimension"></a><code>Dimension</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">value</td>
+  <td align="left">Number</td>
+  <td align="left">Dimension value</td>
+</tr>
+<tr>
+  <td align="left">unit_code</td>
+  <td align="left">String</td>
+  <td align="left">Dimension unit code <br />Possible values: <code>M</code> (meter)</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.GET.load.Vehicle"></a><code>Vehicle</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">registration_plate_number</td>
+  <td align="left">String</td>
+  <td align="left">Vehicle's registration plate number</td>
+</tr>
+<tr>
+  <td align="left">semi_trailer</td>
+  <td align="left">Object(<a href="#Orders.GET.load.SemiTrailer">SemiTrailer</a>)</td>
+  <td align="left">SemiTrailer data</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.GET.load.SemiTrailer"></a><code>SemiTrailer</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">registration_plate_number</td>
+  <td align="left">String</td>
+  <td align="left">Trailer's registration plate number</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.GET.load.Driver"></a><code>Driver</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">employee_id</td>
+  <td align="left">Number</td>
+  <td align="left">Employee ID from Companies API</td>
+</tr>
+<tr>
+  <td align="left">family_name</td>
+  <td align="left">String</td>
+  <td align="left">Person's last name</td>
+</tr>
+<tr>
+  <td align="left">given_name</td>
+  <td align="left">String</td>
+  <td align="left">Person's given name</td>
+</tr>
+<tr>
+  <td align="left">identity_document_number</td>
+  <td align="left">String</td>
+  <td align="left">Driver's ID document number</td>
+</tr>
+<tr>
+  <td align="left">telephone</td>
+  <td align="left">String</td>
+  <td align="left">Telephone number in format: <code>(XX) XXXXXXXXX</code></td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.GET.load.Requirements"></a><code>Requirements</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">is_ftl</td>
+  <td align="left">Boolean</td>
+  <td align="left">Is full track load flag</td>
+</tr>
+<tr>
+  <td align="left">is_tracking_system_required</td>
+  <td align="left">Boolean</td>
+  <td align="left">Tracking system requirement flag</td>
+</tr>
+<tr>
+  <td align="left">is_truck_crane_required</td>
+  <td align="left">Boolean</td>
+  <td align="left">Truck crane requirement flag</td>
+</tr>
+<tr>
+  <td align="left">is_lift_required</td>
+  <td align="left">Boolean</td>
+  <td align="left">Lift requirement flag</td>
+</tr>
+<tr>
+  <td align="left">is_tir_cable_required</td>
+  <td align="left">Boolean</td>
+  <td align="left">Tir cable requirement flag</td>
+</tr>
+<tr>
+  <td align="left">shipping_remarks</td>
+  <td align="left">String</td>
+  <td align="left">Remarks to the shipping</td>
+</tr>
+<tr>
+  <td align="left">required_ways_of_loading</td>
+  <td align="left">Enum</td>
+  <td align="left">Multiple value can be selected. Possible values: [<code>side</code>,<code>top</code>,<code>back</code>]</td>
+</tr>
+<tr>
+  <td align="left">required_truck_bodies</td>
+  <td align="left">Enum</td>
+  <td align="left">Multiple value can be selected. Possible values: [<code>tent</code>, <code>isotherm</code>, <code>box-truck</code>, <code>spacious</code>, <code>other</code>, <code>car-transporter</code>, <code>double-trailer</code>, <code>van</code>, <code>mega</code>, <code>coilmulde</code>, <code>walking-floor</code>, <code>low-suspension</code>, <code>flatbed</code>, <code>chemical-tanker</code>, <code>food-tanker</code>, <code>petroleum-tanker</code>, <code>gas-tanker</code>, <code>log-trailer</code>, <code>oversized-cargo</code>, <code>hook-lift</code>, <code>container-20-40</code>, <code>dump-truck</code>, <code>koffer</code>, <code>swap-body-system</code>, <code>jumbo</code>, <code>cooler</code>, <code>curtainsider</code>, <code>tanker</code>, <code>silos</code>, <code>removal-truck</code>]</td>
+</tr>
+<tr>
+  <td align="left">required_adr_classes</td>
+  <td align="left">Enum</td>
+  <td align="left">Multiple value can be selected. Possible values: [<code>1</code>, <code>2</code>, <code>3</code>, <code>4.1</code>, <code>4.2</code>, <code>4.3</code>, <code>5.1</code>, <code>5.2</code>, <code>6.1</code>, <code>6.2</code>, <code>7</code>, <code>8</code>, <code>9</code>]</td>
+</tr>
+</tbody>
+</table></p>
+
 <p><strong>Example</strong></p>
 
-<pre><code>GET /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000 HTTP/1.1
+<pre><code>GET /api/rest/v1/orders/e674e0a3-847c-4f75-bdff-cedaf6986c7c HTTP/1.1
 Host: orders.system.trans.eu
 Accept: application/hal+json
 Authorization: Bearer {access_token}
@@ -504,93 +777,242 @@ Authorization: Bearer {access_token}
 Content-Type: application/hal+json
 
 {
-    "id": "123e4567-e89b-12d3-a456-426655440000",
-    "number": "PL/2016/05/05/1234",
-    "status": "pending",
-    "route": {
-        "events": [
-            {
-                "place": {
-                    "address": {
-                        "locality": "Wrocław",
-                        "postal_code": "12-345",
-                        "country": "PL"
-                    }
-                },
-                "type": "loading"
-            },
-            {
-                "place": {
-                    "address": {
-                        "locality": "Warszawa",
-                        "postal_code": "54-321",
-                        "country": "PL"
-                    }
-                },
-                "type": "unloading"
-            }
-        ]
-    },
-    "payment": {
-        "price": {
-            "value": 50,
-            "currency": "PLN"
+  "id": "e674e0a3-847c-4f75-bdff-cedaf6986c7c",
+  "number": "EN/15022021/10",
+  "route": {
+    "events": [
+      {
+        "place": {
+          "address": {
+            "locality": "Berlin",
+            "postal_code": "3456",
+            "country": "DE",
+            "street": "Erste strasse",
+            "number": "12"
+          },
+          "coordinates": {
+            "latitude": 23.256789,
+            "longitude": 90
+          }
         },
-        "interval_of_days": "P10D"
-    },
-    "carrier": {
-        "company" : {
-            "name": "Carrier Trans.eu",
-            "vat_id": "00011114444",
-            "address": {
-                "locality": "Paris",
-                "postal_code": "333",
-                "country": "FR"
-            }
+        "time_frame": {
+          "day": "2017-02-20",
+          "time_from": "09:09:09+00:00",
+          "time_to": "16:59:59+00:00"
         },
-        "contact_person": {
-            "family_name": "John",
-            "given_name": "Doo",
-            "email": "john.doo@email.com",
-            "telephone": "(48) 1001000100"
-        }
-    },
-    "shipper": {
-        "company" : {
-            "name": "Trans.eu",
-            "vat_id": "000111122222",
-            "address": {
-                "locality": "London",
-                "postal_code": "L333",
-                "country": "GB"
-            }
+        "type": "loading"
+      },
+      {
+        "place": {
+          "address": {
+            "locality": "Berlin",
+            "postal_code": "3456",
+            "country": "DE",
+            "street": "Some Avenue",
+            "number": "32"
+          },
+          "coordinates": {
+            "latitude": 23.256789,
+            "longitude": 42.000001
+          }
         },
-        "contact_person": {
-            "family_name": "Miss",
-            "given_name": "Foo",
-            "email": "miss.foo@email.com",
-            "telephone": "(48) 1001000100"
-        }
-    },
-    "loads" : [
-        {
-            "weight" : {
-                "value" : 23,
-                "unit_code" : "T"
-            }
+        "time_frame": {
+          "day": "2017-02-22",
+          "time_from": "18:00:00+00:00",
+          "time_to": "20:00:00+00:00"
         },
-        {
-            "weight" : {
-                "value" : 4,
-                "unit_code" : "T"
-            }
-        }
-    ],
-    "_links": {
-        "self": {
-            "href": "https://orders.system.trans.eu/api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000"
-        }
+        "type": "unloading"
+      }
+    ]
+  },
+  "loads": [
+    {
+      "name": "Test load",
+      "weight": {
+        "value": 1,
+        "unit_code": "TNE"
+      },
+      "length": {
+        "value": 4,
+        "unit_code": "M"
+      },
+      "width": {
+        "value": 3,
+        "unit_code": "M"
+      },
+      "height": {
+        "value": 2,
+        "unit_code": "M"
+      },
+      "volume": {
+        "value": 5,
+        "unit_code": "M3"
+      },
+      "type_of_load": "barrel",
+      "amount": 2
     }
+  ],
+  "shipper": {
+    "name": "Shipping imperium",
+    "vat_id": "5379420247",
+    "address": {
+      "locality": "London",
+      "postal_code": "50-001",
+      "country": "PL",
+      "street": "Kings street",
+      "number": "1"
+    },
+    "contact_person": {
+      "family_name": "John",
+      "given_name": "Doe",
+      "email": "john.doe@trans.eu",
+      "telephone": "",
+      "employee_id": 823436,
+      "trans_id": "1008544-1",
+      "contact_id": null
+    }
+  },
+  "carrier": {
+    "name": "Carrying company",
+    "vat_id": "PL6470094616",
+    "address": {
+      "locality": "London",
+      "postal_code": "58-100",
+      "country": "PL",
+      "street": "Some street",
+      "number": "22/11"
+    },
+    "contact_person": {
+      "family_name": "Paul",
+      "given_name": "Doe",
+      "email": "paul.doe@trans.eu",
+      "telephone": "",
+      "employee_id": 823439,
+      "trans_id": "1008547-1",
+      "contact_id": null
+    }
+  },
+  "payer": {
+    "name": "Carrier Trans.eu",
+    "vat_id": "0001111444455",
+    "address": {
+      "locality": "Parisss",
+      "postal_code": "3334",
+      "country": "FR",
+      "street": "Some street",
+      "number": "4/2"
+    },
+    "contact_person": {
+      "family_name": "Johan",
+      "given_name": "Sebastian",
+      "email": "test@trans.eu",
+      "telephone": "(48) 1001000100",
+      "employee_id": null,
+      "trans_id": null,
+      "contact_id": 123155
+    }
+  },
+  "payment": {
+    "price": {
+      "value": 34,
+      "currency": "PLN"
+    },
+    "interval_of_days": "P10D"
+  },
+  "driver": {
+    "given_name": "Joe",
+    "family_name": "Doe",
+    "telephone": "(48) 3003000303",
+    "identity_document_number": "AFA180815",
+    "employee_id": null
+  },
+  "vehicle": {
+    "registration_plate_number": "SPS 212",
+    "semi_trailer": {
+      "registration_plate_number": "SPS 313"
+    }
+  },
+  "requirements": {
+    "is_ftl": true,
+    "is_tracking_system_required": true,
+    "is_truck_crane_required": true,
+    "is_lift_required": true,
+    "is_tir_cable_required": true,
+    "required_ways_of_loading": [
+      "side",
+      "top",
+      "back"
+    ],
+    "required_truck_bodies": [
+      "tent",
+      "isotherm",
+      "box-truck",
+      "spacious",
+      "other",
+      "car-transporter",
+      "double-trailer",
+      "van",
+      "mega",
+      "coilmulde",
+      "walking-floor",
+      "low-suspension",
+      "flatbed",
+      "chemical-tanker",
+      "food-tanker",
+      "petroleum-tanker",
+      "gas-tanker",
+      "log-trailer",
+      "oversized-cargo",
+      "hook-lift",
+      "container-20-40",
+      "dump-truck",
+      "koffer",
+      "swap-body-system",
+      "jumbo",
+      "cooler",
+      "curtainsider",
+      "tanker",
+      "silos",
+      "removal-truck"
+    ],
+    "required_adr_classes": [
+      "1",
+      "2",
+      "3",
+      "4.1",
+      "4.2",
+      "4.3",
+      "5.1",
+      "5.2",
+      "6.1",
+      "6.2",
+      "7",
+      "8",
+      "9"
+    ],
+    "shipping_remarks": "Test remark"
+  },
+  "_links": {
+    "self": {
+      "href": "https://0.0.0.0:8080/api/rest/v1/orders/e674e0a3-847c-4f75-bdff-cedaf6986c7c"
+    },
+    "carrier_company": {
+      "id": 1008547,
+      "href": "https://companies.system.trans.eu/api/rest/v1/companies/1008547"
+    },
+    "carrier_contact_person": {
+      "employee_id": 823439,
+      "href": "https://companies.system.trans.eu/api/rest/v1/employees/823439"
+    },
+    "shipper_company": {
+      "id": 1008544,
+      "href": "https://companies.system.trans.eu/api/rest/v1/companies/1008544"
+    },
+    "shipper_contact_person": {
+      "employee_id": 823436,
+      "href": "https://companies.system.trans.eu/api/rest/v1/employees/823436"
+    }
+  }
 }
 </code></pre>
 
@@ -630,111 +1052,57 @@ Content-Type: application/hal+json
   <td align="left">yes</td>
 </tr>
 <tr>
-  <td align="left">payment</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.payment">Payment</a>)</td>
-  <td align="left">Payment details</td>
-  <td align="left">yes</td>
-</tr>
-<tr>
   <td align="left">route</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.route">Route</a>)</td>
+  <td align="left">Object (<a href="#Orders.POST.route">Route</a>)</td>
   <td align="left">Route details</td>
   <td align="left">yes</td>
 </tr>
 <tr>
+  <td align="left">loads</td>
+  <td align="left">Array (of <a href="#Orders.POST.load">Load</a>)</td>
+  <td align="left">Loads details</td>
+  <td align="left">no</td>
+</tr>
+<tr>
   <td align="left">carrier</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.contractor">Contractor</a>)</td>
+  <td align="left">Object (<a href="#Orders.POST.contractor">Contractor</a>)</td>
   <td align="left">Carrier details</td>
   <td align="left">no</td>
 </tr>
 <tr>
-  <td align="left">loads</td>
-  <td align="left">Array (of <a href="#ShippingOrders.POST.load">Load</a>)</td>
-  <td align="left">Loads details</td>
+  <td align="left">payer</td>
+  <td align="left">Object (<a href="#Orders.POST.contractor">Contractor</a>)</td>
+  <td align="left">Payer details</td>
   <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">payment</td>
+  <td align="left">Object (<a href="#Orders.POST.payment">Payment</a>)</td>
+  <td align="left">Payment details</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">vehicle</td>
+  <td align="left">Object (<a href="#Orders.POST.Vehicle">Vehicle</a>)</td>
+  <td align="left">Vehicle details</td>
+  <td align="left"></td>
+</tr>
+<tr>
+  <td align="left">driver</td>
+  <td align="left">Object (<a href="#Orders.POST.Driver">Driver</a>)</td>
+  <td align="left">Driver details</td>
+  <td align="left"></td>
+</tr>
+<tr>
+  <td align="left">requirements</td>
+  <td align="left">Object (<a href="#Orders.POST.Requirements">Requirements</a>)</td>
+  <td align="left">Requirements</td>
+  <td align="left"></td>
 </tr>
 </tbody>
 </table>
 
-<p><strong><em><a name="ShippingOrders.POST.payment"></a><code>Payment</code> object structure</em></strong>
-<table>
-<thead>
-<tr>
-  <th align="left">Field</th>
-  <th align="left">Type</th>
-  <th align="left">Description</th>
-  <th align="left">Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td align="left">price</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.payment.price">Price</a>)</td>
-  <td align="left">Price definition</td>
-  <td align="left">yes</td>
-</tr>
-<tr>
-  <td align="left">interval_of_days</td>
-  <td align="left">String</td>
-  <td align="left">Payment date interval <em>(in days, ISO 8601 formatted - see <a href="http://php.net/manual/pl/dateinterval.construct.php">PHP DateInterval</a> for more information)</em></td>
-  <td align="left">yes</td>
-</tr>
-</tbody>
-</table></p>
-
-<p><strong><em><a name="ShippingOrders.POST.payment.price"></a><code>Price</code> object structure</em></strong>
-<table>
-<thead>
-<tr>
-  <th align="left">Field</th>
-  <th align="left">Type</th>
-  <th align="left">Description</th>
-  <th align="left">Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td align="left">value</td>
-  <td align="left">Number</td>
-  <td align="left">Price value <em>(positive number)</em></td>
-  <td align="left">yes</td>
-</tr>
-<tr>
-  <td align="left">currency</td>
-  <td align="left">String (<a href="#ShippingOrders.POST.payment.currency">Currency</a>)</td>
-  <td align="left">Price currency (<a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a>)</td>
-  <td align="left">yes</td>
-</tr>
-</tbody>
-</table></p>
-
-<p><strong><em><a name="ShippingOrders.POST.contractor"></a><code>Contractor</code> object structure</em></strong>
-<table>
-<thead>
-<tr>
-  <th align="left">Field</th>
-  <th align="left">Type</th>
-  <th align="left">Description</th>
-  <th align="left">Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td align="left">company</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.company">Company</a>)</td>
-  <td align="left">Contractor company details</td>
-  <td align="left">no</td>
-</tr>
-<tr>
-  <td align="left">contact_person</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.contact_person">ContactPerson</a>)</td>
-  <td align="left">Contractor contact person details</td>
-  <td align="left">no</td>
-</tr>
-</tbody>
-</table></p>
-
-<p><strong><em><a name="ShippingOrders.POST.company"></a><code>Company</code> object structure</em></strong>
+<p><strong><em><a name="Orders.POST.contractor"></a><code>Contractor</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -759,14 +1127,20 @@ Content-Type: application/hal+json
 </tr>
 <tr>
   <td align="left">address</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.address">Address</a>)</td>
+  <td align="left">Object (<a href="#Orders.POST.address">Address</a>)</td>
   <td align="left">Company address details</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">contact_person</td>
+  <td align="left">Object (<a href="#Orders.POST.contact_person">ContactPerson</a>)</td>
+  <td align="left">Contractor contact person details</td>
   <td align="left">no</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.address"></a><code>Address</code> object structure</em></strong>
+<p><strong><em><a name="Orders.POST.address"></a><code>Address</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -777,6 +1151,18 @@ Content-Type: application/hal+json
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td align="left">street</td>
+  <td align="left">String</td>
+  <td align="left">Street name</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">number</td>
+  <td align="left">String</td>
+  <td align="left">Street number</td>
+  <td align="left">no</td>
+</tr>
 <tr>
   <td align="left">locality</td>
   <td align="left">String</td>
@@ -798,7 +1184,7 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.contact_person"></a><code>ContactPerson</code> object structure</em></strong>
+<p><strong><em><a name="Orders.POST.contact_person"></a><code>ContactPerson</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -809,6 +1195,24 @@ Content-Type: application/hal+json
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td align="left">contact_id</td>
+  <td align="left">String</td>
+  <td align="left">Person's contact id</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">employee_id</td>
+  <td align="left">String</td>
+  <td align="left">Employee id from Companies API</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">trans_id</td>
+  <td align="left">String</td>
+  <td align="left">Person's TransID</td>
+  <td align="left">no</td>
+</tr>
 <tr>
   <td align="left">given_name</td>
   <td align="left">String</td>
@@ -836,7 +1240,7 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.route"></a><code>Route</code> object structure</em></strong>
+<p><strong><em><a name="Orders.POST.route"></a><code>Route</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -849,14 +1253,14 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">events</td>
-  <td align="left">Array (of <a href="#ShippingOrders.POST.route.event">RouteEvent</a>)</td>
+  <td align="left">Array (of <a href="#Orders.POST.route.event">RouteEvent</a>)</td>
   <td align="left">Array with route events</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.route.event"></a><code>RouteEvent</code> object structure</em></strong>
+<p><strong><em><a name="Orders.POST.route.event"></a><code>RouteEvent</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -869,8 +1273,14 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">place</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.place">Place</a>)</td>
+  <td align="left">Object (<a href="#Orders.POST.place">Place</a>)</td>
   <td align="left">Details of event place</td>
+  <td align="left">yes</td>
+</tr>
+<tr>
+  <td align="left">time_frame</td>
+  <td align="left">Object (<a href="#Orders.POST.TimeFrame">TimeFrame</a>)</td>
+  <td align="left">Time frame when load is expected</td>
   <td align="left">yes</td>
 </tr>
 <tr>
@@ -882,7 +1292,7 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.place"></a><code>Place</code> object structure</em></strong>
+<p><strong><em><a name="Orders.POST.place"></a><code>Place</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -895,14 +1305,14 @@ Content-Type: application/hal+json
 <tbody>
 <tr>
   <td align="left">address</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.address">Address</a>)</td>
+  <td align="left">Object (<a href="#Orders.POST.address">Address</a>)</td>
   <td align="left">Address details</td>
   <td align="left">yes</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.load"></a><code>Load</code> object structure</em></strong>
+<p><strong><em><a name="Orders.POST.TimeFrame"></a><code>TimeFrame</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -914,15 +1324,89 @@ Content-Type: application/hal+json
 </thead>
 <tbody>
 <tr>
-  <td align="left">weight</td>
-  <td align="left">Object (<a href="#ShippingOrders.POST.load.weight">Weight</a>)</td>
-  <td align="left">Load weight details</td>
-  <td align="left">yes</td>
+  <td align="left">day</td>
+  <td align="left">Date</td>
+  <td align="left"><code>[YYYY-MM-DD]</code></td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">time_from</td>
+  <td align="left">Date</td>
+  <td align="left"><code>[hh]:[mm]:[ss]Z</code> ie. <code>11:20:00+01:00</code></td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">time_to</td>
+  <td align="left">Date</td>
+  <td align="left"><code>[hh]:[mm]:[ss]Z</code> ie. <code>11:20:00+01:00</code></td>
+  <td align="left">no</td>
 </tr>
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.load.weight"></a><code>Weight</code> object structure</em></strong>
+<p><strong><em><a name="Orders.POST.load"></a><code>Load</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">name</td>
+  <td align="left">String</td>
+  <td align="left">Load name</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">type_of_load</td>
+  <td align="left">Enum</td>
+  <td align="left">Possible values: [<code>adr</code>,<code>bags</code>,<code>unit</code>,<code>logs</code>,<code>envelope</code>,<code>box</code>,<code>barrel</code>,<code>pallet</code>,<code>other</code>]</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">weight</td>
+  <td align="left">Object (<a href="#Orders.POST.load.weight">Weight</a>)</td>
+  <td align="left">Load weight details</td>
+  <td align="left">yes</td>
+</tr>
+<tr>
+  <td align="left">volume</td>
+  <td align="left">Object (<a href="#Orders.POST.load.Volume">Volume</a>)</td>
+  <td align="left">Load weight details</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">height</td>
+  <td align="left">Object (<a href="#Orders.POST.load.Dimension">Dimension</a>)</td>
+  <td align="left">Load height Dimension</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">width</td>
+  <td align="left">Object (<a href="#Orders.POST.load.Dimension">Dimension</a>)</td>
+  <td align="left">Load width Dimension</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">length</td>
+  <td align="left">Object (<a href="#Orders.POST.load.Dimension">Dimension</a>)</td>
+  <td align="left">Load length Dimension</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">amount</td>
+  <td align="left">Number</td>
+  <td align="left">Amount of loads</td>
+  <td align="left">no</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.POST.load.weight"></a><code>Weight</code> object structure</em></strong>
 <table>
 <thead>
 <tr>
@@ -948,7 +1432,111 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><em><a name="ShippingOrders.POST.payment.currency"></a> Supported <code>Currency</code> list</em></strong>
+<p><strong><em><a name="Orders.POST.load.Volume"></a><code>Volume</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">value</td>
+  <td align="left">Number</td>
+  <td align="left">Volume value</td>
+  <td align="left">yes</td>
+</tr>
+<tr>
+  <td align="left">unit_code</td>
+  <td align="left">String</td>
+  <td align="left">Weight unit code<br />Possible values: <code>M3</code> (cubic meter)</td>
+  <td align="left">yes</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.POST.load.Dimension"></a><code>Dimension</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">value</td>
+  <td align="left">Number</td>
+  <td align="left">Dimension value</td>
+  <td align="left">yes</td>
+</tr>
+<tr>
+  <td align="left">unit_code</td>
+  <td align="left">String</td>
+  <td align="left">Weight unit code<br />Possible values: <code>M</code> (meter)</td>
+  <td align="left">yes</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.POST.payment"></a><code>Payment</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">price</td>
+  <td align="left">Object (<a href="#Orders.POST.payment.price">Price</a>)</td>
+  <td align="left">Price definition</td>
+  <td align="left">yes</td>
+</tr>
+<tr>
+  <td align="left">interval_of_days</td>
+  <td align="left">String</td>
+  <td align="left">Payment date interval <em>(in days, ISO 8601 formatted - see <a href="https://php.net/manual/pl/dateinterval.construct.php">PHP DateInterval</a> for more information)</em></td>
+  <td align="left">yes</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.POST.payment.price"></a><code>Price</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">value</td>
+  <td align="left">Number</td>
+  <td align="left">Price value <em>(positive number)</em></td>
+  <td align="left">yes</td>
+</tr>
+<tr>
+  <td align="left">currency</td>
+  <td align="left">String (<a href="#Orders.POST.payment.currency">Currency</a>)</td>
+  <td align="left">Price currency (<a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a>)</td>
+  <td align="left">yes</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.POST.payment.currency"></a> Supported <code>Currency</code> list</em></strong>
 <table>
 <thead>
 <tr>
@@ -1052,7 +1640,165 @@ Content-Type: application/hal+json
 </tbody>
 </table></p>
 
-<p><strong><a name="ShippingOrders.POST.response"></a>Responses</strong></p>
+<p><strong><em><a name="Orders.POST.Vehicle"></a><code>Vehicle</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">registration_plate_number</td>
+  <td align="left">String</td>
+  <td align="left">Vehicle's registration plate number</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">semi_trailer</td>
+  <td align="left">Object(<a href="#Orders.POST.SemiTrailer">SemiTrailer</a>)</td>
+  <td align="left">SemiTrailer data</td>
+  <td align="left">no</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.POST.SemiTrailer"></a><code>SemiTrailer</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">registration_plate_number</td>
+  <td align="left">String</td>
+  <td align="left">SemiTrailer's registration plate number</td>
+  <td align="left">no</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.POST.Driver"></a><code>Driver</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">employee_id</td>
+  <td align="left">Number</td>
+  <td align="left">Employee ID from Companies API</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">family_name</td>
+  <td align="left">String</td>
+  <td align="left">Person's last name</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">given_name</td>
+  <td align="left">String</td>
+  <td align="left">Person's given name</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">identity_document_number</td>
+  <td align="left">String</td>
+  <td align="left">Driver's ID document number</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">telephone</td>
+  <td align="left">String</td>
+  <td align="left">Telephone number in format: <code>(XX) XXXXXXXXX</code></td>
+  <td align="left">no</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><em><a name="Orders.POST.Requirements"></a><code>Requirements</code> object structure</em></strong>
+<table>
+<thead>
+<tr>
+  <th align="left">Field</th>
+  <th align="left">Type</th>
+  <th align="left">Description</th>
+  <th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td align="left">is_ftl</td>
+  <td align="left">Boolean</td>
+  <td align="left">Is full track load flag</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">is_tracking_system_required</td>
+  <td align="left">Boolean</td>
+  <td align="left">Tracking system requirement flag</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">is_truck_crane_required</td>
+  <td align="left">Boolean</td>
+  <td align="left">Truck crane requirement flag</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">is_lift_required</td>
+  <td align="left">Boolean</td>
+  <td align="left">Lift requirement flag</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">is_tir_cable_required</td>
+  <td align="left">Boolean</td>
+  <td align="left">Tir cable requirement flag</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">shipping_remarks</td>
+  <td align="left">String</td>
+  <td align="left">Remarks to the shipping</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">required_ways_of_loading</td>
+  <td align="left">Enum</td>
+  <td align="left">Multiple value can be selected. Possible values: [<code>side</code>,<code>top</code>,<code>back</code>]</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">required_truck_bodies</td>
+  <td align="left">Enum</td>
+  <td align="left">Multiple value can be selected. Possible values: [<code>tent</code>, <code>isotherm</code>, <code>box-truck</code>, <code>spacious</code>, <code>other</code>, <code>car-transporter</code>, <code>double-trailer</code>, <code>van</code>, <code>mega</code>, <code>coilmulde</code>, <code>walking-floor</code>, <code>low-suspension</code>, <code>flatbed</code>, <code>chemical-tanker</code>, <code>food-tanker</code>, <code>petroleum-tanker</code>, <code>gas-tanker</code>, <code>log-trailer</code>, <code>oversized-cargo</code>, <code>hook-lift</code>, <code>container-20-40</code>, <code>dump-truck</code>, <code>koffer</code>, <code>swap-body-system</code>, <code>jumbo</code>, <code>cooler</code>, <code>curtainsider</code>, <code>tanker</code>, <code>silos</code>, <code>removal-truck</code>]</td>
+  <td align="left">no</td>
+</tr>
+<tr>
+  <td align="left">required_adr_classes</td>
+  <td align="left">Enum</td>
+  <td align="left">Multiple value can be selected. Possible values: [<code>1</code>, <code>2</code>, <code>3</code>, <code>4.1</code>, <code>4.2</code>, <code>4.3</code>, <code>5.1</code>, <code>5.2</code>, <code>6.1</code>, <code>6.2</code>, <code>7</code>, <code>8</code>, <code>9</code>]</td>
+  <td align="left">no</td>
+</tr>
+</tbody>
+</table></p>
+
+<p><strong><a name="Orders.POST.response"></a>Responses</strong></p>
 
 <table>
 <thead>
@@ -1095,45 +1841,132 @@ Content-Type: application/hal+json
 
 <p><strong>Example</strong></p>
 
-<pre><code class="http">POST /api/rest/v1/orders HTTP/1.1
+<pre><code class="http">POST /api/rest/v1/shipping-orders HTTP/1.1
 Host: orders.system.trans.eu
 Accept: application/hal+json
 Content-Type: application/json
 Authorization: Bearer {access_token}
+</code></pre>
 
-{
-    "number": "DE/3455/4460",
-    "payment": {
-        "price": {
-            "value": 34,
-            "currency": "PLN"
+<pre><code>{
+  "number": "EN/15022021/10",
+  "route": {
+    "events": [
+      {
+        "place": {
+          "address": {
+            "locality": "Berlin",
+            "postal_code": "3456",
+            "country": "DE",
+            "street": "Some Avenue",
+            "number": "12"
+          },
+          "coordinates": {
+            "latitude": 23.256789,
+            "longitude": 90.000000
+          }
         },
-        "interval_of_days": "P10D"
-    },
-    "route" : {
-        "events": [
-            {
-                "place": {
-                    "address": {
-                        "locality": "Berlin",
-                        "postal_code": "3456",
-                        "country": "DE"
-                    }
-                },
-                "type": "loading"
-            },
-            {
-                "place": {
-                    "address": {
-                        "locality": "Wysoka",
-                        "postal_code": "12345",
-                        "country": "PL"
-                    }
-                },
-                "type": "unloading"
-            }
-        ]
+        "time_frame": {
+          "day": "2017-02-20",
+          "time_from": "09:09:09+00:00",
+          "time_to": "16:59:59+00:00"
+        },
+        "type": "loading"
+      },
+      {
+        "place": {
+          "address": {
+            "locality": "Berlin",
+            "postal_code": "3456",
+            "country": "DE",
+            "street": "Some Avenue",
+            "number": "32"
+          },
+          "coordinates": {
+            "latitude": 23.256789,
+            "longitude": 42.000001
+          }
+        },
+        "time_frame": {
+          "day": "2017-02-22",
+          "time_from": "18:00:00+00:00",
+          "time_to": "20:00:00+00:00"
+        },
+        "type": "unloading"
+      }
+    ]
+  },
+  "loads": [
+    {
+      "name": "Test load",
+      "type_of_load": "barrel",
+      "weight": {
+        "value": 1,
+        "unit_code": "TNE"
+      },
+      "height": {
+        "value": 2,
+        "unit_code": "M"
+      },
+      "width": {
+        "value": 3,
+        "unit_code": "M"
+      },
+      "length": {
+        "value": 4,
+        "unit_code": "M"
+      },
+      "volume": {
+        "value": 5,
+        "unit_code": "M3"
+      },
+      "amount": 2
     }
+  ],
+  "payer": {
+    "name": "Carrier Trans.eu",
+    "vat_id": "0001111444455",
+    "language": "PL",
+    "address": {
+      "locality": "Parisss",
+      "postal_code": "3334",
+      "country": "FR",
+      "street": "Ulica Fabrycznego",
+      "number": "4/2"
+    },
+    "contact_person": {
+      "contact_id": 123155,
+      "family_name": "Testowski",
+      "given_name": "Tescik jr",
+      "email": "test@trans.eu",
+      "telephone": "(48) 1001000100",
+      "fax": "(48) 2002000200"
+    }
+  },
+  "driver": {
+    "employee_id": 110519,
+    "family_name": "Doe",
+    "given_name": "Joe",
+    "identity_document_number": "AFA180815",
+    "telephone": "(48) 3003000303"
+  },
+  "requirements": {
+    "is_ftl": true,
+    "is_tracking_system_required": true,
+    "shipping_remarks": "Test remark",
+    "required_ways_of_loading": [
+      "side"
+    ],
+    "required_truck_bodies": [
+      "tent"
+    ],
+    "is_truck_crane_required": true,
+    "is_lift_required": true,
+    "is_tir_cable_required": true,
+    "required_adr_classes": [
+      "9"
+    ]
+  }
 }
 </code></pre>
 
@@ -1142,7 +1975,7 @@ Content-Type: application/hal+json
 
 {
     "id": "56acf700-1774-11e6-8ab6-0002a5d5c51b",
-    ...
+    // ...
 }
 </code></pre>
 

@@ -40,7 +40,7 @@ POST /orders
 
 | Field | Type | Description | Required |
 |:---|:---|:---|:---|
-| custom_id | String | optional external system ID | false |
+| custom_ids | Array (of [CustomId](#OrdersRepository.CustomId)) | optional external system ID | false |
 | number | String | order number | false |
 | status | String | optional external system status | false |
 | terms | String | order terms | false |
@@ -54,7 +54,13 @@ POST /orders
 | documents | Array (of [Document](#OrdersRepository.Document)) |  | false |
 | vehicles | Array (of [OrderVehicle](#OrdersRepository.OrderVehicle)) |  | false |
 | drivers | Array (of [Driver](#OrdersRepository.Driver)) |  | false |
-| requirements | Object ([Requirements](#OrdersRepository.Requirements)) |  | false |
+
+***<a name="OrdersRepository.CustomId"></a>`CustomId` object structure***
+
+| Field | Type | Description |
+|:---|:---|:---|
+| id | String | External system ID |
+| source | String | External system alias |
 
 ***<a name="OrdersRepository.RouteEvent"></a>`RouteEvent` object structure***
 
@@ -104,15 +110,14 @@ POST /orders
 |custom_id|String ||
 |name|String ||
 |description|String ||
-|load_type|String ||
+|type_of_load|String ||
 |weight|Object ([Weight](#OrdersRepository.Weight))||
 |height|Object ([Height](#OrdersRepository.Height))||
 |width|Object ([Width](#OrdersRepository.Width))||
 |length|Object ([Length](#OrdersRepository.Length))||
-|capacity|Object ([Capacity](#OrdersRepository.Capacity))||
+|volume|Object ([Volume](#OrdersRepository.Volume))||
 |amount|positive Integer||
-|adr| Enum (ADR classess) | one of [hazard classes](https://en.wikipedia.org/wiki/ADR_(treaty)) ie. `4.1` |
-|carrying_requirements|Object ([Capacity](#OrdersRepository.CarryingRequirements))||
+|requirements|Object ([Requirements](#OrdersRepository.Requirements))||
 |shipper|Object ([Contractor](#OrdersRepository.Contractor))||
 |carrier|Object ([Contractor](#OrdersRepository.Contractor))||
 |payer|Object ([Contractor](#OrdersRepository.Contractor))||
@@ -145,32 +150,29 @@ POST /orders
 |value| positive float| [precision: 3 digits]|
 |unit_code| String | ISO 2955 c/i value ie. `M` |
 
-***<a name="OrdersRepository.Capacity"></a>`Capacity` object structure***
+***<a name="OrdersRepository.Volume"></a>`Volume` object structure***
 
 |Field|Type|Description|
 |:---|:---|:---|
 |value| positive float| [precision: 3 digits]|
 |unit_code| String | ISO 2955 c/i value ie. `M3` |
 
-***<a name="OrdersRepository.CarryingRequirements"></a>`CarryingRequirements` object structure***
+***<a name="OrdersRepository.Requirements"></a>`Requirements` object structure***
 
 |Field|Type|Description|
 |:---|:---|:---|
-|loading_methods| Array (of Enum) | Enum values: `top`, `side`, `back`. Says which side load should be put into the vehicle|
-|vehicle_body_types| Array (of String) | which type of vehicle/trailer body should be used to carry the load|
-|has_hds| Boolean ||
-|has_elevator_lift| Boolean ||
-|is_ready_to_declare| Boolean |whether load should be "ready to declare" - to excise on country border|
-|has_securing_rope| Boolean |whether load should be secured by ropes|
+|required_ways_of_loading| Array (of Enum) | Enum values: `top`, `side`, `back`. Says which side load should be put into the vehicle|
+|required_truck_bodies| Array (of String) | which type of vehicle/trailer body should be used to carry the load|
+|required_adr_classes| Array (of Enum) | Enum values: [hazard classes](https://en.wikipedia.org/wiki/ADR_(treaty)) ie. `4.1` |
+|is_truck_crane_required| Boolean ||
+|is_lift_required| Boolean ||
+|is_for_clearance| Boolean |whether load should be "ready to declare" - to excise on country border|
+|is_tir_cable_required| Boolean |whether load should be secured by ropes|
+|is_ftl| Boolean | whether shipper requires vehicles exclusively for purpose of carrying the loads |
+|is_tracking_system_required| Boolean | whether shipper requires GPS tracking of carrier's vehicles |
+|shipping_remarks| String | place for shippers additional remarks & requirements |
 
 ***<a name="OrdersRepository.Contractor"></a>`Contractor` object structure***
-
-|Field|Type|Description|
-|:---|:---|:---|
-| company | Object ([Company](#OrdersRepository.Company)) | |
-| contact_persons | Array ( of [Person](#OrdersRepository.Person)) | |
-
-***<a name="OrdersRepository.Company"></a>`Company` object structure***
 
 |Field|Type|Description|
 |:---|:---|:---|
@@ -182,6 +184,7 @@ POST /orders
 |telephone| String  | digits, and `+-()` characters and whitespaces |
 |fax| String | digits, and `+-()` characters and whitespaces |
 |address| Object ([Address](#OrdersRepository.Address)) |   |
+|contact_persons| Array ( of [Person](#OrdersRepository.Person)) | |
 
 ***<a name="OrdersRepository.Person"></a>`Person` object structure***
 
@@ -234,7 +237,7 @@ POST /orders
 |custom_id| String | ID of vehicle in user's external system |
 |registration_plate_number| String | |
 |body_type| String | |
-|bearing_capacity| Object ([Capacity](#OrdersRepository.Capacity)) | |
+|bearing_capacity| Object ([Volume](#OrdersRepository.Volume)) | |
 
 ***<a name="OrdersRepository.Trailer"></a>`Trailer` object structure***
 
@@ -243,7 +246,7 @@ POST /orders
 |custom_id| String | ID of trailer in user's external system |
 |registration_plate_number| String | |
 |body_type| String | |
-|bearing_capacity| Object ([Capacity](#OrdersRepository.Capacity)) | |
+|bearing_capacity| Object ([Volume](#OrdersRepository.Volume)) | |
 
 ***<a name="OrdersRepository.Driver"></a>`Driver` object structure***
 
@@ -256,14 +259,6 @@ POST /orders
 |id_card_number| String | driver's ID card number |
 |email| String | valid e-mail |
 |telephone| String  | digits, and `+-()` characters and whitespaces |
-
-***<a name="OrdersRepository.Requirements"></a>`Requirements` object structure***
-
-|Field|Type|Description|
-|:---|:---|:---|
-|is_ftl| Boolean | whether shipper requires vehicles exclusively for purpose of carrying the loads |
-|has_gps| Boolean | whether shipper requires GPS tracking of carrier's vehicles |
-|shipping_remarks| String | place for shippers additional remarks & requirements |
 
 **Responses**
 
@@ -282,7 +277,12 @@ Accept: application/hal+json
 Authorization: Bearer {access_token}
 
 {
-  "custom_id": "12345",
+  "custom_ids": [
+    {
+      "id": "12345",
+      "source": "TransOrders"
+    }
+  ],
   "number": "DE/3455/4444",
   "status": "pending",
   "terms": "Some long order terms...",
@@ -343,7 +343,7 @@ Authorization: Bearer {access_token}
       "custom_id": "1",
       "name": "Some load",
       "description": "Some random load desc",
-      "load_type": "box",
+      "type_of_load": "box",
       "weight" : {
         "value" : 23,
         "unit_code" : "TNE"
@@ -360,36 +360,37 @@ Authorization: Bearer {access_token}
         "value": 1.2,
         "unit_code": "M"
       },
-      "capacity": {
+      "volume": {
         "value": 1.8,
         "unit_code": "M3"
       },
       "amount": 5,
-      "adr": "4.1",
-      "carrying_requirements": {
-        "loading_methods": ["side",  "back"],
-        "vehicle_body_types": ["freezer"],
-        "has_hds": true,
-        "has_elevator_lift": false,
-        "is_ready_to_declare": true,
-        "has_securing_rope": false
+      "requirements": {
+        "required_ways_of_loading": ["side", "back"],
+        "required_truck_bodies": ["freezer"],
+        "required_adr_classes": ["2", 4.1"],
+        "is_truck_crane_required": true,
+        "is_lift_required": false,
+        "is_for_clearance": true,
+        "is_tir_cable_required": false,
+        "is_ftl": true,
+        "is_tracking_system_required": true,
+        "shipping_remarks": "just one small thing"
       }
     }
   ],
   "shipper": {
-    "company" : {
-      "name": "Trans.eu",
-      "vat_id": "000111122222",
-      "telephone": "(22)332-21-13",
-      "fax": "(22) 332 21 14",
-      "address": {
-        "locality": "London",
-        "postal_code": "L333",
-        "country": "GB",
-        "street": "Some Avenue",
-        "number": "5"
-      }
-    },
+    "name": "Trans.eu",
+    "vat_id": "000111122222",
+    "telephone": "(22)332-21-13",
+    "fax": "(22) 332 21 14",
+    "address": {
+      "locality": "London",
+      "postal_code": "L333",
+      "country": "GB",
+      "street": "Some Avenue",
+      "number": "5"
+    }
     "contact_persons": [
       {
         "family_name": "Test",
@@ -401,20 +402,18 @@ Authorization: Bearer {access_token}
     ]
   },
   "carrier": {
-    "company" : {
-      "trans_company_id": 2134,
-      "custom_id": "ABC001",
-      "name": "Carrier Trans.eu",
-      "vat_id": "00011114444",
-      "email": "carrier@trans.eu",
-      "address": {
-        "locality": "Wroclaw",
-        "postal_code": "50-539",
-        "country": "PL",
-        "street": "Krynicka",
-        "number": "2A/20"
-      }
-    },
+    "trans_company_id": 2134,
+    "custom_id": "ABC001",
+    "name": "Carrier Trans.eu",
+    "vat_id": "00011114444",
+    "email": "carrier@trans.eu",
+    "address": {
+      "locality": "Wroclaw",
+      "postal_code": "50-539",
+      "country": "PL",
+      "street": "Krynicka",
+      "number": "2A/20"
+    }
     "contact_persons": [
       {
         "trans_id": "2134-2",
@@ -427,17 +426,15 @@ Authorization: Bearer {access_token}
     ]
   },
   "payer": {
-    "company" : {
-      "name": "Trans.eu",
-      "vat_id": "000111122222",
-      "address": {
-        "locality": "London",
-        "postal_code": "L333",
-        "country": "GB",
-        "street": "Some Avenue",
-        "number": "5"
-      }
-    },
+    "name": "Trans.eu",
+    "vat_id": "000111122222",
+    "address": {
+      "locality": "London",
+      "postal_code": "L333",
+      "country": "GB",
+      "street": "Some Avenue",
+      "number": "5"
+    }
     "contact_persons": [
       {
         "family_name": "Test",
@@ -495,12 +492,7 @@ Authorization: Bearer {access_token}
       "email": "test@rst.com.pl",
       "telephone": "1001000100"
     }
-  ],
-  "requirements": {
-    "has_gps": true,
-    "is_ftl": true,
-    "shipping_remarks": "just one small thing"
-  }
+  ]
 }
 ```
 
@@ -592,7 +584,16 @@ Authorization: Bearer {access_token}
 ```http
 {
   "id": "123e4567-e89b-12d3-a456-426655440000",
-  "custom_id": "12345",
+  "custom_ids": [
+    {
+      "id": "123456",
+      "source": "TransOrders"
+    },
+    {
+      "id": "AB45",
+      "source": "SomeExternalSystem"
+    }
+  ],
   "number": "DE/3455/4444",
   "status": "pending",
   "terms": "Some long order terms...",
@@ -651,7 +652,7 @@ Authorization: Bearer {access_token}
   "loads" : [
     {
       "description": "Some random load",
-      "load_type": "box",
+      "type_of_load": "box",
       "weight" : {
         "value" : 23,
         "unit_code" : "TNE"
@@ -668,36 +669,37 @@ Authorization: Bearer {access_token}
         "value": 1.2,
         "unit_code": "M"
       },
-      "capacity": {
+      "volume": {
         "value": 1.8,
         "unit_code": "M3"
       },
       "amount": 5,
-      "adr": "4.1",
-      "carrying_requirements": {
-        "loading_methods": ["side",  "back"],
-        "vehicle_body_types": ["freezer"],
-        "has_hds": true,
-        "has_elevator_lift": false,
-        "is_ready_to_declare": true,
-        "has_securing_rope": false
+      "requirements": {
+        "required_ways_of_loading": ["side", "back"],
+        "required_truck_bodies": ["freezer"],
+        "required_adr_classes": ["2", 4.1"],
+        "is_truck_crane_required": true,
+        "is_lift_required": false,
+        "is_for_clearance": true,
+        "is_tir_cable_required": false,
+        "is_tracking_system_required": true,
+        "is_ftl": true,
+        "shipping_remarks": "just one small thing"
       }
     }
   ],
   "shipper": {
-    "company" : {
-      "name": "Trans.eu",
-      "vat_id": "000111122222",
-      "telephone": "(22)332-21-13",
-      "fax": "(22) 332 21 14",
-      "address": {
-        "locality": "London",
-        "postal_code": "L333",
-        "country": "GB",
-        "street": "Some Avenue",
-        "number": "5"
-      }
-    },
+    "name": "Trans.eu",
+    "vat_id": "000111122222",
+    "telephone": "(22)332-21-13",
+    "fax": "(22) 332 21 14",
+    "address": {
+      "locality": "London",
+      "postal_code": "L333",
+      "country": "GB",
+      "street": "Some Avenue",
+      "number": "5"
+    }
     "contact_persons": [
       {
         "family_name": "Test",
@@ -709,20 +711,18 @@ Authorization: Bearer {access_token}
     ]
   },
   "carrier": {
-    "company" : {
-      "trans_company_id": 2134,
-      "custom_id": "ABC001",
-      "name": "Carrier Trans.eu",
-      "vat_id": "00011114444",
-      "email": "carrier@trans.eu",
-      "address": {
-        "locality": "Wroclaw",
-        "postal_code": "50-539",
-        "country": "PL",
-        "street": "Krynicka",
-        "number": "2A/20"
-      }
-    },
+    "trans_company_id": 2134,
+    "custom_id": "ABC001",
+    "name": "Carrier Trans.eu",
+    "vat_id": "00011114444",
+    "email": "carrier@trans.eu",
+    "address": {
+      "locality": "Wroclaw",
+      "postal_code": "50-539",
+      "country": "PL",
+      "street": "Krynicka",
+      "number": "2A/20"
+    }
     "contact_persons": [
       {
         "trans_id": "2134-2",
@@ -735,17 +735,15 @@ Authorization: Bearer {access_token}
     ]
   },
   "payer": {
-    "company" : {
-      "name": "Trans.eu",
-      "vat_id": "000111122222",
-      "address": {
-        "locality": "London",
-        "postal_code": "L333",
-        "country": "GB",
-        "street": "Some Avenue",
-        "number": "5"
-      }
-    },
+    "name": "Trans.eu",
+    "vat_id": "000111122222",
+    "address": {
+      "locality": "London",
+      "postal_code": "L333",
+      "country": "GB",
+      "street": "Some Avenue",
+      "number": "5"
+    }
     "contact_persons": [
       {
         "family_name": "Test",
@@ -796,10 +794,6 @@ Authorization: Bearer {access_token}
       "telephone": "1001000100"
     }
   ],
-  "requirements": {
-    "has_gps": true,
-    "is_ftl": true
-  },
   "_links": {
     "self": {
       "href": "http://orders.system.trans.eu/api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000"
