@@ -492,7 +492,13 @@ Authorization: Bearer {access_token}
       "email": "test@rst.com.pl",
       "telephone": "1001000100"
     }
-  ]
+  ],
+  "_embedded": {
+    "metadata": {
+      "revision": "d459813b-7708-4a83-8dcd-672581dc5d3d",
+      "modified": "2017-04-03T11:41:49+00:00"
+    }
+  }
 }
 ```
 
@@ -794,6 +800,12 @@ Authorization: Bearer {access_token}
       "telephone": "1001000100"
     }
   ],
+  "_embedded": {
+    "metadata": {
+      "revision": "d459813b-7708-4a83-8dcd-672581dc5d3d",
+      "modified": "2017-04-03T11:41:49+00:00"
+    }
+  },
   "_links": {
     "self": {
       "href": "http://orders.system.trans.eu/api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000"
