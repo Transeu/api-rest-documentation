@@ -1628,7 +1628,9 @@ Authorization: Bearer {access_token}
 
 <p>When updating order, only updated fields should be sent in request.
 Fields not mentioned in request will remain intact.
-To unset previously set field send <code>null</code> value or empty array <code>[]</code> for array fields.</p>
+To unset previously set field send <code>null</code> value or empty array <code>[]</code> for array fields.
+Revision identifier of editing order must be sent by X-Order-Revision header and it must be up-to-date, otherwise 409 will be returned.
+To get last revision identifier just fetch order and check it metadata.</p>
 
 <p><strong>Scopes</strong></p>
 
@@ -1664,6 +1666,10 @@ To unset previously set field send <code>null</code> value or empty array <code>
   <td>Order not found</td>
 </tr>
 <tr>
+  <td>409</td>
+  <td>Conflict</td>
+</tr>
+<tr>
   <td>422</td>
   <td>Invalid request</td>
 </tr>
@@ -1675,6 +1681,7 @@ To unset previously set field send <code>null</code> value or empty array <code>
 <pre><code class="http">PATCH /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000
 Host: orders-repository.system.trans.eu
 Accept: application/hal+json
+X-Order-Revision: 123e4567-e89b-12d3-a456-426655440000
 Authorization: Bearer {access_token}
 
 {
