@@ -820,6 +820,8 @@ Authorization: Bearer {access_token}
 When updating order, only updated fields should be sent in request.
 Fields not mentioned in request will remain intact.
 To unset previously set field send `null` value or empty array `[]` for array fields.
+Revision identifier of editing order must be sent by X-Order-Revision header and it must be up-to-date, otherwise 409 will be returned.
+To get last revision identifier just fetch order and check it metadata.
 
 **Scopes**
 
@@ -837,6 +839,7 @@ PATCH /orders/{ID}
 | 200 | OK |
 | 403 | Forbidden |
 | 404 | Order not found |
+| 409 | Conflict |
 | 422 | Invalid request |
 
 **Example**
@@ -845,6 +848,7 @@ PATCH /orders/{ID}
 PATCH /api/rest/v1/orders/123e4567-e89b-12d3-a456-426655440000
 Host: orders-repository.system.trans.eu
 Accept: application/hal+json
+X-Order-Revision: 123e4567-e89b-12d3-a456-426655440000
 Authorization: Bearer {access_token}
 
 {
