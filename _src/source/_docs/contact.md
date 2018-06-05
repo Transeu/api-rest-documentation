@@ -3,16 +3,16 @@ title: Developers contact
 is_contact: true
 ---
 
-!['Grzegorz Patynek'](/api-rest-documentation/images/gpatynek.png)
+!['Paweł Dżumaga'](/api-rest-documentation/images/pdzumaga.png)
 
-**Grzegorz Patynek**
+**Paweł Dżumaga**
 
-IT Systems Integration Manager
+Technical Account Manager
 
 Product Development Division
 
-+48 506 363 605
++48 506 363 494
 
-[gpatynek@trans.eu](mailto:gpatynek@trans.eu)
+[pdzumaga@trans.eu](mailto:pdzumaga@trans.eu)
 
-(T) 10-205
+(T) 10-190

@@ -23,7 +23,7 @@ Every registered application has it's own unique `client_id` and `client_secret`
 
 Process of registering application is handled by Logintrans.
 
-To initiate this process please contact Grzegorz Patynek with email address [gpatynek@trans.eu](mailto:gpatynek@trans.eu?subject=Prośba%20o%20rejestrację%20aplikacji%20w%20Trans.eu).
+To initiate this process please contact Paweł Dżumaga with email address [pdzumaga@trans.eu](mailto:pdzumaga@trans.eu?subject=Prośba%20o%20rejestrację%20aplikacji%20w%20Trans.eu).
 
 ## Required application data
 

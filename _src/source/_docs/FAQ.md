@@ -132,7 +132,7 @@ Tags: `api usage`, `available features`
 
 #### Answer:
 
-To obtain TransId please contact Grzegorz Patynek [gpatynek@trans.eu](mailto:gpatynek@trans.eu).
+To obtain TransId please contact Paweł Dżumaga [gpatynek@trans.eu](mailto:pdzumaga@trans.eu).
 
 ---
 <a class="anchor" name="are_dictionary_entries_translated"></a>
